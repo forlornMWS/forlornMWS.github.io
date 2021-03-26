@@ -1,37 +1,1299 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/web.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/web.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/web.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/web.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++ premier plus学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Chapter8 函数探幽8.1 内联函数内联函数是C++为了提高程序运行速度所做的一项改进。常规函数和内联函数的主要区别不在于编写方式，而在于C++编译器如何将它们组合到程序中。 执行常规函数调用指令时，程序将在函数调用后立即存储该指令的内存地址，并将函数参数复制到堆栈，跳到标记函数起点的内存单元，执行函数代码，然后跳回到地址被保存的指令处（这与阅读文章时停下来看脚注，并在阅读完教主后返回到以前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter8 函数探幽">
+<meta property="og:url" content="http://mwszksnmdys.xyz/2021/03/26/Chapter8_%E5%87%BD%E6%95%B0%E6%8E%A2%E5%B9%BD/index.html">
+<meta property="og:site_name" content="MWS&#39;s Blog">
+<meta property="og:description" content="Chapter8 函数探幽8.1 内联函数内联函数是C++为了提高程序运行速度所做的一项改进。常规函数和内联函数的主要区别不在于编写方式，而在于C++编译器如何将它们组合到程序中。 执行常规函数调用指令时，程序将在函数调用后立即存储该指令的内存地址，并将函数参数复制到堆栈，跳到标记函数起点的内存单元，执行函数代码，然后跳回到地址被保存的指令处（这与阅读文章时停下来看脚注，并在阅读完教主后返回到以前">
+<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201018162900.png">
+<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201018192526.png">
+<meta property="article:published_time" content="2021-03-26T06:46:18.531Z">
+<meta property="article:modified_time" content="2020-10-19T02:58:32.000Z">
+<meta property="article:author" content="MWSzksnmdys">
+<meta property="article:tag" content="C++ premier plus学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201018162900.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mwszksnmdys.xyz/2021/03/26/Chapter8_函数探幽/"/>
+
+
+
+
+
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <title>Chapter8 函数探幽 | MWS's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MWS's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://mwszksnmdys.xyz/2021/03/26/Chapter8_%E5%87%BD%E6%95%B0%E6%8E%A2%E5%B9%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MWSzksnmdys">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MWS's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Chapter8 函数探幽</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-26T14:46:18+08:00">
+                2021-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning/" itemprop="url" rel="index">
+                    <span itemprop="name">learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Chapter8-函数探幽"><a href="#Chapter8-函数探幽" class="headerlink" title="Chapter8 函数探幽"></a>Chapter8 函数探幽</h2><h3 id="8-1-内联函数"><a href="#8-1-内联函数" class="headerlink" title="8.1 内联函数"></a>8.1 内联函数</h3><p>内联函数是C++为了提高程序运行速度所做的一项改进。<strong>常规函数和内联函数的主要区别不在于编写方式，而在于C++编译器如何将它们组合到程序中</strong>。</p>
+<p>执行常规函数调用指令时，程序将在函数调用后立即存储该指令的内存地址，并将函数参数复制到堆栈，跳到标记函数起点的内存单元，执行函数代码，然后跳回到地址被保存的指令处（<em>这与阅读文章时停下来看脚注，并在阅读完教主后返回到以前阅读的地方类似</em>）。来回跳跃并记录跳跃位置意味着使用函数时需要一定的开销。而内联函数的编译代码与其他程序代码“内联“起来了。这也就是说，编译器将使用相应的函数代码替换函数调用。<strong>对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此，内联函数的运行速度比常规函数稍快，但代价是需要占用更多的内存</strong>。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201018162900.png" alt="内联函数和常规函数"></p>
+<p>要使用内联函数，必须采取下述措施之一：<br>（1）在函数声明前加上关键字inline；<br>（2）在函数顶以前加上关键字inline。<br>通常的做法是省略原型，将整个定义放在本应该提供原型的地方。（<em><strong>内联函数不能递归</strong></em>，与常规函数一样，也是按值来传递参数的）</p>
+<p><strong>宏是通过文本替换来实现的，并非传递参数</strong>。</p>
+<h3 id="8-2-引用变量"><a href="#8-2-引用变量" class="headerlink" title="8.2 引用变量"></a>8.2 引用变量</h3><p>引用是已定义的变量的别名。通过将引用变量用作参数，函数将使用原始数据，而不是其副本。这样除指针之外，引用也为函数处理大型结构提供了一种非常方便的途径。</p>
+<h4 id="8-2-1-创建引用变量"><a href="#8-2-1-创建引用变量" class="headerlink" title="8.2.1 创建引用变量"></a>8.2.1 创建引用变量</h4><p>C和C++使用&amp;符号来指示变量的地址，而C++给&amp;符号赋予了另一个含义，将其用来声明引用。例如，要将rodents作为rats 变量的别名，可以这样做：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> rats;</span><br><span class="line"><span class="keyword">int</span> &amp; rodents = rats; <span class="comment">//makes rodents an alias for rats</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，&amp;不是地址运算符，而是类型标识符的一部分。就像生命中的char * 指的是指向char的指针一样，int &amp;指的是指向int的引用。上述声明允许将rats和rodents互换——它们指向相同的值和内存单元。</p>
+<p><strong>必须在声明引用的时候进行初始化</strong>，引用更接近const 指针，必须在创建时进行初始化，一旦与某个变量关联起来，就将一直效忠于他。也就是说：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp; rodents = rats;</span><br></pre></td></tr></table></figure>
+
+<p>实际上是下述代码的伪装表示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> pr = &amp;rats;</span><br></pre></td></tr></table></figure>
+
+<p>其中引用rodents扮演的角色与表达式*pr相同。</p>
+<h4 id="8-2-2-将引用作为函数参数"><a href="#8-2-2-将引用作为函数参数" class="headerlink" title="8.2.2 将引用作为函数参数"></a>8.2.2 将引用作为函数参数</h4><p>引用经常被用作函数参数，使得函数中的变量名称为调用程序中的变量的别名。这种传递参数的方法称为按引用传递。</p>
+<p>如果函数调用的参数不是左值或与相应的const引用参数的类型不匹配，则C++将创建类型正确的匿名变量，将函数调用的参数的值传递给该匿名变量，并让参数来引用该变量。</p>
+<p>假设实参的类型与引用参数类型不匹配，但可被转换为引用类型，程序将创建一个正确类型的临时变量，使用转换后的实参值来初始化它，然后传递一个指向该临时变量的引用。</p>
+<p>引用参数应尽可能使用const引用：</p>
+<ul>
+<li>使用const可以避免无意中修改数据的编程错误；</li>
+<li>使用const使函数能够处理const和非const实参，否则将只能接受非const数据；</li>
+<li>使用const引用使函数能够正确生成并使用临时变量。</li>
+</ul>
+<p>返回引用的函数返回的实际上是被引用的变量的别名。返回引用时应避免返回函数终止时不再存在的内存单元引用。</p>
+<p><strong>基类引用可以指向派生类对象，而无需进行强制类型转换</strong>。</p>
+<h4 id="8-2-3-何时使用引用参数"><a href="#8-2-3-何时使用引用参数" class="headerlink" title="8.2.3 何时使用引用参数"></a>8.2.3 何时使用引用参数</h4><p>使用引用参数的主要原因有两个：</p>
+<ul>
+<li>程序员能够修改调用函数中的数据对象。</li>
+<li>通过传递引用而不是整个数据对象，可以提高程序的运行速度。</li>
+</ul>
+<p>引用、指针、值传递使用场景：</p>
+<ul>
+<li>对于使用传递的值而不做修改的函数<ul>
+<li>如果数据对象很小，则按值传递</li>
+<li>如果数据对象是数组，则使用指针</li>
+<li>如果数据对象是较大的结构，则使用const指针或const引用给，以提高程序的效率</li>
+<li>如果数据对象是类对象，则使用const引用</li>
+</ul>
+</li>
+<li>对于修改调用函数中数据的函数：<ul>
+<li>如果数据对象是内置数据类型，则使用指针</li>
+<li>如果数据对象是数组，则只能使用指针</li>
+<li>如果数据对象是结构，则使用引用或指针</li>
+<li>如果数据对象是类对象，则使用引用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-3-默认参数"><a href="#8-3-默认参数" class="headerlink" title="8.3 默认参数"></a>8.3 默认参数</h3><p>默认参数是指当函数调用中省略了实参时自动使用的一个值。由于编译器通过查看原型来了解函数所使用的参数数目，因此函数原型也必须将可能的默认参数告知程序。方法是将值赋给原型中的参数（<u>只有原型需指定默认值，函数定义与没有默认参数时完全相同</u>）。</p>
+<p><strong>对于带参数列表的函数，必须从右向左添加默认值。也就是说，要为某个参数设置默认值，则必须为它右边的所有参数提供默认值</strong>。实参按从左到右的顺序依次被赋给相应的形参，而不能跳过任何参数。</p>
+<h3 id="8-4-函数重载"><a href="#8-4-函数重载" class="headerlink" title="8.4 函数重载"></a>8.4 函数重载</h3><p>函数多态（函数重载）使得能能够使用多个同名的函数。术语”多态”指的是有多种形式，因此函数多态可以有多种形式。类似地，<strong>术语“函数重载”指的是可以有多个同名的函数</strong>，因此对名称进行了重载。这两个术语指的是同一回事，但我们通常使用函数重载。可以通过函数重载来设计一系列函数——<strong>它们完成相同的工作，但使用不同的参数列表</strong>。</p>
+<p><strong>C++使用上下文来确定要使用的重载函数版本</strong>。</p>
+<p>函数重载的关键是函数的参数列表——也称为函数特征标识（function signature)。<strong>如果两个函数的参数数目和类型相同，同时参数的排列顺序也相同，则它们的特征标相同</strong>，而变量名是无关紧要的。***<u>编译器在检查函数特征标时，将把类型引用和类型本身视为同一个特征标</u>***</p>
+<p>将非const值赋给const变量时合法的，但反之则是非法的。</p>
+<p>仅当函数基本上执行相同的任务，但是用不同形式的数据时，才应采用函数重载。</p>
+<p>使用C++开发工具中的编译器编写和编译程序时，C++编译器将执行<strong>名称修饰</strong>（name decoration）或<strong>名称矫正</strong>（name mangling），它<strong>根据函数原型中指定的形参类型对每个函数名进行加密</strong>。</p>
+<h3 id="8-5-函数模板"><a href="#8-5-函数模板" class="headerlink" title="8.5 函数模板"></a>8.5 函数模板</h3><p>函数模板时通用的函数描述，也就是说，它们使用泛型来定义函数，其中的泛型可用具体的类型替换。通过将类型作为参数传递给模板，可使编译器生成该类型的函数。由于模板允许以泛型的方式编写程序，因此有时也被称为通用编程。由于类型是用参数表示的，因此模板特性有时也被称为参数化类型（parameterized types）。</p>
+<p>函数模板允许以任意类型的方式来定义函数，例如，如下示建立一个交换模板：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> AnyType&gt;	<span class="comment">//建立一个模板，并把类型命名为AnyType，关键字template和typename是必须的，可用class代替typename</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(AnyType &amp;a, AnyType &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    AnyType temp;</span><br><span class="line">    temp = a;</span><br><span class="line">    a = b; </span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>模板不创建任何函数，而只是告诉编译器如何定义函数</strong>。</p>
+<p>可以提供一个具体化函数定义——称为<strong>显式具体化</strong>（explicit specialization），其中包含所需的代码。当编译器找到与函数调用相匹配的具体化定义时，将使用该定义，而不再寻找模板。如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">job</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">40</span>];</span><br><span class="line">    <span class="keyword">double</span> salary;</span><br><span class="line">    <span class="keyword">int</span> floor</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> Swap&lt;job&gt;(job &amp;, job &amp;) <span class="comment">//显式具体化</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对于给定的函数名，可以有非模板函数、模板函数和显式具体化模板函数以及它们的重载版本</li>
+<li>显式具体化函数的原型和定义应以template&lt;&gt;打头，并通过名称来指出类型</li>
+<li><strong>具体化优先于常规模板，而非模板函数优先于具体化和常规模板</strong></li>
+</ul>
+<p>在代码中包含函数模块本身并不会生成函数定义，它指示一个用于生成函数定义的方案。编译器使用模板为特定类型生成函数定义时，得到的时模板实例（instantiation）。模板并非函数定义，但某一类型的模板实例时函数定义，这种实例化方式被称为<strong>隐式实例化</strong>。</p>
+<p>最初，编译器只能通过隐式实例化，来使用模板生成函数定义，但现在C++还允许<strong>显式实例化</strong>（explicit instantiation），这意味着可以直接命令编译器创建特定的实例。其语法是，声明所需的种类——用&lt;&gt;符号指示类型，并在声明前加上关键字template：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="keyword">void</span> Swap&lt;<span class="keyword">int</span>&gt; (<span class="keyword">int</span>, <span class="keyword">int</span>); <span class="comment">//explicit instantiation</span></span><br></pre></td></tr></table></figure>
+
+<p>试图在同一个文件（或转换单元）中使用同一种类型的显式实例和显式具体化将出错。</p>
+<p>隐式实例化、显式实例化和显式具体化统称为具体化（specialization），它们的相通之处在于，<strong>它们表示的都是使用具体类型的函数定义，而不是通用描述</strong>。</p>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(T &amp;, T &amp;)</span></span>; <span class="comment">// 模板原型</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">void</span> Swap&lt;job&gt;(job &amp;, job&amp;); <span class="comment">//显式具体化, job声明同上</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">template</span> <span class="keyword">void</span> Swap&lt;<span class="keyword">char</span>&gt; (<span class="keyword">char</span> &amp;, <span class="keyword">char</span> &amp;); <span class="comment">//显式实例化</span></span><br><span class="line">    <span class="keyword">short</span> a,b;</span><br><span class="line">    ...</span><br><span class="line">    <span class="built_in">Swap</span>(a,b); <span class="comment">//short隐式实例化</span></span><br><span class="line">    job n,m;</span><br><span class="line">    ...</span><br><span class="line">	<span class="built_in">Swap</span>(n,m); <span class="comment">//job结构显式具体化</span></span><br><span class="line">	<span class="keyword">char</span> g, h;</span><br><span class="line">    ...</span><br><span class="line">	<span class="built_in">Swap</span>(g, h); <span class="comment">//char型显式实例化</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于函数重载、函数模板和函数模板重载，C++需要（且有）一个定义良好的策略，来决定为函数调用使用哪一个函数定义，尤其是有多个参数时，这个过程称为重载解析（overloading resolution），大致过程如下：</p>
+<ol>
+<li><strong>创建候选函数列表</strong>。其中包含与被调用函数的名称相同的函数和模板函数。</li>
+<li><strong>使用候选函数列表创建可行函数列表</strong>。这些都是参数数目正确的函数，为此有一个隐式转换序列，其中包括实参类型与相应的形参类型完全匹配的情况。</li>
+<li><strong>确定是否有最佳的可行函数</strong>。如果有，则使用它，否则该函数调用出错。<ol>
+<li>通常从最佳到最差的顺序如下所述：<ol>
+<li>完全匹配<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>，但常规函数优先于模板<a href="#bib2" id="bib2ref"><sup>[2]</sup></a><br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201018192526.png" alt="image-20201018192526290"></li>
+<li>提升转换（如，char和short自动转换为int，float自动转换为double）</li>
+<li>标准转换（如int转换为char，long转换为double）</li>
+<li>用户定义的转换，如类声明中定义的转换。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>如果有多个匹配的原型，则百年一起将无法完成重载解析过程；如果没有最佳的可行函数，编译器将生成一条错误信息。</p>
+<p>重载解析将寻找最匹配的函数。如果只存在一个这样的函数，则选择它；如果存在多个这样的函数，但其中只有一个时非模板函数，则选择该函数；如果存在多个适合的函数，且它们都为模板函数，但其中有一个函数比其他函数更具体<a href="#bib3" id="bib3ref"><sup>[3]</sup></a>，则选择该函数。如果有多个同样合适的非模板函数或模板函数，但没有一个函数比其他函数更具体，则函数调用将是不确定的，因此是错误的；当然如果不存在匹配的函数，也是错误的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">decltype</span>(x) y; <span class="comment">// make y the same type as x</span></span><br></pre></td></tr></table></figure>
+
+<p>对于无法预先得知模板返回值，可通过使用关键字decltype和后置返回类型(trailing return type)来创建模板:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line">auto func(T1 x, T2 y) -&gt;decltype(x + y)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">	<span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a id="bib1" href="#bib1ref"><sup>[1]</sup></a>进行完全匹配时，C++允许某些“无关紧要”的转换</p>
+<p><a id="bib2" href="#bib2ref"><sup>[2]</sup></a>如果两个完全匹配的函数都是模板函数，则较具体<a href="#bib3" id="bib3ref"><sup>[3]</sup></a>的模板函数优先</p>
+<p><a id="bib3" href="#bib3ref"><sup>[3]</sup></a>指编译器推断使用哪种类型时执行的转换最少</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+      </div>
+    
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-premier-plus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> C++ premier plus学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/26/Chapter5_%E5%BE%AA%E7%8E%AF%E5%92%8C%E5%85%B3%E7%B3%BB%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="next" title="Chapter5 循环和关系表达式">
+                <i class="fa fa-chevron-left"></i> Chapter5 循环和关系表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/26/Chapter7_%E5%87%BD%E6%95%B0--C++%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9D%97/" rel="prev" title="Chapter7 函数--C++的编程模块">
+                Chapter7 函数--C++的编程模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+            <a href="/">
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="MWSzksnmdys" />
+            </a>
+            
+              <p class="site-author-name" itemprop="name">MWSzksnmdys</p>
+              <p class="site-description motion-element" itemprop="description">Ever youngful, ever weeping</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter8-函数探幽"><span class="nav-text">Chapter8 函数探幽</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-内联函数"><span class="nav-text">8.1 内联函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-引用变量"><span class="nav-text">8.2 引用变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-1-创建引用变量"><span class="nav-text">8.2.1 创建引用变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-2-将引用作为函数参数"><span class="nav-text">8.2.2 将引用作为函数参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-3-何时使用引用参数"><span class="nav-text">8.2.3 何时使用引用参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-默认参数"><span class="nav-text">8.3 默认参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-函数重载"><span class="nav-text">8.4 函数重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-5-函数模板"><span class="nav-text">8.5 函数模板</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2020 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MWSzksnmdys</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script src="/js/src/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '82e81c99c69ba7d2507e',
+      clientSecret: '6b727547a0561b9e79776371cbdc10038fef70d6',
+      repo: 'comment',
+      owner: 'forlornMWS',
+      admin: ['forlornMWS'],
+      id: md5(location.pathname),
+      distractionFreeMode: 'true'
+    })
+    gitalk.render('gitalk-container')
+  </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+
+
+<!--��̬��������-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+</body>
+</html>

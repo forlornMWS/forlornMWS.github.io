@@ -1,37 +1,1281 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/web.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/web.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/web.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/web.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++ premier plus学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Chapter14 C++中的代码重用类的成员本身是另一个类的对象，称为包含（containment）、组合（composition）或层次化（layering）。 通常，包含、私有继承和保护继承用于实现has-a的关系，即新的类将包含另一个类的对象。多重继承使得能够使用两个或更多的基类派生出新的类，将基类的功能组合在一起。 14.1 包含对象成员的类14.1.1 valarray类简介valar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter14 C++中的代码重用">
+<meta property="og:url" content="http://mwszksnmdys.xyz/2021/03/26/Chapter14_C++%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8/index.html">
+<meta property="og:site_name" content="MWS&#39;s Blog">
+<meta property="og:description" content="Chapter14 C++中的代码重用类的成员本身是另一个类的对象，称为包含（containment）、组合（composition）或层次化（layering）。 通常，包含、私有继承和保护继承用于实现has-a的关系，即新的类将包含另一个类的对象。多重继承使得能够使用两个或更多的基类派生出新的类，将基类的功能组合在一起。 14.1 包含对象成员的类14.1.1 valarray类简介valar">
+<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201031140137.png">
+<meta property="article:published_time" content="2021-03-26T06:46:18.523Z">
+<meta property="article:modified_time" content="2020-10-31T07:03:24.000Z">
+<meta property="article:author" content="MWSzksnmdys">
+<meta property="article:tag" content="C++ premier plus学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201031140137.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mwszksnmdys.xyz/2021/03/26/Chapter14_C++中的代码重用/"/>
+
+
+
+
+
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <title>Chapter14 C++中的代码重用 | MWS's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MWS's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://mwszksnmdys.xyz/2021/03/26/Chapter14_C++%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MWSzksnmdys">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MWS's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Chapter14 C++中的代码重用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-26T14:46:18+08:00">
+                2021-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning/" itemprop="url" rel="index">
+                    <span itemprop="name">learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.8k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Chapter14-C-中的代码重用"><a href="#Chapter14-C-中的代码重用" class="headerlink" title="Chapter14 C++中的代码重用"></a>Chapter14 C++中的代码重用</h2><p>类的成员本身是另一个类的对象，称为包含（containment）、组合（composition）或层次化（layering）。</p>
+<p>通常，包含、私有继承和保护继承用于实现has-a的关系，即新的类将包含另一个类的对象。多重继承使得能够使用两个或更多的基类派生出新的类，将基类的功能组合在一起。</p>
+<h3 id="14-1-包含对象成员的类"><a href="#14-1-包含对象成员的类" class="headerlink" title="14.1 包含对象成员的类"></a>14.1 包含对象成员的类</h3><h4 id="14-1-1-valarray类简介"><a href="#14-1-1-valarray类简介" class="headerlink" title="14.1.1 valarray类简介"></a>14.1.1 valarray类简介</h4><p>valarray类是由头文件valarray支持的，它被定义为一个模板类，以便处理不同的数据类型。模板特性意味着声明对象时，必须指定具体的数据类型。因此，使用valarray类来声明一个对象时，需要在标识符valarray后面加上一对尖括号，并在其中包含所需的数据类型，如：<code>valarray&lt;int&gt; test</code>。</p>
+<p>使用公有继承时，类可以继承接口，可能还有实现（基类的纯虚函数提供接口，但不提供实现），获得接口时is-a关系的组成部分。而使用组合，类可以获得实现，但不能获得接口。不继承接口是has-a关系的组成部分。</p>
+<p>使用explicit防止单参数构造函数的隐式转换，使用const限制方法修改数据，原因在于：在编译阶段出现错误优于在运行阶段出现错误。</p>
+<p>对于继承的对象，构造函数在成员初始化列表中使用类名来调用特定的基类构造函数，对于成员对象，构造函数则使用成员名。</p>
+<p>C++要求在构建对象的其他部分之前，先构建对象的所有成员对象，如果省略了初始化列表，C++将使用成员对象所属类的默认构造函数。<strong>当初始化列表中包含多个项目时，这些项目被初始化的顺序为它们被声明的顺序，而不是它们在初始化列表中的顺序</strong>。</p>
+<h3 id="14-2-私有继承"><a href="#14-2-私有继承" class="headerlink" title="14.2 私有继承"></a>14.2 私有继承</h3><p>使用私有继承，基类的公有成员和保护乘员都将称为派生类的私有成员。这意味着基类方法将不会成为派生类对象公有接口的一部分，但可以在派生类的成员函数中使用它们。</p>
+<p>使用公有继承，基类的公有方法将称为派生类的公有方法，派生类继承基类的接口，这是is-a关系的一部分；使用私有继承，基类的公有方法将称为派生类的私有方法，派生类不继承基类的接口，这种不完全继承是has-a关系的一部分。</p>
+<p>包含将对象作为一个命名的成员对象添加到类中，而私有继承将对象作为一个未被命名的继承对象添加到类中。我们使用术语<strong>子对象</strong>（subobject）来表示通过继承或包含添加的对象。（私有继承提供的特性和包含相同：获得实现，但捕获的接口）。</p>
+<p>使用多个基类的继承被称为多重继承（multiple inheritance， MI）。</p>
+<p>使用私有继承时，只能在派生类的方法中使用基类的方法，然而私有继承使得能够使用类名和作用域解析运算符来调用基类的方法。（<em>使用包含时将使用对象名来调用方法，而是用私有继承时建更实用类名和作用域解析运算符来调用方法</em>）</p>
+<p>在私有继承中，在不进行显式类型转换的情况下，不能将指向派生类的引用或指针赋给基类引用或指针。</p>
+<p>类声明中包含表示被包含类的显式命名对象，代码可以通过名称引用这些对象，而使用继承将使关系更抽象。然而，私有继承提供的特性比包含多。<em>例如，假设类包含保护成员，则这样的成员在派生类中是可用的，但在继承层次结构外是不可用的，如果使用组合将这样的类包含在另一个类中，后者位于继承层次结构之外，不能访问保护成员</em>。(<strong>通常，应使用包含来建立has-a关系；如果新类需要访问原有类的保护成员，或需要重新定义虚函数，则应使用私有继承</strong>)</p>
+<h4 id="14-2-1-保护继承"><a href="#14-2-1-保护继承" class="headerlink" title="14.2.1 保护继承"></a>14.2.1 保护继承</h4><p>保护继承是私有继承的变体。<strong>使用保护继承时，基类的公有成员和保护成员都将称为派生类的保护成员</strong>。和私有继承一样，保护继承中基类的接口在派生类中也是可用的，但在继承层次结构之外是不可用的。使用私有继承时，第三代类将不能使用基类的接口，这是因为基类的公有方法在派生类中编程私有方法；使用保护继承时，基类的公有方法在第二代中将变成受保护的，因此第三代派生类可以使用它们。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201031140137.png" alt="image-20201031140051194"></p>
+<h4 id="14-2-2-使用using重新定义访问权限"><a href="#14-2-2-使用using重新定义访问权限" class="headerlink" title="14.2.2 使用using重新定义访问权限"></a>14.2.2 使用using重新定义访问权限</h4><p>使用保护派生或私有派生时，基类的公有成员建更成为保护成员或私有成员。若要让基类的方法在派生类外可用，方法之一是<strong>定义一个使用该基类方法的派生类方法</strong>。例如，假设希望Student类能够使用valarray类的sum()方法，可以在Student类的声明中声明一个sum()方法，然后像下面这样定义该方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">Student::sum</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> std::valarray&lt;<span class="keyword">double</span>&gt;::<span class="built_in">sum</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样Student对象便能够调用Student::sum()，后者进而将valarray&lt;double&gt;::sum()方法应用于被包含的valarray对象。</p>
+<p>另一种方法是，<strong>将函数调用包装在另一个函数调用中</strong>，即<strong>使用一个using声明来指出派生类可以使用特定的基类成员</strong>，即使采用的是私有派生。例如，假设希望Student类能够使用valarray类的sum()方法，可以在Student类的声明的公有部分中加入如下using声明：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">private</span> std::string, <span class="keyword">private</span> std::valarray&lt;<span class="keyword">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="keyword">using</span> std::valarray&lt;<span class="keyword">double</span>&gt;::<span class="built_in">sum</span>();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>using声明只是用成员名</strong>——没有圆括号、函数特征标和返回类型。</p>
+<h3 id="14-3-多重继承"><a href="#14-3-多重继承" class="headerlink" title="14.3 多重继承"></a>14.3 多重继承</h3><p>MI描述的是有多个直接基类的类。与单继承一样，公有MI表示的也是is-a关系，私有MI和保护MI可以表示has-a关系。</p>
+<p>虚基类使得从多个类派生出的对象只继承一个基类对象。</p>
+<p>对于非虚基类，唯一可以出现在初始化列表中的构造函数是即时基类构造函数。</p>
+<p>C++在基类是虚的时，禁止信息通过中间类自动传递给基类。</p>
+<p>如果类有间接虚基类，则除非只需使用该虚基类的默认构造函数，否则必须显式地调用该虚基类的某个构造函数。</p>
+<ul>
+<li>当类通过多条虚途径和非虚途径继承某个特定的基类时，该类将包含一个表示所有的虚途径的基类子对象和分别表示各条非虚途径的多个基类子对象</li>
+<li>派生类中的名称优先于直接或简介祖先类中的相同名称（<em>虚二义性规则与访问规则无关</em>）</li>
+</ul>
+<p>如果一个类从两个不同的类那里继承了两个同名的成员，则需要在派生类中使用类限定符来区分它们。</p>
+<p>当派生类使用关键字virtual来指示派生时，基类就成为了虚基类：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">marketing</span>:</span> <span class="keyword">public</span> <span class="keyword">virtual</span> reality&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>从虚基类的一个或多个示例派生而来的类将只继承一个基类对象。为实现这种特征，必须满足其他要求：</p>
+<ul>
+<li>有间接虚基类的派生类包含直接调用间接基类构造函数的构造函数，这对于间接非虚基类来说时非法的</li>
+<li>通过优先规则解决名称二义性。</li>
+</ul>
+<h3 id="14-4-类模板"><a href="#14-4-类模板" class="headerlink" title="14.4 类模板"></a>14.4 类模板</h3><p>由于模板不是函数，它们不能单独编译。模板必须与特定的模板实例化请求一起使用。</p>
+<p>模板代码不能修改参数的值，也不能使用参数的地址。</p>
+<p>实例化模板时，用作表达式参数的值必须是常量表达式。</p>
+<p>虽然可以为类模板参数提供默认值，但不能为函数模板参数提供默认值。然而，可以为两种模板中的非类型参数提供默认值。</p>
+<h4 id="14-4-1-模板的具体化"><a href="#14-4-1-模板的具体化" class="headerlink" title="14.4.1 模板的具体化"></a>14.4.1 模板的具体化</h4><p>隐式实例化、显式实例化和显式具体化统称为具体化。</p>
+<ul>
+<li><p>隐式实例化</p>
+<p>声明一个或多个对象，指出所需的类型，而编译器使用通用模板生成具体的类定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayTP&lt;<span class="keyword">int</span>, <span class="number">100</span>&gt; staff;<span class="comment">// 隐式实例化</span></span><br></pre></td></tr></table></figure>
+
+<p>编译器在需要对象之前，不会生成类的隐式实例化。</p>
+</li>
+<li><p>显式实例化</p>
+<p>当使用关键字template并指出所需类型来声明类时，编译器将生成类声明的显式实例化。声明必须位于模板所在的名称空间中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayTP</span>&lt;</span>string, <span class="number">100</span>&gt;; <span class="comment">//生成ArrayTP&lt;string, 100&gt; 类</span></span><br></pre></td></tr></table></figure></li>
+<li><p>显式具体化</p>
+<p>显式具体化是特定类型（用于替换模板中的泛型）定义。格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tempalte &lt;&gt; <span class="class"><span class="keyword">class</span> <span class="title">Classname</span>&lt;</span>specialized-type-name&gt;&#123;...&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><p>部分具体化</p>
+<p>即部分限制模板的通用性。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tempalte &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="keyword">class</span> <span class="title">T2</span>&gt;</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&#123;</span>...&#125;;<span class="comment">//通用模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>&gt;</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;</span>T1, <span class="keyword">int</span>&gt;&#123;...&#125;;<span class="comment">//部分具体化</span></span><br></pre></td></tr></table></figure>
+
+<p>如果指定所有的类型，则&lt;&gt;内将为空，这将导致显式具体化。</p>
+</li>
+</ul>
+<p>如果有多个模板可供选择，编译器将使用具体化程度最高的模板。</p>
+<h4 id="14-4-2-模板类和友元"><a href="#14-4-2-模板类和友元" class="headerlink" title="14.4.2 模板类和友元"></a>14.4.2 模板类和友元</h4><ul>
+<li><p>模板类的非模板友元函数</p>
+<p>在模板类中将一个常规函数声明为友元：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HasFriend</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">counts</span><span class="params">()</span></span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><p>模板类的约束模板友元函数</p>
+<p>友元函数本身成为模板。</p>
+<p>（1）在类定义前声明每个模板函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;  <span class="function"><span class="keyword">void</span> <span class="title">counts</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">report</span><span class="params">(T &amp;)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>（2）在函数中再次将模板声明为友元。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> TT&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HasFriendT</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> counts&lt;TT&gt;();</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> reprot&lt;&gt;(HasFriendT&lt;TT&gt; &amp;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>模板类的非约束模板友元函数</p>
+<p>通过在类内部声明模板，可以创建非约束友元函数，即每个函数具体化都是每个类具体化。对于非约束友元，友元模板类型参数与模板类类型参数是不同的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManyFriend</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    template&lt;typename C, typename D&gt; friend void show2(C &amp;, D &amp;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>C++11允许将语法using =用于非模板，用于非模板时，何种语法与常规的typedef等价。如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">const</span> <span class="keyword">char</span> * pc1;</span><br><span class="line"><span class="keyword">using</span> pc2 = <span class="keyword">const</span> <span class="keyword">char</span> *;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+      </div>
+    
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-premier-plus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> C++ premier plus学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/26/Chapter11_%E4%BD%BF%E7%94%A8%E7%B1%BB/" rel="next" title="Chapter11 使用类">
+                <i class="fa fa-chevron-left"></i> Chapter11 使用类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/26/Chapter15_%E5%8F%8B%E5%85%83%E3%80%81%E5%BC%82%E5%B8%B8%E5%92%8C%E5%85%B6%E4%BB%96/" rel="prev" title="Chapter15 友元、异常和其他">
+                Chapter15 友元、异常和其他 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+            <a href="/">
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="MWSzksnmdys" />
+            </a>
+            
+              <p class="site-author-name" itemprop="name">MWSzksnmdys</p>
+              <p class="site-description motion-element" itemprop="description">Ever youngful, ever weeping</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter14-C-中的代码重用"><span class="nav-text">Chapter14 C++中的代码重用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#14-1-包含对象成员的类"><span class="nav-text">14.1 包含对象成员的类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#14-1-1-valarray类简介"><span class="nav-text">14.1.1 valarray类简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-2-私有继承"><span class="nav-text">14.2 私有继承</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#14-2-1-保护继承"><span class="nav-text">14.2.1 保护继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-2-2-使用using重新定义访问权限"><span class="nav-text">14.2.2 使用using重新定义访问权限</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-3-多重继承"><span class="nav-text">14.3 多重继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-4-类模板"><span class="nav-text">14.4 类模板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#14-4-1-模板的具体化"><span class="nav-text">14.4.1 模板的具体化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-4-2-模板类和友元"><span class="nav-text">14.4.2 模板类和友元</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2020 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MWSzksnmdys</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script src="/js/src/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '82e81c99c69ba7d2507e',
+      clientSecret: '6b727547a0561b9e79776371cbdc10038fef70d6',
+      repo: 'comment',
+      owner: 'forlornMWS',
+      admin: ['forlornMWS'],
+      id: md5(location.pathname),
+      distractionFreeMode: 'true'
+    })
+    gitalk.render('gitalk-container')
+  </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+
+
+<!--��̬��������-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+</body>
+</html>
