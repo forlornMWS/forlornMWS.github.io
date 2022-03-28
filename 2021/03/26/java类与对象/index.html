@@ -85,13 +85,13 @@
 <meta property="og:url" content="http://mwszksnmdys.xyz/2021/03/26/java%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/index.html">
 <meta property="og:site_name" content="MWS&#39;s Blog">
 <meta property="og:description" content="Java 类与对象  在一个面向对象的系统中，对象是对现实世界中事物的抽象，是Java程序的基本封装单位，是类的实例；类是对象的抽象，是数据和操作的封装体；属性是事物静态特征的抽象，在程序中使用数据成员加以描述；操作是事物动态特征的抽象，在程序中使用成员方法来实现。  类与对象概念对象 客观世界的事物映射为对象，对象是面向对象程序设计中用来描述客观事物的基本单位。  类是对象的抽象和归纳，对象是类">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200227215710.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200227215710.png">
 <meta property="article:published_time" content="2021-03-26T06:46:23.247Z">
-<meta property="article:modified_time" content="2020-03-09T16:16:36.000Z">
+<meta property="article:modified_time" content="2022-03-28T06:12:19.956Z">
 <meta property="article:author" content="MWSzksnmdys">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200227215710.png">
+<meta name="twitter:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200227215710.png">
 
 
 
@@ -438,8 +438,7 @@
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Class Person		<span class="comment">//class指出这是一个类，Person是类标识</span></span><br><span class="line">&#123;</span><br><span class="line">    String head;		<span class="comment">//类的属性</span></span><br><span class="line">    String hands;</span><br><span class="line">    String feet;</span><br><span class="line">    <span class="function">Public <span class="keyword">void</span> <span class="title">move</span><span class="params">()</span>		<span class="comment">//类的方法</span></span></span><br><span class="line"><span class="function">    </span>&#123;...&#125;</span><br><span class="line">    <span class="function">Public <span class="keyword">void</span> <span class="title">ShowPerson</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
+<ol>
 <li><strong>类与对象的关系</strong>：</li>
 </ol>
 <blockquote>
@@ -459,10 +458,9 @@
 <p>用abstract修饰符修饰的类称为抽象类。<strong>抽象类刻画了研究对象的公有行为特征，并通过继承机制将这些特征传送给它的派生类</strong>。抽象类的作用是将许多有关的类组织在一起，提供一个公共的基类，为派生具体类奠定基础。<em>当一个类中出现一个或多个用abstract修饰符定义的方法时，必须将这个类定义为抽像类</em>。</p>
 </li>
 </ol>
-<p>可以同时使用两个修饰符来修饰一个类（修饰符之间用空格分开，写在class之前，修饰符的顺序对类的性质没有任何影响。<em><strong>类不能被修饰为abstract final</strong></em>[^1]。</p>
+<p>可以同时使用两个修饰符来修饰一个类（修饰符之间用空格分开，写在class之前，修饰符的顺序对类的性质没有任何影响。<strong><em>类不能被修饰为abstract final</em></strong><sup><a href="#fn_1" id="reffn_1">1</a></sup>。</p>
 <h4 id="声明类的一般格式"><a href="#声明类的一般格式" class="headerlink" title="声明类的一般格式"></a><strong>声明类的一般格式</strong></h4><p>类的声明部分用于描述类的名称以及类的其他属性（类的访问权限、与其他类的关系等）。声明类的语法如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[public] [abstract | final] class &lt;className&gt; [extends superClass-Name] [implements interfaceNameList]&#123;...&#125;</span><br></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <ol>
 <li>“[]”代表可选项，“&lt;&gt;”表示必选项，“|”表示多选一。</li>
@@ -479,10 +477,9 @@
 </ol>
 </li>
 </ol>
-<h4 id="数据成员-2"><a href="#数据成员-2" class="headerlink" title="数据成员[^2]"></a><strong>数据成员</strong>[^2]</h4><p><strong>一、数据成员的声明</strong></p>
+<h4 id="数据成员2"><a href="#数据成员2" class="headerlink" title="数据成员2"></a><strong>数据成员</strong><sup><a href="#fn_2" id="reffn_2">2</a></sup></h4><p><strong>一、数据成员的声明</strong></p>
 <p>一般情况下，声明一个数据成员时必须给出这个数据成员的标识符并指明它所属的数据类型，声明数据成员的语法如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">public</span> | <span class="keyword">protected</span> | <span class="keyword">private</span>] [<span class="keyword">static</span>] [<span class="keyword">final</span>] [<span class="keyword">transient</span>] [<span class="keyword">volatile</span>] &lt;type&gt;&lt;variableName&gt;</span><br></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <ol>
 <li>public、protected、private：指定变量的访问权限。</li>
@@ -494,18 +491,16 @@
 <li>variableName：指定数据成员的名称。</li>
 </ol>
 <p><strong>二、静态初始化器</strong></p>
-<p>静态数据成员的初始化可以有用户在定义时进行，也可以由<u>静态初始化器</u>[^3]来完成。</p>
+<p>静态数据成员的初始化可以有用户在定义时进行，也可以由<u>静态初始化器</u><sup><a href="#fn_3" id="reffn_3">3</a></sup>来完成。</p>
 <p>eg:在类ClassPractice的定义中，用静态初始化器对静态数据成员进行初始化：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassPractice</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> nn;</span><br><span class="line">    <span class="keyword">static</span></span><br><span class="line">    &#123;n = <span class="number">20</span>;&#125;</span><br><span class="line">    ClassPractice()</span><br><span class="line">    &#123;nn = n++;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> java.applet.Applet;</span><br><span class="line"><span class="keyword">import</span> java.awt.Graphics;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassPractice_1</span> <span class="keyword">extends</span> <span class="title">Applet</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ClassPractice m = <span class="keyword">new</span> ClassPractice();</span><br><span class="line">        ClassPractice n = <span class="keyword">new</span> ClassPractice();</span><br><span class="line">        g.drawString(<span class="string">&quot;m=&quot;</span>+m.nn,<span class="number">20</span>,<span class="number">50</span>);</span><br><span class="line">        g.drawString(<span class="string">&quot;n=&quot;</span>+n.nn,<span class="number">20</span>,<span class="number">90</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200227215710.png" alt="程序运行结果"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassPractice</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> nn;</span><br><span class="line">    <span class="keyword">static</span></span><br><span class="line">    &#123;n = <span class="number">20</span>;&#125;</span><br><span class="line">    ClassPractice()</span><br><span class="line">    &#123;nn = n++;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> java.applet.Applet;</span><br><span class="line"><span class="keyword">import</span> java.awt.Graphics;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassPractice_1</span> <span class="keyword">extends</span> <span class="title">Applet</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ClassPractice m = <span class="keyword">new</span> ClassPractice();</span><br><span class="line">        ClassPractice n = <span class="keyword">new</span> ClassPractice();</span><br><span class="line">        g.drawString(<span class="string">"m="</span>+m.nn,<span class="number">20</span>,<span class="number">50</span>);</span><br><span class="line">        g.drawString(<span class="string">"n="</span>+n.nn,<span class="number">20</span>,<span class="number">90</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200227215710.png" alt="程序运行结果"></p>
 <p><strong>三、用final修饰的最终数据成员</strong></p>
 <p>如果一个类的数据成员用final修饰符修饰，则这个数据成员就被限定为最终数据成员。最终数据成员可以在声明时进行初始化，也可以通过构造方法赋值，但不能在程序的其他部分赋值，他的值在程序的整个执行过程中时不能改变的。</p>
 <h4 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h4><p><strong>成员方法描述对象所具有的功能或操作，反映对象的行为，是具有某种相对独立功能的程序模块</strong>。<em>一个类或对象可以有多个成员方法，对象通过执行它的成员方法对传来的消息做出响应，完成特定的功能</em>。（按来源可分为类库成员方法和用户自定义的成员方法）</p>
 <p><strong>一、声明成员方法的格式</strong></p>
 <p>类的成员方法由方法声明和方法体两部分组成，声明成员方法的语法如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[accessLevel] [<span class="keyword">static</span>] [<span class="keyword">final</span> | <span class="keyword">abstract</span>] [<span class="keyword">native</span>] [<span class="keyword">synchronized</span>] &lt;return_type&gt;&lt;name&gt; ([&lt;argument_list&gt;]) [<span class="keyword">throws</span> &lt;exception_list&gt;]&#123;</span><br><span class="line">    [block]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <ol>
 <li><p>accessLevel：确定方法的被访问权限，可选值为public、protected和private</p>
@@ -518,7 +513,7 @@
 <p>（5）static方法是不能被覆盖，即这个类的子类不能由相同名及相同参数的方法。</p>
 <p>（5）main方法是静态方法。Java的每个Application程序中，都必须有且只能有一个main方方法，它是Application程序运行的入口。</p>
 </li>
-<li><p>final：指明该成员方法为最终方法不能被重写[^4]。</p>
+<li><p>final：指明该成员方法为最终方法不能被重写<sup><a href="#fn_4" id="reffn_4">4</a></sup>。</p>
 </li>
 <li><p>abstract：指名该方法是抽象成员方法。</p>
 </li>
@@ -537,24 +532,23 @@
 <li><p>block：方法体，描述该方法所要完成的功能，是方法的实现部分。</p>
 </li>
 <li><p>```Java<br>public class ClassPractice2{</p>
-<pre><code>public static void main(String[] args)&#123;
+<pre><code>public static void main(String[] args){
     int a=2,b=3;
     int f=add(a,b);
     System.out.println(&quot;f=&quot;+f);
-&#125;
+}
 static int add(int x,int y)
-&#123;
+{
     int z,d;
     z=x+y;
     return z;
-</code></pre>
-<p>}<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**二、成员方法的引用**</span><br><span class="line"></span><br><span class="line">成员方法引用的四种方式：</span><br><span class="line"></span><br><span class="line">1. 方法语句。成员方法作为一个独立的语句被引用。</span><br><span class="line">2. 方法表达式。成员方法作为表达式中的一部分，通过表达式被引用。</span><br><span class="line">3. 方法作为参数。一个成员方法作为另一个成员方法的参数别引用。</span><br><span class="line">4. 通过对象来引用。</span><br><span class="line"></span><br><span class="line">#### Java类库</span><br><span class="line"></span><br><span class="line">Java的类库是系统提供的已实现的标准类的集合，是Java编程的API，在Java中，系统定义好的类根据实现功能的不同，可以划分成不同的集合，每个集合称为一个包，所有包合称为类库。</span><br><span class="line"></span><br><span class="line">对于类库中系统定义好的类，有三种使用方式：一是直接使用系统类，第二种方式是继承系统类，在用户程序里创建系统类的子类，例如每个JavaApplet的朱磊都是java.applet包中的Applet类的子类；第三种方式是创建系统类的对象。</span><br><span class="line"></span><br><span class="line">Java程序设计中常用的包：</span><br><span class="line"></span><br><span class="line">1. java.lang包</span><br><span class="line"></span><br><span class="line">   是Java的核心类库，包含了运行Java程序必不可少的系统类，每个Java程序运行时，系统都会自动地引入java.lang包。</span><br><span class="line"></span><br><span class="line">2. java.io包</span><br><span class="line"></span><br><span class="line">   包中包含了实现Java程序与操作系统、用户界面以及其他Java程序之间进行数据交换所使用的类。（凡是需要完成与操作系统有关的较低层的输入&#x2F;输出操作的Java程序都要用到java.io包）</span><br><span class="line"></span><br><span class="line">3. java.awt包</span><br><span class="line"></span><br><span class="line">   是java语言用来构建图形用户界面的类库，它包含许多界面元素和资源，主要在三个方面提供界面支持：</span><br><span class="line"></span><br><span class="line">   （1）低级绘图操作，如Graphics类等。</span><br><span class="line"></span><br><span class="line">   （2）图形界面组件和布局管理，如Checkbox类、Container类、Layout-Manager类等。</span><br><span class="line"></span><br><span class="line">   （3）界面用户交互控制和时间响应，如Event类。</span><br><span class="line"></span><br><span class="line">4. java.awt.event包</span><br><span class="line"></span><br><span class="line">   是JDK1.0版本中原有的Event类的一个扩充，它使得程序可以用不同方式来处理不同类型的事件，并使每个图形界面的元素本身可以拥有处理它上面事件的能力。</span><br><span class="line"></span><br><span class="line">5. java.awt.image包</span><br><span class="line"></span><br><span class="line">   是用来处理和操纵来自网上图片的Java工具类库。</span><br><span class="line"></span><br><span class="line">6. java.applet包</span><br><span class="line"></span><br><span class="line">   是用来实现运行于Internet浏览器中的JavaApplet工具类库，它仅包含少量几个接口和一个非常有用的类java.applet.Applet.</span><br><span class="line"></span><br><span class="line">7. java.net包</span><br><span class="line"></span><br><span class="line">   是Java语言用来实现网络功能的类库，目前已经实现的Java网络功能主要有：底层的网络通信类；编写用户自己的Telnet、FTP、邮件服务等实现网上通信的类；用于访问Internet上资源和进行CGI网关调用的类等。</span><br><span class="line"></span><br><span class="line">8. java.rmi包、java.rmi.registry包和java.rmi.server包</span><br><span class="line"></span><br><span class="line">   这三个包用来实现RMI(Remote Method Invocation,远程方法调用)功能，利用RMI功能，用户程序可以在远程计算机（服务器）上创建对象，并在本地计算机（客户机）上使用这个对象。</span><br><span class="line"></span><br><span class="line">9. java.util包</span><br><span class="line"></span><br><span class="line">   包括了Java语言中一些低级的使用工具，如处理事件的Date类，处理变长数组的Vector类，实现栈的Socket类和实现哈希表的HashTable类等。</span><br><span class="line"></span><br><span class="line">10. java.sql包</span><br><span class="line"></span><br><span class="line">    是实现JDBC的类库，利用这个包可以使Java程序具有访问不同种类数据库的功能。（只要安装了合适的驱动程序，同一个Java程序不许修改就可以存取、修改这些不同数据库中的数据。</span><br><span class="line"></span><br><span class="line">11. java.security包、java.security.acl包和java.security.interface包</span><br><span class="line"></span><br><span class="line">    这三个包提供了更完善的Java程序安全性控制和管理，利用他们可以对Java程序加密，也可以把特定的JavaApplet标记为“可信赖的”，是它能够具有于JavaApplication相近的安全权限。</span><br><span class="line"></span><br><span class="line">12. java.awt.peer包</span><br><span class="line"></span><br><span class="line">    包是实现Java语言跨平台特性的手段之一，它的作用是将不同的平台包裹、隐藏起来，是这些平台在用户程序面前呈现基本基本相同的面貌。</span><br><span class="line"></span><br><span class="line">13. java.util.zip </span><br><span class="line"></span><br><span class="line">    用来实现文件压缩功能。</span><br><span class="line"></span><br><span class="line">14. java.awt.datatransfer包</span><br><span class="line"></span><br><span class="line">    提供处理数串数的工具类，包括剪贴板、字符串发送器等。</span><br><span class="line"></span><br><span class="line">15. java.lang.reflect包</span><br><span class="line"></span><br><span class="line">    提供了用于反射对象的工具，反射允许程序监视一个正在运行的对象并获得它的构造函数、方法和属性。</span><br><span class="line"></span><br><span class="line">16. java.corba包和java.corba.orb包</span><br><span class="line"></span><br><span class="line">     这两个包将CORBA嵌入到java环境中，使得Java程序可以存取、调用CORBA对象，并于CORBA对象共同工作，这样，Java程序就可以方便、动态地使用已经存在的由Java或其他面向对象开发的部件，简化软件的开发。</span><br><span class="line"></span><br><span class="line">### 对象的创建</span><br><span class="line"></span><br><span class="line">创建对象通常包括引用变量、创建对象和初始化三步，在Java中，对象是通过类创建的，对象是类的动态实例。一个对象在程序运行期间的生命周期包括创建、使用和销毁三个阶段。</span><br><span class="line"></span><br><span class="line">#### 声明对象</span><br><span class="line"></span><br><span class="line">​	在Java中，创建一个对象前，要先声明该对象，语法如下:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;Java</span><br><span class="line">&lt;className&gt;&lt;objectName&gt;</span><br></pre></td></tr></table></figure></li>
+</code></pre><p>}<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**二、成员方法的引用**</span><br><span class="line"></span><br><span class="line">成员方法引用的四种方式：</span><br><span class="line"></span><br><span class="line">1. 方法语句。成员方法作为一个独立的语句被引用。</span><br><span class="line">2. 方法表达式。成员方法作为表达式中的一部分，通过表达式被引用。</span><br><span class="line">3. 方法作为参数。一个成员方法作为另一个成员方法的参数别引用。</span><br><span class="line">4. 通过对象来引用。</span><br><span class="line"></span><br><span class="line">#### Java类库</span><br><span class="line"></span><br><span class="line">Java的类库是系统提供的已实现的标准类的集合，是Java编程的API，在Java中，系统定义好的类根据实现功能的不同，可以划分成不同的集合，每个集合称为一个包，所有包合称为类库。</span><br><span class="line"></span><br><span class="line">对于类库中系统定义好的类，有三种使用方式：一是直接使用系统类，第二种方式是继承系统类，在用户程序里创建系统类的子类，例如每个JavaApplet的朱磊都是java.applet包中的Applet类的子类；第三种方式是创建系统类的对象。</span><br><span class="line"></span><br><span class="line">Java程序设计中常用的包：</span><br><span class="line"></span><br><span class="line">1. java.lang包</span><br><span class="line"></span><br><span class="line">   是Java的核心类库，包含了运行Java程序必不可少的系统类，每个Java程序运行时，系统都会自动地引入java.lang包。</span><br><span class="line"></span><br><span class="line">2. java.io包</span><br><span class="line"></span><br><span class="line">   包中包含了实现Java程序与操作系统、用户界面以及其他Java程序之间进行数据交换所使用的类。（凡是需要完成与操作系统有关的较低层的输入&#x2F;输出操作的Java程序都要用到java.io包）</span><br><span class="line"></span><br><span class="line">3. java.awt包</span><br><span class="line"></span><br><span class="line">   是java语言用来构建图形用户界面的类库，它包含许多界面元素和资源，主要在三个方面提供界面支持：</span><br><span class="line"></span><br><span class="line">   （1）低级绘图操作，如Graphics类等。</span><br><span class="line"></span><br><span class="line">   （2）图形界面组件和布局管理，如Checkbox类、Container类、Layout-Manager类等。</span><br><span class="line"></span><br><span class="line">   （3）界面用户交互控制和时间响应，如Event类。</span><br><span class="line"></span><br><span class="line">4. java.awt.event包</span><br><span class="line"></span><br><span class="line">   是JDK1.0版本中原有的Event类的一个扩充，它使得程序可以用不同方式来处理不同类型的事件，并使每个图形界面的元素本身可以拥有处理它上面事件的能力。</span><br><span class="line"></span><br><span class="line">5. java.awt.image包</span><br><span class="line"></span><br><span class="line">   是用来处理和操纵来自网上图片的Java工具类库。</span><br><span class="line"></span><br><span class="line">6. java.applet包</span><br><span class="line"></span><br><span class="line">   是用来实现运行于Internet浏览器中的JavaApplet工具类库，它仅包含少量几个接口和一个非常有用的类java.applet.Applet.</span><br><span class="line"></span><br><span class="line">7. java.net包</span><br><span class="line"></span><br><span class="line">   是Java语言用来实现网络功能的类库，目前已经实现的Java网络功能主要有：底层的网络通信类；编写用户自己的Telnet、FTP、邮件服务等实现网上通信的类；用于访问Internet上资源和进行CGI网关调用的类等。</span><br><span class="line"></span><br><span class="line">8. java.rmi包、java.rmi.registry包和java.rmi.server包</span><br><span class="line"></span><br><span class="line">   这三个包用来实现RMI(Remote Method Invocation,远程方法调用)功能，利用RMI功能，用户程序可以在远程计算机（服务器）上创建对象，并在本地计算机（客户机）上使用这个对象。</span><br><span class="line"></span><br><span class="line">9. java.util包</span><br><span class="line"></span><br><span class="line">   包括了Java语言中一些低级的使用工具，如处理事件的Date类，处理变长数组的Vector类，实现栈的Socket类和实现哈希表的HashTable类等。</span><br><span class="line"></span><br><span class="line">10. java.sql包</span><br><span class="line"></span><br><span class="line">    是实现JDBC的类库，利用这个包可以使Java程序具有访问不同种类数据库的功能。（只要安装了合适的驱动程序，同一个Java程序不许修改就可以存取、修改这些不同数据库中的数据。</span><br><span class="line"></span><br><span class="line">11. java.security包、java.security.acl包和java.security.interface包</span><br><span class="line"></span><br><span class="line">    这三个包提供了更完善的Java程序安全性控制和管理，利用他们可以对Java程序加密，也可以把特定的JavaApplet标记为“可信赖的”，是它能够具有于JavaApplication相近的安全权限。</span><br><span class="line"></span><br><span class="line">12. java.awt.peer包</span><br><span class="line"></span><br><span class="line">    包是实现Java语言跨平台特性的手段之一，它的作用是将不同的平台包裹、隐藏起来，是这些平台在用户程序面前呈现基本基本相同的面貌。</span><br><span class="line"></span><br><span class="line">13. java.util.zip </span><br><span class="line"></span><br><span class="line">    用来实现文件压缩功能。</span><br><span class="line"></span><br><span class="line">14. java.awt.datatransfer包</span><br><span class="line"></span><br><span class="line">    提供处理数串数的工具类，包括剪贴板、字符串发送器等。</span><br><span class="line"></span><br><span class="line">15. java.lang.reflect包</span><br><span class="line"></span><br><span class="line">    提供了用于反射对象的工具，反射允许程序监视一个正在运行的对象并获得它的构造函数、方法和属性。</span><br><span class="line"></span><br><span class="line">16. java.corba包和java.corba.orb包</span><br><span class="line"></span><br><span class="line">     这两个包将CORBA嵌入到java环境中，使得Java程序可以存取、调用CORBA对象，并于CORBA对象共同工作，这样，Java程序就可以方便、动态地使用已经存在的由Java或其他面向对象开发的部件，简化软件的开发。</span><br><span class="line"></span><br><span class="line">### 对象的创建</span><br><span class="line"></span><br><span class="line">创建对象通常包括引用变量、创建对象和初始化三步，在Java中，对象是通过类创建的，对象是类的动态实例。一个对象在程序运行期间的生命周期包括创建、使用和销毁三个阶段。</span><br><span class="line"></span><br><span class="line">#### 声明对象</span><br><span class="line"></span><br><span class="line">​	在Java中，创建一个对象前，要先声明该对象，语法如下:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;Java</span><br><span class="line">&lt;className&gt;&lt;objectName&gt;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 <p>其中：className指定一个已经定义的类，objectName指定对象名称（对象名必须是合法的Java标识符）。<strong>在声明对象是，只是在内存中为其分配了一个引用空间，并置初始值为null，表示不指向任何存储空间</strong>。</p>
 <h4 id="建立对象"><a href="#建立对象" class="headerlink" title="建立对象"></a>建立对象</h4><p>在声明对象时，只确定了对象的名称和它所属的类，并没有为对象分配存储空间，此时对象还不是类的实例。只有通过建立对象，才为对象分配内存，使该对象称为类的实例，这个过程称为对象的实例化，使用关键字new来完成，它的语法如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;objectName&gt;=<span class="keyword">new</span> &lt;someClass&gt; ([argument_list])</span><br></pre></td></tr></table></figure>
-
 <p>其中：bojectName指定已经声明的对象名；someClass指定需要调用的构造方法名，即类名；argument_list指定构造方法的入口参数。</p>
 <h4 id="初始化对象"><a href="#初始化对象" class="headerlink" title="初始化对象"></a>初始化对象</h4><p>初始化对象是指由一个类生成对象时，为这个对象去欸的那个初始状态的过程，初始化对象由三种实现方法：</p>
 <p>一、用默认初始化原则赋初值</p>
@@ -612,7 +606,7 @@ static int add(int x,int y)
 </table>
 
 <p>二、用赋值语句赋处置。</p>
-<p>三、由Java提供的<u>构造方法</u>来完成它[^5]。每当使用new关键字创建一个对象，为新建对象开辟了内存空间之后，Java系统将自动调用构造方法初始化这个新建对象。，构造方法是类的一种特殊方法，它的特殊性体现在以下几个方面:</p>
+<p>三、由Java提供的<u>构造方法</u>来完成它<sup><a href="#fn_5" id="reffn_5">5</a></sup>。每当使用new关键字创建一个对象，为新建对象开辟了内存空间之后，Java系统将自动调用构造方法初始化这个新建对象。，构造方法是类的一种特殊方法，它的特殊性体现在以下几个方面:</p>
 <ol>
 <li>构造方法的方法名与类名相同；</li>
 <li>构造方法是类的方法，它能够简化对象数据成员的初始化操作；</li>
@@ -625,7 +619,6 @@ static int add(int x,int y)
 <h4 id="使用对象"><a href="#使用对象" class="headerlink" title="使用对象"></a>使用对象</h4><p>当一个对象被创建之后，这个对象就拥有了自己的数据成员和成员方法，可以通过与之关联的引用变量名来引用对象的成员。引用方法如下：<code>objectReference.variableName</code>;</p>
 <p>其中：objdctReference指定调用成员变量的对象名称（引用）；variableName指定需要调用的数据成员的名称。对象成员方法的引用方式如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objectReference.methodName([argument_list])</span><br></pre></td></tr></table></figure>
-
 <p>其中objectReference指定调用成员变量的对象名称，methodName指定需要调用的成员方法的名称，argument_list指定需要调用的成员方法的参数列表。</p>
 <h4 id="对象的消除"><a href="#对象的消除" class="headerlink" title="对象的消除"></a>对象的消除</h4><p>在Java中程序员创建的对象可以不必删除，因为Java系统提供的垃圾回收机制可以自动判断对象是否还在使用，并能够自动销毁不再使用的对象，回收对象所占用的资源。</p>
 <p>Object类提供了finalize()方法，自定义的Java类可以覆盖finalize()方法，并在这个方法中进行释放对象所占资源的操作。当垃圾回收器要释放无用对象的存储空间时，将先调用该对象的finalize()方法。</p>
@@ -640,54 +633,71 @@ static int add(int x,int y)
     <caption><b>Java类成员的四种访问控制权限及其可见性</b></caption>
 </table>
 
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"></th>
-<th align="center">同一个类</th>
-<th align="center">同一个包</th>
-<th align="center">不同包的子类</th>
-<th align="center">任何场合</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">同一个类</th>
+<th style="text-align:center">同一个包</th>
+<th style="text-align:center">不同包的子类</th>
+<th style="text-align:center">任何场合</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">private</td>
-<td align="center">√</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
+<tbody>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">protected</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center"></td>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">public</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center">√</td>
+<td style="text-align:center">public</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
 </tr>
 <tr>
-<td align="center">default</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center">default</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="package和import"><a href="#package和import" class="headerlink" title="package和import"></a>package和import</h4><p>一、package</p>
-<p>包的创建就是将原程序文件中的接口与类纳入指定的包中，创建包可以通过类和接口的源文件使用package语句实现。声明package语句的语法如下：<code>package pk1[.pk2]…</code>，其中符号“.”代表目录分隔符，pk<del>n</del>为包。</p>
+<p>包的创建就是将原程序文件中的接口与类纳入指定的包中，创建包可以通过类和接口的源文件使用package语句实现。声明package语句的语法如下：<code>package pk1[.pk2]…</code>，其中符号“.”代表目录分隔符，pk~n~为包。</p>
 <p>创建一个包就是在当前文件夹下床架一个子文件夹，粗放这个包中包含的所有类的.class文件。Java编译器把包对应于文件系统的目录进行管理，因此包可以嵌套使用。</p>
 <p>二、import</p>
 <p>将类组织成包的目的是为了更好地利用包中的类，通常，一个类只能引用与它在同一个包中的类，如果要使用其他包中的public类，可以通过两种方式实现：</p>
 <p>（1）使用长名导入包中的类，这种方法是在想要导入的每个类名前面加上完整的包名。</p>
 <p>（2）使用import语句导入包中的类，语句格式为：</p>
 <p><code>import pkg1[.pkg2]&lt;类名|*&gt;</code>其中<code>pkg1[.pkg2]</code>表示包的层次，与package语句相同，它对应于文件的目录，类名指明所要导入的类，“*”可用来导入多个类。</p>
-<p>[^1]: abstract类自身没有对象，需要派生子类后再创建对象，而final类不能派生子类，所以不存在用abstract final两个修饰符<br>[^2]: 类中用来表述研究对象静态特征的变量称为数据成员，也称为成员变量或变量<br>[^3]: 静态初始化器是由关键字static引导的一对花括号括起来的语法快，其作用是在它所属的类加载到内存时，由系统调用执行，初始化类的静态数据成员。<br>[^4]: 如果类某个方法被final修饰符所限定，则该类的子类就不能覆盖父类的方法，即不能重新定义与此方法同名的自己的方法，而仅能使用从父类继承来的方法。<br>[^5]: 构造方法是一个类的方法中方法名与类名相同的类方法。</p>
+<blockquote id="fn_1">
+<sup>1</sup>. abstract类自身没有对象，需要派生子类后再创建对象，而final类不能派生子类，所以不存在用abstract final两个修饰符<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. 类中用来表述研究对象静态特征的变量称为数据成员，也称为成员变量或变量<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. 静态初始化器是由关键字static引导的一对花括号括起来的语法快，其作用是在它所属的类加载到内存时，由系统调用执行，初始化类的静态数据成员。<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>. 如果类某个方法被final修饰符所限定，则该类的子类就不能覆盖父类的方法，即不能重新定义与此方法同名的自己的方法，而仅能使用从父类继承来的方法。<a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_5">
+<sup>5</sup>. 构造方法是一个类的方法中方法名与类名相同的类方法。<a href="#reffn_5" title="Jump back to footnote [5] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -881,7 +891,7 @@ static int add(int x,int y)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-类与对象"><span class="nav-text">Java 类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类与对象概念"><span class="nav-text">类与对象概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象"><span class="nav-text">对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类"><span class="nav-text">类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的定义"><span class="nav-text">类的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类修饰符"><span class="nav-text">类修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#声明类的一般格式"><span class="nav-text">声明类的一般格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据成员-2"><span class="nav-text">数据成员[^2]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员方法"><span class="nav-text">成员方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立对象"><span class="nav-text">建立对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化对象"><span class="nav-text">初始化对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用对象"><span class="nav-text">使用对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的消除"><span class="nav-text">对象的消除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装机制"><span class="nav-text">封装机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#封装"><span class="nav-text">封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问控制"><span class="nav-text">访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package和import"><span class="nav-text">package和import</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-类与对象"><span class="nav-text">Java 类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类与对象概念"><span class="nav-text">类与对象概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象"><span class="nav-text">对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类"><span class="nav-text">类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的定义"><span class="nav-text">类的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类修饰符"><span class="nav-text">类修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#声明类的一般格式"><span class="nav-text">声明类的一般格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据成员2"><span class="nav-text">数据成员2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员方法"><span class="nav-text">成员方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立对象"><span class="nav-text">建立对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化对象"><span class="nav-text">初始化对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用对象"><span class="nav-text">使用对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的消除"><span class="nav-text">对象的消除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装机制"><span class="nav-text">封装机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#封装"><span class="nav-text">封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问控制"><span class="nav-text">访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package和import"><span class="nav-text">package和import</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -85,13 +85,13 @@
 <meta property="og:url" content="http://mwszksnmdys.xyz/2021/03/26/Chapter15_%E5%8F%8B%E5%85%83%E3%80%81%E5%BC%82%E5%B8%B8%E5%92%8C%E5%85%B6%E4%BB%96/index.html">
 <meta property="og:site_name" content="MWS&#39;s Blog">
 <meta property="og:description" content="Chapter15 友元、异常和其他15.1 友元类并非只能拥有友元函数，也可以将类作为友元。在这种情况下友元类的所有方法都可以访问原始类的私有成员和保护成员。 下述语句可以使类成为友元类：friend class className，友元声明可以位于公有、私有或保护部分，其所在的位置无关紧要。 内联函数的链接性时内部的，这意味着函数定义必须在使用函数的文件中。 15.2 嵌套类在另一个类中声明的">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201101154217.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201101154217.png">
 <meta property="article:published_time" content="2021-03-26T06:46:18.523Z">
-<meta property="article:modified_time" content="2020-11-01T08:20:22.000Z">
+<meta property="article:modified_time" content="2022-03-28T06:12:19.948Z">
 <meta property="article:author" content="MWSzksnmdys">
 <meta property="article:tag" content="C++ premier plus学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201101154217.png">
+<meta name="twitter:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201101154217.png">
 
 
 
@@ -412,7 +412,7 @@
 <p>内联函数的链接性时内部的，这意味着函数定义必须在使用函数的文件中。</p>
 <h3 id="15-2-嵌套类"><a href="#15-2-嵌套类" class="headerlink" title="15.2 嵌套类"></a>15.2 嵌套类</h3><p>在另一个类中声明的类被称为嵌套类（nexted class），它通过提供新的类型类作用域来避免名称混乱，包含类的成员函数可以创建和使用被嵌套类的对象。</p>
 <p>对类进行嵌套与包含并不同。包含意味着将类对象作为另一个类的成员，而对类进行嵌套不创建类成员，而是定义了一种类型，该类型仅在包含嵌套类声明的类中有效。</p>
-<p>如果嵌套类是在另一个类的私有部分声明的，则只有后者知道它；如果嵌套类实在另一个类的保护部分声明的，则它对于后者来说是可见的，但对于外部世界则是不可见的；如果嵌套类是在另一个类的共有部分声明的，则允许后者、后者的派生类以及外部世界使用它。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201101154217.png" alt="image-20201101154210427"></p>
+<p>如果嵌套类是在另一个类的私有部分声明的，则只有后者知道它；如果嵌套类实在另一个类的保护部分声明的，则它对于后者来说是可见的，但对于外部世界则是不可见的；如果嵌套类是在另一个类的共有部分声明的，则允许后者、后者的派生类以及外部世界使用它。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201101154217.png" alt="image-20201101154210427"></p>
 <p>对嵌套类访问权的控制规则与常规类相同。</p>
 <h3 id="15-3-异常"><a href="#15-3-异常" class="headerlink" title="15.3 异常"></a>15.3 异常</h3><p>abort()函数的原型位于头文件cstdlib中，其典型实现是向标准错误流发送消息abnormal program termination，然后终止进程。abort()是否刷新问及那缓冲区取决于实现，而exit()函数刷新文件缓冲区，但不显示消息。</p>
 <p>对异常的处理通常包括3个组成部分：</p>
@@ -436,10 +436,10 @@
 <li>type_info结构存储了有关特定类型的信息。</li>
 </ul>
 <p>只能将RTTI用于包含虚函数的类层次结构中，原因在于只有对于这种类层次结构，才应该将派生对象的地址赋给基类指针。</p>
-<p>通常，如果指向的对象（*pt）的类型为Type或是从Type直接或间接派生而来的类型，则下面的表达式将指针pt转换为Type类型的指针：<code>dynamic_cast&lt;Type *&gt;(pt)</code>，否则，结果为0，即空指针。</p>
+<p>通常，如果指向的对象（<em>pt）的类型为Type或是从Type直接或间接派生而来的类型，则下面的表达式将指针pt转换为Type类型的指针：`dynamic_cast&lt;Type </em>&gt;(pt)`，否则，结果为0，即空指针。</p>
 <p>typeid运算符使得能够确定两个对象是否为同种类型，它接受两种参数：类名、结果为对象的表达式。typeid运算符返回一个对type_info对象的引用。其中type_info是在头文件typeinfo中定义的一个类，它重载了==和！=运算符，以便可以使用这些运算符来对类型进行比较。</p>
 <h3 id="15-5-类型转换运算符"><a href="#15-5-类型转换运算符" class="headerlink" title="15.5 类型转换运算符"></a>15.5 类型转换运算符</h3><p>static_cast用于数据类型的强制转换，强制将一种数据类型转换为另一种数据类型。</p>
-<p>reinterpret_cast主要有三种强制转换用途：<em><strong>改变指针或引用的类型、将指针或引用转换为一个足够长度的整形、将整型转换为指针或引用类型</strong></em></p>
+<p>reinterpret_cast主要有三种强制转换用途：<strong><em>改变指针或引用的类型、将指针或引用转换为一个足够长度的整形、将整型转换为指针或引用类型</em></strong></p>
 <p>const限定符通常被用来限定变量，用于表示该变量的值不能被修改。而const_cast则正是用于强制去掉这种不能被修改的常数特性，但需要特别注意的是const_cast不是用于去除变量的常量性，而是去除指向常数对象的指针或引用的常量性，其去除常量性的对象必须为指针或引用</p>
 <p><strong>在类的转换时，在类层次间进行上行转换时，dynamic_cast和static_cast的效果是一样的。在进行下行转换时，dynamic_cast具有类型检查的功能，比static_cast更安全</strong></p>
 

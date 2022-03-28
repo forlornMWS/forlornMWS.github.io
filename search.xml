@@ -11,29 +11,23 @@
 <p>成员函数定义与常规函数定义非常相似，它们有函数头和函数体，也可以有返回类型和参数，但是它们还有两个特殊的特征：（1）定义成员函数时，使用作用域解析运算符（::）来标识函数所属的类（<em>类方法的完整名称中包括类名</em>）（2）类方法可以访问类的private组件。</p>
 <p>定义位于类声明中的函数都将自动称为内联函数，此外也可以在类声明之外定义成员函数，并使其称为内联函数，为此，只需在类实现部分中定义函数时使用inline限定符即可。</p>
 <p>内联函数的特殊规则要求在每个使用它们的文件中都对其进行定义。（根据改写规则，在类声明中定义方法，等同于用原型替换方法定义，然后在类声明的后面将定义改写为内联函数）。</p>
-<p>创建的每个新对象都有自己的存储空间，用于存储其内部变量和类成员；但同一个类的所有对象共享同一组类方法，即每种方法只有一个副本。在OOP中，调用成员函数被称为发送消息，因此将同样的消息发送给两个不同的对象将调用同一个方法，但该方法被用于两个不同的对象。<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201023160922.png" alt="image-20201023160915489"></p>
+<p>创建的每个新对象都有自己的存储空间，用于存储其内部变量和类成员；但同一个类的所有对象共享同一组类方法，即每种方法只有一个副本。在OOP中，调用成员函数被称为发送消息，因此将同样的消息发送给两个不同的对象将调用同一个方法，但该方法被用于两个不同的对象。<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201023160922.png" alt="image-20201023160915489"></p>
 <p>要创建对象，可以声明类变量，也可以使用new为类对象分配存储空间。可以将对象作为函数的参数和返回值，也可以将一个对象赋给另一个。</p>
 <p>指定类设计的第一步是提供类声明。类声明类似结构声明，可以包括数据成员和函数成员。声明有四有部分，在其中生命的成员只能通过成员函数进行访问；声明还具有公有部分，在其中生命的成员可被使用类对象的程序直接访问。典型的类声明格式如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">className</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	data member declarations</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	member function prototypes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h3 id="10-2-类的构造函数和析构函数"><a href="#10-2-类的构造函数和析构函数" class="headerlink" title="10.2 类的构造函数和析构函数"></a>10.2 类的构造函数和析构函数</h3><h4 id="10-2-1-构造函数"><a href="#10-2-1-构造函数" class="headerlink" title="10.2.1 构造函数"></a>10.2.1 构造函数</h4><p>程序声明对象时，将自动调用构造函数。（*构造函数的参数表示的不是类成员，而是赋给类成员的值，因此，参数名不能与类成员相同）</p>
 <p>C++提供了两种使用构造函数来初始化对象的方式，一种是显式地调用构造函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock food = <span class="built_in">Stock</span>(<span class="string">&quot;test&quot;</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock food = Stock(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
 <p>另一种是隐式地调用构造函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Stock <span class="title">food</span><span class="params">(<span class="string">&quot;test&quot;</span>, <span class="number">230</span>, <span class="number">1.25</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Stock <span class="title">food</span><span class="params">(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>也可以使用new运算符创建对象：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock * pt = <span class="keyword">new</span> <span class="built_in">Stock</span>(<span class="string">&quot;test&quot;</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock * pt = <span class="keyword">new</span> Stock(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
 <p>C++无法使用对象来调用构造函数，<strong>因为在构造函数构造出对象之前，对象是不存在的</strong>。</p>
 <p>默认构造函数是在未提供显式初始值时，用来创建对象的构造函数。默认构造函数没有参数，因为声明中不包含值。<em>当且仅当没有定义任何构造函数时，编译器才会提供默认构造函数</em>。</p>
 <p>如果要创建对象而不显式地初始化，则必须定义一个不接受任何参数的默认构造函数。定义默认构造函数的方式有两种。一种是<strong>给已有构造函数的所有参数提供默认值</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Stock</span>(<span class="keyword">const</span> String &amp; co = <span class="string">&quot;Error&quot;</span>, <span class="keyword">int</span> n = <span class="number">0</span>, <span class="keyword">double</span> pr = <span class="number">0.0</span>);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock(<span class="keyword">const</span> <span class="keyword">String</span> &amp; co = <span class="string">"Error"</span>, <span class="keyword">int</span> n = <span class="number">0</span>, <span class="keyword">double</span> pr = <span class="number">0.0</span>);</span><br></pre></td></tr></table></figure>
 <p>另一种方式是通过函数重载来定义另一个构造函数——<strong>没有参数的构造函数</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Stock</span>();</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock();</span><br></pre></td></tr></table></figure>
 <h4 id="10-2-2-析构函数"><a href="#10-2-2-析构函数" class="headerlink" title="10.2.2 析构函数"></a>10.2.2 析构函数</h4><p>和构造函数一样，析构函数的名称也很特殊：在类名前加上~，另外析构函数和构造函数一样，也没有返回值和声明类型。与构造函数不同的是，析构函数没有参数。</p>
 <p>如果创建的是静态存储类对象，则其析构函数将在程序结束时自动被调用。如果创建的是自动存储类对象，则将其析构函数将在程序执行完代码块时自动被调用给。如果对象是通过new创建的，则它将驻留在占内存或自由存储区中，当使用delete来释放内存时，其析构函数将自动被调用。</p>
 <p>由于在类对象过期时析构函数将被自动调用，因此必须有一个析构函数。如果程序员没有提供析构函数，编译器将隐式地声明一个默认析构函数，并在发现导致对象被删除的代码后，提供析构函数的定义。</p>
@@ -47,12 +41,10 @@
 <p>初始化数组的方案式，首先使用默认构造函数创建数组元素，然后花括号中的构造函数将创建临时对象，然后将临时对象的内容复制到相应的元素中。因此，<strong>要创建类对象数组，则这个类必须有默认构造函数</strong>。</p>
 <h3 id="10-4-类作用域"><a href="#10-4-类作用域" class="headerlink" title="10.4 类作用域"></a>10.4 类作用域</h3><p>在类中定义的名称的作用域都为整个类，作用域为整个类的名称只在该类种是已知的，在类外是不可知的。类作用域意味着不能从外部直接访问类的成员，公有成员函数也是如此，要调用公有成员函数，必须通过对象，同样，在定义成员函数时，必须使用作用域解析运算符。</p>
 <p>在类声明种声明的枚举的作用域为整个类，因此可以用枚举为整型常量提供作用域为整个类的符号名称。例：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="class"><span class="keyword">enum</span> &#123;</span>Months = <span class="number">12</span>&#125;;</span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="keyword">enum</span> &#123;Months = <span class="number">12</span>&#125;;</span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>用这种方式声明枚举并不会创建类数据成员。也就是说，所有对象中都不包含枚举。</p>
 <p>C++提供了另一种在类中定义常量的方法——使用关键字static：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> Months = <span class="number">12</span>;<span class="comment">/*创建名为Months的常量，该常量将与其他静态变量存储在一起</span></span><br><span class="line"><span class="comment">    	，而不是存储在对象中*/</span></span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>作用域内枚举不能隐式地转换为整型。</p>
 <h3 id="10-5-总结"><a href="#10-5-总结" class="headerlink" title="10.5 总结"></a>10.5 总结</h3><p>面向对象编程强调的是程序如何表示数据。使用OOP方法解决编程问题的第一步是根据它与程序之间的接口来描述数据，从而指定如何使用数据。然后，设计一个类来实现该接口，一般来说，私有数据成员存储信息，公有成员函数（又称为方法）提供访问数据的唯一途径。</p>
 <p>类是用户定义的类型，对象是类的实例。</p>
@@ -109,7 +101,7 @@
   <entry>
     <title>Chapter12 类和动态内存分配</title>
     <url>/2021/03/26/Chapter12_%E7%B1%BB%E5%92%8C%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/</url>
-    <content><![CDATA[<h2 id="Chapter12-类和动态内存分配"><a href="#Chapter12-类和动态内存分配" class="headerlink" title="Chapter12 类和动态内存分配"></a>Chapter12 类和动态内存分配</h2><p>静态类成员有一个特点：无论创建了多少对象，程序都只创建一个静态类变量副本。也就是说，类的所有对象共享同一个静态成员。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201025121320.png" alt="image-20201025121313087"></p>
+    <content><![CDATA[<h2 id="Chapter12-类和动态内存分配"><a href="#Chapter12-类和动态内存分配" class="headerlink" title="Chapter12 类和动态内存分配"></a>Chapter12 类和动态内存分配</h2><p>静态类成员有一个特点：无论创建了多少对象，程序都只创建一个静态类变量副本。也就是说，类的所有对象共享同一个静态成员。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201025121320.png" alt="image-20201025121313087"></p>
 <p>不能在类声明中初始化静态成员变量，这是因为声明描述了如何分配内存，但不分配内存。对于静态类成员，须在类声明之外使用单独的语句来进行初始化，这是因为静态类成员是单独存储的，而不是对象的组成部分。（<em>初始化应在方法文件中进行，而非类声明文件中，这是因为类声明位于头文件中，程序可能将头文件包括在其他几个文件中。如果在头文件中进行初始化，将出现多个初始化语句副本，从而引发错误</em>）</p>
 <p><u>静态数据成员在类声明中声明，在包含类方法的文件中初始化。类初始化时使用作用域运算符来指出静态成员所属的类。但如果静态成员是整型或枚举型const，则可以在类声明中进行初始化</u></p>
 <p>删除对象可以释放对象本身占用的内存，但并不能自动释放属于对象成员的指针指向的内存。</p>
@@ -117,23 +109,20 @@
 <h3 id="12-1-特殊成员函数"><a href="#12-1-特殊成员函数" class="headerlink" title="12.1 特殊成员函数"></a>12.1 特殊成员函数</h3><p>C++自动提供了下面这些成员函数：<br>（1）默认构造函数，如果没有定义构造函数；<br>（2）默认析构函数，如果没有定义；<br>（3）复制构造函数，如果没有定义；<br>（4）赋值运算符，如果没有定义：<br>（5）地址运算符（返回调用对象的地址，this指针），如果没有定义。</p>
 <h4 id="12-1-1-默认构造函数"><a href="#12-1-1-默认构造函数" class="headerlink" title="12.1.1 默认构造函数"></a>12.1.1 默认构造函数</h4><p>如果没有提供任何构造函数，C++将创建默认构造函数（不接受任何参数，也不执行任何操作），如果希望在创建对象时不显式地对它进行初始化，则必须显式地定义默认构造函数。带参数的构造函数也可以是默认构造函数，只要所有参数都有默认值。</p>
 <h4 id="12-1-2-复制构造函数"><a href="#12-1-2-复制构造函数" class="headerlink" title="12.1.2 复制构造函数"></a>12.1.2 复制构造函数</h4><p>复制构造函数用于将一个对象复制到新创建的对象中。也就是说，它用于初始化过程中，而不是常规的赋值过程中。类的复制构造函数原型通常如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Class_name</span> (<span class="keyword">const</span> Class_name &amp; );</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Class_name (<span class="keyword">const</span> Class_name &amp; );</span><br></pre></td></tr></table></figure>
 <p>它接受一个指向类对象的常量引用作为参数。</p>
 <ul>
 <li>何时调用复制构造函数<br>(1)新建一个对象并将其初始化为同类现有对象时，复制构造函数都将被调用。<br>(2)每当程序生成了对象副本时，编译器都将使用复制构造函数。具体地说，当函数按值传递对象或函数返回对象时，都将使用复制构造函数。（<em>由于按值传递对象将调用复制构造函数，因此应该按引用传递对象，这样可以节省调用构造函数的时间以及存储新对象的空间</em>）</li>
-<li>默认复制构造函数的功能<br>默认的复制构造函数逐个复制<u>非静态成员</u>（成员复制也成为浅复制），复制的时成员的值。<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201025125243.png" alt="image-20201025125243335" style="zoom:80%;" /></li>
+<li>默认复制构造函数的功能<br>默认的复制构造函数逐个复制<u>非静态成员</u>（成员复制也成为浅复制），复制的时成员的值。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201025125243.png" alt="image-20201025125243335" style="zoom:80%;" /></li>
 </ul>
 <p>如果类中包含了使用new初始化的指针成员，应当定义一个复制构造函数，以复制指向的数据，而不是指针，这被称为<strong>深度复制</strong>。</p>
 <h4 id="12-1-3-赋值运算符"><a href="#12-1-3-赋值运算符" class="headerlink" title="12.1.3 赋值运算符"></a>12.1.3 赋值运算符</h4><p>C++允许类对象赋值，这是通过自动为类重载赋值运算符实现的。运算符原型如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Class_name &amp; Class_name::<span class="keyword">operator</span>=(<span class="keyword">const</span> Class_name &amp; );</span><br></pre></td></tr></table></figure>
-
 <p>它返回一个指向类对象的引用。</p>
 <p>将已有的对象赋给另一个对象时，将使用重载的赋值运算符。（初始化总是会调用复制构造函数，而使用=运算符时也可能调用赋值运算符）</p>
 <p>与赋值构造函数相似，赋值运算符的隐式实现也对成员进行逐个复制。如果成员本身就是类对象，则程序将使用为这个类定义的赋值运算符来复制该成员，但静态数据成员不受影响（存储空间不同）。</p>
 <p>对于由于默认赋值运算符不合适而导致的问题，解决办法是提供赋值运算符定义：<br>（1）由于目标对象可能引用了以前分配的数据，所以函数应使用delete[]来释放这些数据；<br>（2）函数应当避免将对象赋给自身；否则，给对象重新赋值之前，释放内存操作可能删除对象的内容；<br>（3）函数返回一个指向调用对象的引用。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Class_name &amp; Class_name::<span class="keyword">operator</span>=(<span class="keyword">const</span> Class_name &amp; obj)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> == &amp;obj)</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">delete</span> [] obj;</span><br><span class="line">    ...<span class="comment">//deep copy</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>Strcmp()函数，如果依照字母排序，第一个参数位于第二个参数之前，则该函数返回一个负值；如果两个字符串相同，则返回0；如果第一个参数位于第二个参数之后，则返回一个正值。</p>
 <p>对于中括号运算符([])，一个操作数位于第一个中括号的前面，另一个操作数位于两个中括号之间。</p>
 <p><strong>不能通过对象调用静态成员函数</strong>，如果静态成员函数实在公有部分声明的，则可以使用类名和作用域解析运算符来调用它。</p>
@@ -155,32 +144,27 @@
 </li>
 </ul>
 <h3 id="12-4-使用指向对象的指针"><a href="#12-4-使用指向对象的指针" class="headerlink" title="12.4 使用指向对象的指针"></a>12.4 使用指向对象的指针</h3><p>通常，如果Class_name是类，value的类型为Type_name,则下面的语句：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Class_name * pclass = <span class="keyword">new</span> <span class="built_in">Class_name</span>(value);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Class_name * pclass = <span class="keyword">new</span> Class_name(value);</span><br></pre></td></tr></table></figure>
 <p>将调用如下构造函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Class_name</span> (<span class="keyword">const</span> Type_name &amp;);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201025132924.png" alt="image-20201025132924314"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Class_name (<span class="keyword">const</span> Type_name &amp;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201025132924.png" alt="image-20201025132924314"></p>
 <p>在下述情况下析构函数将被调用：<br>(1) 如果对象是动态变量，则当执行完定义该对象的程序块时，将调用该对象的析构函数。<br>(2) 如果对象是静态变量（外部、静态、静态外部或来自名称空间），则在程序结束时将调用对象的析构函数。<br>(3) 如果对象是用new创建的，仅当显式使用delete删除对象时，其析构函数才会被调用。</p>
 <h4 id="12-4-1-指针和对象小结"><a href="#12-4-1-指针和对象小结" class="headerlink" title="12.4.1 指针和对象小结"></a>12.4.1 指针和对象小结</h4><ul>
 <li>使用常规表示法声明指向对象的指针：<code>String * glamour;</code></li>
 <li>可以将指针初始化为指向已有的对象：<code>String * first = &amp; sayings[0]</code></li>
 <li>可以使用new来初始化指针，这将创建一个新的对象：<code>String * favorite=new String(sayings[choices]);</code></li>
-<li>对类使用new将调用相应的类构造函数来初始化新建的对象。<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201025134033.png" alt="image-20201025134033444"><br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201025134054.png" alt="image-20201025134054599"></li>
+<li>对类使用new将调用相应的类构造函数来初始化新建的对象。<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201025134033.png" alt="image-20201025134033444"><br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201025134054.png" alt="image-20201025134054599"></li>
 <li>可以使用-&gt;运算符通过指针访问类方法</li>
 <li>可以对对象指针应用接触引用运算符(*)来获得对象。</li>
 </ul>
 <p>对于使用定位new运算符创建的对象，应以与创建顺序相反的顺序进行删除。原因在于，晚创建的对象可能依赖于早创建的对象。另外，仅当所有对象都被销毁后，才能释放用于存储这些对象的缓冲区。</p>
 <h3 id="12-5-复习各种技术"><a href="#12-5-复习各种技术" class="headerlink" title="12.5 复习各种技术"></a>12.5 复习各种技术</h3><h4 id="12-5-1-重载-lt-lt-运算符"><a href="#12-5-1-重载-lt-lt-运算符" class="headerlink" title="12.5.1 重载&lt;&lt;运算符"></a>12.5.1 重载&lt;&lt;运算符</h4><p>要重新定义&lt;&lt;运算符，以便将它和cout一起用来显式对象的内容，需定义如下友元运算符函数：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; os, <span class="keyword">const</span> c_name &amp; obj)</span><br><span class="line">&#123;</span><br><span class="line">    os &lt;&lt; ...;</span><br><span class="line">    <span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="12-5-2-转换函数"><a href="#12-5-2-转换函数" class="headerlink" title="12.5.2 转换函数"></a>12.5.2 转换函数</h4><p>要将单个值转换为类类型，需要创建原如下的类构造函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">c_name</span> (type_name value);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">c_name (type_name value);</span><br></pre></td></tr></table></figure>
 <p>其中c_name为类名，type_name是要转换的类型的名称。</p>
 <p>要将类转换为其他类型，需要创建原型如下所示的类成员函数：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">typename</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>虽然该函数没有声明返回类型，但应返回所需类型的值。</p>
 <p>可以在声明构造函数时使用关键字explicit，以防它被用于隐式转换。</p>
 <h4 id="12-5-3-构造函数使用new的类"><a href="#12-5-3-构造函数使用new的类" class="headerlink" title="12.5.3 构造函数使用new的类"></a>12.5.3 构造函数使用new的类</h4><p>如果类使用new运算符来分配类成员指向的内存，在设计时应采取一些预防措施：</p>
@@ -194,19 +178,11 @@
 <li><p>应定义一个分配内存（而不是建该指针指向已有内存）的复制构造函数。这样程序将能够将类对象初始化为另一个类对象，这种构造函数的原型通常如下：<code>className(const className &amp;)</code>。</p>
 </li>
 <li><p>应定义一个重载赋值运算符的类成员函数，其函数定义如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">c_name &amp; cname::<span class="keyword">operator</span>=(<span class="keyword">const</span> c_name &amp; cn)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> == &amp; cn)</span><br><span class="line">        <span class="keyword">return</span> * <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">delete</span> [] c_pointer;</span><br><span class="line">    c_pointer = <span class="keyword">new</span> type_name[size];</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> * <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">c_name &amp; cname::<span class="keyword">operator</span>=(<span class="keyword">const</span> c_name &amp; cn)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> == &amp; cn)</span><br><span class="line">        <span class="keyword">return</span> * <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">delete</span> [] c_pointer;</span><br><span class="line">    c_pointer = <span class="keyword">new</span> type_name[<span class="built_in">size</span>];</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> * <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <p>成员初始化列表由都好分隔的初始化列表组成（前面带冒号），它位于参数列表的右括号之后、函数体左括号之前。（<strong>对于const类成员和被声明为引用的类成员必须使用这种语法</strong>,这是因为引用与const数据类似，只能在被创建时进行初始化）。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//如果Classy是一个类，而mem1、mem2、mem3都是这个类的数据成员，则构造函数可使用列表初始化语法来初始化成员</span></span><br><span class="line">Classy::<span class="built_in">Classy</span>(<span class="keyword">int</span> n, <span class="keyword">int</span> m):<span class="built_in">mem1</span>(n),<span class="built_in">mem2</span>(<span class="number">0</span>),<span class="built_in">mem3</span>(n * m + <span class="number">2</span>)&#123;&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 这种格式只能用于构造函数</span></span><br><span class="line"><span class="comment">* 必须使用这种格式来初始化非静态const数据成员</span></span><br><span class="line"><span class="comment">* 必须用这种格式来初始化引用数据成员</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//如果Classy是一个类，而mem1、mem2、mem3都是这个类的数据成员，则构造函数可使用列表初始化语法来初始化成员</span></span><br><span class="line">Classy::Classy(<span class="keyword">int</span> n, <span class="keyword">int</span> m):mem1(n),mem2(<span class="number">0</span>),mem3(n * m + <span class="number">2</span>)&#123;&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 这种格式只能用于构造函数</span></span><br><span class="line"><span class="comment">* 必须使用这种格式来初始化非静态const数据成员</span></span><br><span class="line"><span class="comment">* 必须用这种格式来初始化引用数据成员</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>learning</category>
@@ -221,8 +197,7 @@
     <content><![CDATA[<h2 id="Chapter13-类继承"><a href="#Chapter13-类继承" class="headerlink" title="Chapter13 类继承"></a>Chapter13 类继承</h2><p>从一个类派生出另一个类时，原始类称为基类，继承类称为派生类。派生类继承了基类的实现（<u>数据成员</u>）和接口（<u>方法</u>）。</p>
 <p>使用公有派生，基类的公有成员将成为派生类的公有成员；基类的私有部分也将成为派生类的一部分，但只能通过基类的公有和保护方法访问；基类保护部分成为派生类的一部分，且在派生类中可以直接访问。</p>
 <p>派生类构造函数必须给新成员（如果有的话）和继承的成员提供数据，由于派生类不能直接访问基类的私有成员，因此派生类构造函数必须使用基类构造函数。创<strong>建派生对象时，程序首先创建基类对象，从概念上说，这意味着基类对象应当在程序进入派生类之前被创建</strong>，C++使用成员初始化语法来完成这种工作。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">derived::<span class="built_in">derived</span>(type1 x, type2 y) : <span class="built_in">base</span>(x, y)&#123;...&#125;<span class="comment">//derived是派生类，base是基类</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">derived::derived(type1 x, type2 y) : base(x, y)&#123;...&#125;<span class="comment">//derived是派生类，base是基类</span></span><br></pre></td></tr></table></figure>
 <p>派生类构造函数要点如下：</p>
 <ul>
 <li>首先创建基类对象；</li>
@@ -248,7 +223,7 @@
 <p>如果要在派生类中重新定义基类的方法，则将它设置为虚方法；否则，设置为非虚方法。</p>
 </blockquote>
 <p>通常，编译器处理虚函数的方法是：给每个对象添加一个隐藏成员。隐藏成员中保存了一个指向函数地址数组的指针。这种数组称为虚函数表（virtual function table，vtbl）。虚函数表中存储了为类对象进行声明的虚函数的地址。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201030173232.png" alt="image-20201030173225440"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201030173232.png" alt="image-20201030173225440"></p>
 <p>使用虚函数时，在内存和执行速度方面有一定的成本，包括：</p>
 <ul>
 <li>每个对象都将增大，增大量为存储地址的空间；</li>
@@ -327,11 +302,9 @@
 </li>
 <li><p><strong>使用const</strong></p>
 <p>可以用它来确保方法不修改参数，如：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Star::<span class="built_in">Star</span>(<span class="keyword">const</span> <span class="keyword">char</span> * s)&#123;...&#125;;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Star::Star(<span class="keyword">const</span> <span class="keyword">char</span> * s)&#123;...&#125;;</span><br></pre></td></tr></table></figure>
 <p>可以使用它来确保方法不修改调用它的对象：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Star::show</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
-
 <p>如果函数将参数声明未指向const的引用或指针，则不能将该参数传递给另一个函数，除非后者也确保了参数不会被修改。</p>
 </li>
 </ul>
@@ -371,7 +344,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="13-6-4-类函数小结"><a href="#13-6-4-类函数小结" class="headerlink" title="13.6.4 类函数小结"></a>13.6.4 类函数小结</h4><p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201030190138.png" alt="image-20201030190138671"></p>
+<h4 id="13-6-4-类函数小结"><a href="#13-6-4-类函数小结" class="headerlink" title="13.6.4 类函数小结"></a>13.6.4 类函数小结</h4><p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201030190138.png" alt="image-20201030190138671"></p>
 ]]></content>
       <categories>
         <category>learning</category>
@@ -397,14 +370,12 @@
 <p>使用私有继承时，只能在派生类的方法中使用基类的方法，然而私有继承使得能够使用类名和作用域解析运算符来调用基类的方法。（<em>使用包含时将使用对象名来调用方法，而是用私有继承时建更实用类名和作用域解析运算符来调用方法</em>）</p>
 <p>在私有继承中，在不进行显式类型转换的情况下，不能将指向派生类的引用或指针赋给基类引用或指针。</p>
 <p>类声明中包含表示被包含类的显式命名对象，代码可以通过名称引用这些对象，而使用继承将使关系更抽象。然而，私有继承提供的特性比包含多。<em>例如，假设类包含保护成员，则这样的成员在派生类中是可用的，但在继承层次结构外是不可用的，如果使用组合将这样的类包含在另一个类中，后者位于继承层次结构之外，不能访问保护成员</em>。(<strong>通常，应使用包含来建立has-a关系；如果新类需要访问原有类的保护成员，或需要重新定义虚函数，则应使用私有继承</strong>)</p>
-<h4 id="14-2-1-保护继承"><a href="#14-2-1-保护继承" class="headerlink" title="14.2.1 保护继承"></a>14.2.1 保护继承</h4><p>保护继承是私有继承的变体。<strong>使用保护继承时，基类的公有成员和保护成员都将称为派生类的保护成员</strong>。和私有继承一样，保护继承中基类的接口在派生类中也是可用的，但在继承层次结构之外是不可用的。使用私有继承时，第三代类将不能使用基类的接口，这是因为基类的公有方法在派生类中编程私有方法；使用保护继承时，基类的公有方法在第二代中将变成受保护的，因此第三代派生类可以使用它们。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201031140137.png" alt="image-20201031140051194"></p>
+<h4 id="14-2-1-保护继承"><a href="#14-2-1-保护继承" class="headerlink" title="14.2.1 保护继承"></a>14.2.1 保护继承</h4><p>保护继承是私有继承的变体。<strong>使用保护继承时，基类的公有成员和保护成员都将称为派生类的保护成员</strong>。和私有继承一样，保护继承中基类的接口在派生类中也是可用的，但在继承层次结构之外是不可用的。使用私有继承时，第三代类将不能使用基类的接口，这是因为基类的公有方法在派生类中编程私有方法；使用保护继承时，基类的公有方法在第二代中将变成受保护的，因此第三代派生类可以使用它们。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201031140137.png" alt="image-20201031140051194"></p>
 <h4 id="14-2-2-使用using重新定义访问权限"><a href="#14-2-2-使用using重新定义访问权限" class="headerlink" title="14.2.2 使用using重新定义访问权限"></a>14.2.2 使用using重新定义访问权限</h4><p>使用保护派生或私有派生时，基类的公有成员建更成为保护成员或私有成员。若要让基类的方法在派生类外可用，方法之一是<strong>定义一个使用该基类方法的派生类方法</strong>。例如，假设希望Student类能够使用valarray类的sum()方法，可以在Student类的声明中声明一个sum()方法，然后像下面这样定义该方法：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">Student::sum</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> std::valarray&lt;<span class="keyword">double</span>&gt;::<span class="built_in">sum</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样Student对象便能够调用Student::sum()，后者进而将valarray&lt;double&gt;::sum()方法应用于被包含的valarray对象。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">Student::sum</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::sum();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样Student对象便能够调用Student::sum()，后者进而将valarray\<double\>::sum()方法应用于被包含的valarray对象。</p>
 <p>另一种方法是，<strong>将函数调用包装在另一个函数调用中</strong>，即<strong>使用一个using声明来指出派生类可以使用特定的基类成员</strong>，即使采用的是私有派生。例如，假设希望Student类能够使用valarray类的sum()方法，可以在Student类的声明的公有部分中加入如下using声明：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">private</span> std::string, <span class="keyword">private</span> std::valarray&lt;<span class="keyword">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="keyword">using</span> std::valarray&lt;<span class="keyword">double</span>&gt;::<span class="built_in">sum</span>();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">private</span> <span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">private</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="keyword">using</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::sum();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><strong>using声明只是用成员名</strong>——没有圆括号、函数特征标和返回类型。</p>
 <h3 id="14-3-多重继承"><a href="#14-3-多重继承" class="headerlink" title="14.3 多重继承"></a>14.3 多重继承</h3><p>MI描述的是有多个直接基类的类。与单继承一样，公有MI表示的也是is-a关系，私有MI和保护MI可以表示has-a关系。</p>
 <p>虚基类使得从多个类派生出的对象只继承一个基类对象。</p>
@@ -418,7 +389,6 @@
 <p>如果一个类从两个不同的类那里继承了两个同名的成员，则需要在派生类中使用类限定符来区分它们。</p>
 <p>当派生类使用关键字virtual来指示派生时，基类就成为了虚基类：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">marketing</span>:</span> <span class="keyword">public</span> <span class="keyword">virtual</span> reality&#123;...&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>从虚基类的一个或多个示例派生而来的类将只继承一个基类对象。为实现这种特征，必须满足其他要求：</p>
 <ul>
 <li>有间接虚基类的派生类包含直接调用间接基类构造函数的构造函数，这对于间接非虚基类来说时非法的</li>
@@ -433,43 +403,42 @@
 <li><p>隐式实例化</p>
 <p>声明一个或多个对象，指出所需的类型，而编译器使用通用模板生成具体的类定义：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ArrayTP&lt;<span class="keyword">int</span>, <span class="number">100</span>&gt; staff;<span class="comment">// 隐式实例化</span></span><br></pre></td></tr></table></figure>
-
 <p>编译器在需要对象之前，不会生成类的隐式实例化。</p>
 </li>
 <li><p>显式实例化</p>
 <p>当使用关键字template并指出所需类型来声明类时，编译器将生成类声明的显式实例化。声明必须位于模板所在的名称空间中。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayTP</span>&lt;</span>string, <span class="number">100</span>&gt;; <span class="comment">//生成ArrayTP&lt;string, 100&gt; 类</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayTP</span>&lt;string, 100&gt;;</span> <span class="comment">//生成ArrayTP&lt;string, 100&gt; 类</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>显式具体化</p>
 <p>显式具体化是特定类型（用于替换模板中的泛型）定义。格式如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">tempalte &lt;&gt; <span class="class"><span class="keyword">class</span> <span class="title">Classname</span>&lt;</span>specialized-type-name&gt;&#123;...&#125;;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">tempalte &lt;&gt; <span class="class"><span class="keyword">class</span> <span class="title">Classname</span>&lt;specialized-type-name&gt;&#123;</span>...&#125;;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>部分具体化</p>
 <p>即部分限制模板的通用性。例如：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">tempalte &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="keyword">class</span> <span class="title">T2</span>&gt;</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&#123;</span>...&#125;;<span class="comment">//通用模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>&gt;</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;</span>T1, <span class="keyword">int</span>&gt;&#123;...&#125;;<span class="comment">//部分具体化</span></span><br></pre></td></tr></table></figure>
-
-<p>如果指定所有的类型，则&lt;&gt;内将为空，这将导致显式具体化。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">tempalte &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="title">class</span> <span class="title">T2</span>&gt; <span class="title">class</span> <span class="title">Pair</span>&#123;</span>...&#125;;<span class="comment">//通用模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>&gt; <span class="title">class</span> <span class="title">Pair</span>&lt;T1, int&gt;&#123;</span>...&#125;;<span class="comment">//部分具体化</span></span><br></pre></td></tr></table></figure>
+<p>如果指定所有的类型，则\&lt;>内将为空，这将导致显式具体化。</p>
 </li>
 </ul>
 <p>如果有多个模板可供选择，编译器将使用具体化程度最高的模板。</p>
 <h4 id="14-4-2-模板类和友元"><a href="#14-4-2-模板类和友元" class="headerlink" title="14.4.2 模板类和友元"></a>14.4.2 模板类和友元</h4><ul>
 <li><p>模板类的非模板友元函数</p>
 <p>在模板类中将一个常规函数声明为友元：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HasFriend</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">counts</span><span class="params">()</span></span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">HasFriend</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">counts</span><span class="params">()</span></span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>模板类的约束模板友元函数</p>
 <p>友元函数本身成为模板。</p>
 <p>（1）在类定义前声明每个模板函数。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;  <span class="function"><span class="keyword">void</span> <span class="title">counts</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">report</span><span class="params">(T &amp;)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>（2）在函数中再次将模板声明为友元。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> TT&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HasFriendT</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> counts&lt;TT&gt;();</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> reprot&lt;&gt;(HasFriendT&lt;TT&gt; &amp;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> TT&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HasFriendT</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> counts&lt;TT&gt;();</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> reprot&lt;&gt;(HasFriendT&lt;TT&gt; &amp;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>模板类的非约束模板友元函数</p>
 <p>通过在类内部声明模板，可以创建非约束友元函数，即每个函数具体化都是每个类具体化。对于非约束友元，友元模板类型参数与模板类类型参数是不同的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManyFriend</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    template&lt;typename C, typename D&gt; friend void show2(C &amp;, D &amp;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManyFriend</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    template&lt;typename C, typename D&gt; friend void show2(C &amp;, D &amp;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <p>C++11允许将语法using =用于非模板，用于非模板时，何种语法与常规的typedef等价。如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">const</span> <span class="keyword">char</span> * pc1;</span><br><span class="line"><span class="keyword">using</span> pc2 = <span class="keyword">const</span> <span class="keyword">char</span> *;</span><br></pre></td></tr></table></figure>
-
-
-
 ]]></content>
       <categories>
         <category>learning</category>
@@ -486,7 +455,7 @@
 <p>内联函数的链接性时内部的，这意味着函数定义必须在使用函数的文件中。</p>
 <h3 id="15-2-嵌套类"><a href="#15-2-嵌套类" class="headerlink" title="15.2 嵌套类"></a>15.2 嵌套类</h3><p>在另一个类中声明的类被称为嵌套类（nexted class），它通过提供新的类型类作用域来避免名称混乱，包含类的成员函数可以创建和使用被嵌套类的对象。</p>
 <p>对类进行嵌套与包含并不同。包含意味着将类对象作为另一个类的成员，而对类进行嵌套不创建类成员，而是定义了一种类型，该类型仅在包含嵌套类声明的类中有效。</p>
-<p>如果嵌套类是在另一个类的私有部分声明的，则只有后者知道它；如果嵌套类实在另一个类的保护部分声明的，则它对于后者来说是可见的，但对于外部世界则是不可见的；如果嵌套类是在另一个类的共有部分声明的，则允许后者、后者的派生类以及外部世界使用它。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201101154217.png" alt="image-20201101154210427"></p>
+<p>如果嵌套类是在另一个类的私有部分声明的，则只有后者知道它；如果嵌套类实在另一个类的保护部分声明的，则它对于后者来说是可见的，但对于外部世界则是不可见的；如果嵌套类是在另一个类的共有部分声明的，则允许后者、后者的派生类以及外部世界使用它。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201101154217.png" alt="image-20201101154210427"></p>
 <p>对嵌套类访问权的控制规则与常规类相同。</p>
 <h3 id="15-3-异常"><a href="#15-3-异常" class="headerlink" title="15.3 异常"></a>15.3 异常</h3><p>abort()函数的原型位于头文件cstdlib中，其典型实现是向标准错误流发送消息abnormal program termination，然后终止进程。abort()是否刷新问及那缓冲区取决于实现，而exit()函数刷新文件缓冲区，但不显示消息。</p>
 <p>对异常的处理通常包括3个组成部分：</p>
@@ -510,10 +479,10 @@
 <li>type_info结构存储了有关特定类型的信息。</li>
 </ul>
 <p>只能将RTTI用于包含虚函数的类层次结构中，原因在于只有对于这种类层次结构，才应该将派生对象的地址赋给基类指针。</p>
-<p>通常，如果指向的对象（*pt）的类型为Type或是从Type直接或间接派生而来的类型，则下面的表达式将指针pt转换为Type类型的指针：<code>dynamic_cast&lt;Type *&gt;(pt)</code>，否则，结果为0，即空指针。</p>
+<p>通常，如果指向的对象（<em>pt）的类型为Type或是从Type直接或间接派生而来的类型，则下面的表达式将指针pt转换为Type类型的指针：`dynamic_cast&lt;Type </em>&gt;(pt)`，否则，结果为0，即空指针。</p>
 <p>typeid运算符使得能够确定两个对象是否为同种类型，它接受两种参数：类名、结果为对象的表达式。typeid运算符返回一个对type_info对象的引用。其中type_info是在头文件typeinfo中定义的一个类，它重载了==和！=运算符，以便可以使用这些运算符来对类型进行比较。</p>
 <h3 id="15-5-类型转换运算符"><a href="#15-5-类型转换运算符" class="headerlink" title="15.5 类型转换运算符"></a>15.5 类型转换运算符</h3><p>static_cast用于数据类型的强制转换，强制将一种数据类型转换为另一种数据类型。</p>
-<p>reinterpret_cast主要有三种强制转换用途：<em><strong>改变指针或引用的类型、将指针或引用转换为一个足够长度的整形、将整型转换为指针或引用类型</strong></em></p>
+<p>reinterpret_cast主要有三种强制转换用途：<strong><em>改变指针或引用的类型、将指针或引用转换为一个足够长度的整形、将整型转换为指针或引用类型</em></strong></p>
 <p>const限定符通常被用来限定变量，用于表示该变量的值不能被修改。而const_cast则正是用于强制去掉这种不能被修改的常数特性，但需要特别注意的是const_cast不是用于去除变量的常量性，而是去除指向常数对象的指针或引用的常量性，其去除常量性的对象必须为指针或引用</p>
 <p><strong>在类的转换时，在类层次间进行上行转换时，dynamic_cast和static_cast的效果是一样的。在进行下行转换时，dynamic_cast具有类型检查的功能，比static_cast更安全</strong></p>
 ]]></content>
@@ -527,24 +496,20 @@
   <entry>
     <title>Chapter16 string类和标准模板库</title>
     <url>/2021/03/26/Chapter16_string%E7%B1%BB%E5%92%8C%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/</url>
-    <content><![CDATA[<h2 id="Chapter16-string类和标准模板库"><a href="#Chapter16-string类和标准模板库" class="headerlink" title="Chapter16 string类和标准模板库"></a>Chapter16 string类和标准模板库</h2><h2 id="16-1-string类"><a href="#16-1-string类" class="headerlink" title="16.1 string类"></a>16.1 string类</h2><h3 id="16-1-1-构造字符串"><a href="#16-1-1-构造字符串" class="headerlink" title="16.1.1 构造字符串"></a>16.1.1 构造字符串</h3><p>string类将string::npos定义为字符串的最大长度，通常为unsigned int的最大值，下表中NBTS(null-terminated string)表示以空字符结束的字符串，即传统的c字符串。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201108133940.png" alt="image-20201108133932793"></p>
+    <content><![CDATA[<h2 id="Chapter16-string类和标准模板库"><a href="#Chapter16-string类和标准模板库" class="headerlink" title="Chapter16 string类和标准模板库"></a>Chapter16 string类和标准模板库</h2><h2 id="16-1-string类"><a href="#16-1-string类" class="headerlink" title="16.1 string类"></a>16.1 string类</h2><h3 id="16-1-1-构造字符串"><a href="#16-1-1-构造字符串" class="headerlink" title="16.1.1 构造字符串"></a>16.1.1 构造字符串</h3><p>string类将string::npos定义为字符串的最大长度，通常为unsigned int的最大值，下表中NBTS(null-terminated string)表示以空字符结束的字符串，即传统的c字符串。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201108133940.png" alt="image-20201108133932793"></p>
 <h3 id="16-1-2-string类输入"><a href="#16-1-2-string类输入" class="headerlink" title="16.1.2 string类输入"></a>16.1.2 string类输入</h3><p>对于C-风格字符串，有三种输入方式：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> info[<span class="number">100</span>];</span><br><span class="line">cin &gt;&gt; info; <span class="comment">//read a word</span></span><br><span class="line">cin.<span class="built_in">getline</span>(info, <span class="number">100</span>); <span class="comment">//read a line, discard \n</span></span><br><span class="line">cin.<span class="built_in">get</span>(info, <span class="number">100</span>); <span class="comment">//read a line, leave \n in queue</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> info[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; info; <span class="comment">//read a word</span></span><br><span class="line"><span class="built_in">cin</span>.getline(info, <span class="number">100</span>); <span class="comment">//read a line, discard \n</span></span><br><span class="line"><span class="built_in">cin</span>.<span class="built_in">get</span>(info, <span class="number">100</span>); <span class="comment">//read a line, leave \n in queue</span></span><br></pre></td></tr></table></figure>
 <p>对于string对象，有两种方式：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string stuff;</span><br><span class="line">cin &gt;&gt; stuff; <span class="comment">//read a word</span></span><br><span class="line"><span class="built_in">getline</span>(cin, stuff); <span class="comment">//read a line, discard \n</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> stuff;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; stuff; <span class="comment">//read a word</span></span><br><span class="line">getline(<span class="built_in">cin</span>, stuff); <span class="comment">//read a line, discard \n</span></span><br></pre></td></tr></table></figure>
 <p>两个版本的getline()都有一个可选参数，用于指定使用哪个字符来确定输入的边界：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">cin.<span class="built_in">getline</span>(info, <span class="number">100</span>, <span class="string">&#x27;:&#x27;</span>); <span class="comment">//read up to :, discard :</span></span><br><span class="line"><span class="built_in">getline</span>(stuff, <span class="string">&#x27;:&#x27;</span>); <span class="comment">//read up to :, discard :</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cin</span>.getline(info, <span class="number">100</span>, <span class="string">':'</span>); <span class="comment">//read up to :, discard :</span></span><br><span class="line">getline(stuff, <span class="string">':'</span>); <span class="comment">//read up to :, discard :</span></span><br></pre></td></tr></table></figure>
 <p>在功能上，两者的主要区别在于，string版本的getline()将自动调整目标string对象的大小，使之刚好能够存储输入的字符。在设计方面的区别是，读取C-风格字符串的函数是istream类的方法，而string版本是独立的函数。对于C-风格字符串输入，cin是调用对象；而对于string对象输入，cin是一个函数参数。</p>
 <p>string版本的getline()函数从输入中读取字符，并将其存储到目标string中，直到发生下列三种情况之一：<br>（1）到达文件尾，在这种情况下，输入流的eofbit将被设置，这意味着方法fail()和eof()都将返回true；<br>（2）遇到分界字符（默认为\n），在这种情况下，将把分界字符从输入流中删除，但不存储它；<br>（3）读取的字符数达到最大允许值（string::npos和可供分配的内存字节数中较小的一个），在这种情况下，将设置输入流的failbit，这意味着fail()将返回true。</p>
 <h3 id="16-1-3-使用字符串"><a href="#16-1-3-使用字符串" class="headerlink" title="16.1.3 使用字符串"></a>16.1.3 使用字符串</h3><p>size()和length()成员函数都返回字符串中的字符数，length()成员来自较早版本的string类，而size()则是为提供STL兼容性而添加的。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201108142109.png" alt="image-20201108142109286"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201108142109.png" alt="image-20201108142109286"></p>
 <p>string库还提供了相关的方法：rfind()、find_first_of()、find_last_of()、find_first_not_of()和find_last_not_of()，它们的重载函数特征标都与find()方法相同。<br>rfind()方法查找子字符串或字符最后一次出现的位置；<br>find_first_of()方法在字符串中查找参数中任何一个字符首次出现的位置；<br>find_last_of()方法在字符串中查找参数中任何一个字符最后一次出现的位置；<br>find_first_not_of()方法在字符串中查找第一个不包含在参数中的字符。</p>
 <p>string库实际上是基于一个模板类的：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">charT</span>, <span class="keyword">class</span> <span class="title">traits</span> =</span> <span class="keyword">char</span> _traits&lt;charT&gt;, <span class="class"><span class="keyword">class</span> <span class="title">Allocator</span>=</span>allocator&lt;charT&gt;&gt;</span><br><span class="line">basic_string&#123;&#125;;<span class="comment">//有四个具体化，每个具体化都有一个typedef名称</span></span><br><span class="line"><span class="keyword">typedef</span> basic_string&lt;<span class="keyword">char</span>&gt; string;</span><br><span class="line"><span class="keyword">typedef</span> basic_string&lt;<span class="keyword">wchar_t</span>&gt; wstring;</span><br><span class="line"><span class="keyword">typedef</span> basic_string&lt;<span class="keyword">char16_t</span>&gt; u16string;<span class="comment">//c++11</span></span><br><span class="line"><span class="keyword">typedef</span> basic_string&lt;<span class="keyword">char32_t</span>&gt; u32string;<span class="comment">//c++11</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">charT</span>, <span class="title">class</span> <span class="title">traits</span> = <span class="title">char</span> _<span class="title">traits</span>&lt;charT&gt;, <span class="title">class</span> <span class="title">Allocator</span>=<span class="title">allocator</span>&lt;charT&gt;&gt;</span></span><br><span class="line"><span class="class"><span class="title">basic_string</span>&#123;</span>&#125;;<span class="comment">//有四个具体化，每个具体化都有一个typedef名称</span></span><br><span class="line"><span class="keyword">typedef</span> basic_string&lt;<span class="keyword">char</span>&gt; <span class="built_in">string</span>;</span><br><span class="line"><span class="keyword">typedef</span> basic_string&lt;<span class="keyword">wchar_t</span>&gt; <span class="built_in">wstring</span>;</span><br><span class="line"><span class="keyword">typedef</span> basic_string&lt;<span class="keyword">char16_t</span>&gt; u16string;<span class="comment">//c++11</span></span><br><span class="line"><span class="keyword">typedef</span> basic_string&lt;<span class="keyword">char32_t</span>&gt; u32string;<span class="comment">//c++11</span></span><br></pre></td></tr></table></figure>
 <h2 id="16-2-智能指针模板"><a href="#16-2-智能指针模板" class="headerlink" title="16.2 智能指针模板"></a>16.2 智能指针模板</h2><p>auto_ptr、unique_ptr和shared_ptr这三个智能指针模板都定义了类似指针的对象，可以将new获得的地址赋给这种对象。当智能指针过期时，其析构函数将使用delete来释放内存。</p>
 <p>要创建智能指针对象，必须包含头文件memory，然后使用通常的模板语法来实例化所需类型的指针。</p>
 <p>所有智能指针类都有一个explicit构造函数，该构造函数将指针作为参数。</p>
@@ -580,7 +545,7 @@
 <p>随机访问迭代器具有双向迭代器的所有特性，同时添加了支持随机访问的操作和用于对元素进行排序的关系运算符。</p>
 </li>
 </ul>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201108153205.png" alt="image-20201108153205759"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201108153205.png" alt="image-20201108153205759"></p>
 <h2 id="16-5-函数对象"><a href="#16-5-函数对象" class="headerlink" title="16.5 函数对象"></a>16.5 函数对象</h2><p>函数对象也叫函数符（functor），是可以以函数方式与()结合使用的任意对象。</p>
 <p>函数符概念：</p>
 <ul>
@@ -590,7 +555,7 @@
 <li>返回bool值的一元函数是谓词（predicdate).</li>
 <li>返回bool值的二元函数是二元谓词（binary predicate）。</li>
 </ul>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201108153857.png" alt="image-20201108153857841"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201108153857.png" alt="image-20201108153857841"></p>
 ]]></content>
       <categories>
         <category>learning</category>
@@ -631,9 +596,9 @@
 <li>将流与输入去向的程序关联起来</li>
 <li>将流与文件连接起来</li>
 </ul>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109152900.png" alt="image-20201109152852856"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109152900.png" alt="image-20201109152852856"></p>
 <p>通过使用缓冲区可以更高效地处理输入和输出。缓冲区是用作中介的内存块，它是将信息从设备传输到程序或从程序传输给设备的临时存储工具。输出时，程序首先填满缓冲区，然后把整块数据传输给硬盘，并清空缓冲区，以备下一批输出使用，这被称为刷新缓冲区（flushing the buffer）。</p>
-<p>streambuf类为缓冲区提供了内存，并提供了用于填充缓冲区、访问缓冲区内容、刷新缓冲区和管理缓冲区内存的类方法；<br>iso_base类表示流的一般特征，如是否可读取、是二进制流还是文本流等；<br>iso类基于ios_base，其中包括了一个指向streabuf对象的指针成员；<br>ostream类是从ios类派生来的，提供了输出方法；<br>istream也是从ios类派生而来的，提供了输入方法；<br>iostream类是基于istream和ostream类的，因此继承了输入方法和输出方法。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109153626.png" align="center" style="zoom:75%;" /></p>
+<p>streambuf类为缓冲区提供了内存，并提供了用于填充缓冲区、访问缓冲区内容、刷新缓冲区和管理缓冲区内存的类方法；<br>iso_base类表示流的一般特征，如是否可读取、是二进制流还是文本流等；<br>iso类基于ios_base，其中包括了一个指向streabuf对象的指针成员；<br>ostream类是从ios类派生来的，提供了输出方法；<br>istream也是从ios类派生而来的，提供了输入方法；<br>iostream类是基于istream和ostream类的，因此继承了输入方法和输出方法。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109153626.png" align="center" style="zoom:75%;" /></p>
 <p>在程序中包含iostream头文件将自动创建8个流对象（4个用于窄字符流，4个用于宽字符流）</p>
 <ul>
 <li>cin对象对应于标准输入流。wcin对象与此类似，但处理的是wchar_t类型；</li>
@@ -642,22 +607,18 @@
 <li>clog对象也对应着标准错误流，与cerr不同的是这个流被缓冲。wclog对象与此类似，单处理的是wchar_t类型。</li>
 </ul>
 <h3 id="17-1-使用cout进行输出"><a href="#17-1-使用cout进行输出" class="headerlink" title="17.1 使用cout进行输出"></a>17.1 使用cout进行输出</h3><p>ostream类将数据内部表示（二进制位模式）转换为由字符字节组成的输出流。</p>
-<p>&lt;&lt;运算符的默认含义是左移运算符，ostream类重新定义了&lt;&lt;运算符，方法是将其重载为输出，在这种情况下，&lt;&lt;叫作插入运算符。</p>
+<p>\&lt;\&lt;运算符的默认含义是左移运算符，ostream类重新定义了\&lt;\&lt;运算符，方法是将其重载为输出，在这种情况下，\&lt;\&lt;叫作插入运算符。</p>
 <p>C++用指向字符串位置的指针来表示字符串。指针的形式可以是char数组名、显式的char指针或用引号扩起的字符串。</p>
 <p>插入运算符的所有化身的返回类型都是ostream &amp;，也就是说，原型格式如下:</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(type);</span><br></pre></td></tr></table></figure>
-
-<p>除了各种operator&lt;&lt;()函数外，ostream类还提供了put()方法和write()方法，前者用于显示字符，后者用于显示字符串。</p>
+<p>除了各种operator\&lt;\&lt;()函数外，ostream类还提供了put()方法和write()方法，前者用于显示字符，后者用于显示字符串。</p>
 <p>最初put()方法的原型如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">ostream &amp; <span class="title">put</span><span class="params">(<span class="keyword">char</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>当前标准与此相同，但被模板化，以适用于wchar_t。可以用类方法表示法来调用它：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">cout.<span class="built_in">put</span>(<span class="string">&#x27;w&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>其中cout是调用方法的对象，put()是类成员函数，和&lt;&lt;运算符函数一样，该函数也返回一个指向调用对象的引用，因此可以用它将输出拼接。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cout</span>.<span class="built_in">put</span>(<span class="string">'w'</span>);</span><br></pre></td></tr></table></figure>
+<p>其中cout是调用方法的对象，put()是类成员函数，和\&lt;\&lt;运算符函数一样，该函数也返回一个指向调用对象的引用，因此可以用它将输出拼接。</p>
 <p>write()方法显示整个字符串，其模板原型如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">basic_ostream &lt;charT, traits&gt; &amp; <span class="built_in">write</span>(<span class="keyword">const</span> char_type * s, streamsize n);</span><br></pre></td></tr></table></figure>
-
 <p>write()的第一个参数提供了要显示的字符串的地址，第二个参数指出了要显示多少个字符。</p>
 <p>write()方法并不会在遇到空字符时自动停止打印字符，而只是打印指定数目的字符，即使超出了字符串的边界！、</p>
 <p>控制符flush刷新缓冲区，而控制符endl刷新缓冲区并插入一个换行符。</p>
@@ -669,16 +630,13 @@
 </ul>
 <p><strong>1、修改显示时使用的计数系统</strong></p>
 <p>ios_base  类存储了描述格式状态的信息，如要控制整数以十进制、十六进制还是八进制显示，可以使用dec、hex和oct控制符。如：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">hex</span>(cout);<span class="comment">//将cout对象的计数系统格式状态设置为十六进制</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">hex(<span class="built_in">cout</span>);<span class="comment">//将cout对象的计数系统格式状态设置为十六进制</span></span><br></pre></td></tr></table></figure>
 <p>虽然控制符不是成员函数，因此不必通过对象来调用，但它们通常的使用方式为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">cout &lt;&lt; hex;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; hex;</span><br></pre></td></tr></table></figure>
 <p>可以单独使用控制符，也可以将其作为一系列插入的组成部分。</p>
 <p><strong>2、调整字段宽度</strong></p>
 <p>可以使用width()成员函数将长度不同的数字放到宽度相同的字段中，该方法的原型为：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">width</span><span class="params">()</span></span>;<span class="comment">//返回字段宽度的当前设置；</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">width</span><span class="params">(<span class="keyword">int</span> i)</span></span>; <span class="comment">//将字段宽度设置为i个空格，并返回以前的字段宽度值。</span></span><br></pre></td></tr></table></figure>
-
 <p>width()方法只影响将显示的下一个项目，然后字段宽度将恢复为默认值。</p>
 <p>C++永远不会截断数据，因此如果在宽度为2的字段中打印一个7位值，C++将增宽字段，以容纳该数据。</p>
 <p><strong>3、填充字符</strong></p>
@@ -689,30 +647,28 @@
 <p>ios_base类有一个受保护的数据成员，其中的各位（标记）分别控制这格式化的各个方面，例如计数系统、是否显示末尾的0等。</p>
 <p>setf()函数由两个原型，第一个为：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">fmtflags <span class="title">setf</span><span class="params">(fmtflags)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>其中fmtflags是bitmask<a id="tag1" href="#test1"><sup>[1]</sup></a>类型的typedef名，用于存储格式标记 。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109174146.png" alt="image-20201109174146091"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109174146.png" alt="image-20201109174146091"></p>
 <p>第二个setf()原型接受两个参数，并返回以前的设置：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">fmtflags <span class="title">setf</span><span class="params">(fmtflags, fmtflags)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109174730.png" alt="image-20201109174730908"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109174730.png" alt="image-20201109174730908"></p>
 <p>调用setf()的效果可以通过unsetf()消除，后者原型如下：<code>void unsetf(fmtflags mask);</code>.</p>
 <p><strong>6、标准控制符</strong></p>
-<p>使用setf()不是进行格式化、对用户最为有好的方法，C++提供了多个控制符，能够调用setf()，并自动提供正确的参数。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109175554.png" alt="image-20201109175554821"></p>
+<p>使用setf()不是进行格式化、对用户最为有好的方法，C++提供了多个控制符，能够调用setf()，并自动提供正确的参数。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109175554.png" alt="image-20201109175554821"></p>
 <p><strong>8、头文件iomanip</strong></p>
 <p>使用iostream工具来设置一些个是指不太方便，为了简化工作，C++在头文件iomanip中提供了其他一些控制符，3个最常用的控制符分别是setprecision()、setfill()和setw(),分别用来设置精度、填充字符和字段宽度。</p>
 <h3 id="17-2-使用cin进行输入"><a href="#17-2-使用cin进行输入" class="headerlink" title="17.2 使用cin进行输入"></a>17.2 使用cin进行输入</h3><p>不同版本的抽取运算符查看输入流的方法是相同的，它们跳过空白（空格、换行符和制表符），直到遇到非空白字符。</p>
 <p>cin或cout对像包含一个描述流状态的数据成员。流状态（被定义为iostate类型，而iostate是一种bitmask类型）由3个ios_base元素组成：eobit、badbit和failbit，其中每一个元素都是一位。当全部3个状态位都设置为0时，说明一切顺利。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109180459.png" alt="image-20201109180459398"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109180459.png" alt="image-20201109180459398"></p>
 <p>设置流状态位有一个非常重要的后果：流将对后面的输入或输出关闭，直到位被清楚。如果希望程序在流状态为被设置后能够读取后面的输入，就必须将流状态重置为良好。这可以通过调用clear()方法来实现。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109180720.png" alt="image-20201109180720414"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109180720.png" alt="image-20201109180720414"></p>
 <p>read()函数读取指定数目的字节，并将它们存储在指定的位置中。<br>peek()函数返回输入中的下一个字符，但不愁去输入流中的下一个字符。<br>gount()函数返回最后一个非格式化抽取方法读取的字符数。<br>putback()函数将一个字符插入到输入字符串中，被插入的字符将是下一条输入语句读取的第一个字符。</p>
 <h3 id="17-3-文件输入和输出"><a href="#17-3-文件输入和输出" class="headerlink" title="17.3 文件输入和输出"></a>17.3 文件输入和输出</h3><p>由于ofstream是ostream的派生类，因此可以使用所有的ostream方法，包括各种插入运算符定义、格式化方法和控制符。</p>
 <p>以默认模式打开文件进行输出将自动把文件的长度截断位零，这相当于删除已有的内容。</p>
 <p>ios_base类定义了一个openmode类型，用于表示模式；与fmtflags和iostate类型一样，它也是一种bitmask类型。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109181714.png" alt="image-20201109181713995"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109181714.png" alt="image-20201109181713995"></p>
 <p>ios_base::ate和ios_base::app都将文件指针指向打开的文件尾。二者的区别在于，后者只允许将数据添加到文件尾，而前者将指针放到文件尾。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109181942.png" alt="image-20201109181942871"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109181942.png" alt="image-20201109181942871"></p>
 <p><a id="test1" href="#tag1">[1]</a>:bitmask类型是一种用来存储各个位值的类型。它可以是整型、枚举，也可以是STL bitset容器，这里的主要思想是每一位都是可以单独访问的。</p>
 ]]></content>
       <categories>
@@ -753,7 +709,7 @@
 <p>头文件climits（老式实现中位limits.h）中包含了关于整型限制的信息。具体来说，它定义了表示各种限制的符号名称。</p>
 <h3 id="3-2-const限定符"><a href="#3-2-const限定符" class="headerlink" title="3.2 const限定符"></a>3.2 const限定符</h3><p>创建常量的通用格式如下：<code>const type name  = value;</code>应在声明中对常量进行初始化，如果在声明常量时没有提供值，则该常量的值将是不确定的，且无法修改。</p>
 <h3 id="3-3-浮点数"><a href="#3-3-浮点数" class="headerlink" title="3.3 浮点数"></a>3.3 浮点数</h3><p>使用浮点类型可以表示带小数部分的数字。计算机将这样的值分成两部分存储，一部分表示值（基准值），另一部分用于对值进行放大或缩小（缩放因子）。（d.dddE+n指的是将小数点向右移动n位，而d.dddE-n指的是将小数点向左移动n位，之所以称为“浮点数”，就是因为小数点可移动）</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201011101447.png" alt="image-20201011101439767" style="zoom: 67%;" /></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201011101447.png" alt="image-20201011101439767" style="zoom: 67%;" /></p>
 <p>与整数相比，浮点数有两大优点。首先，它们可以表示整数之间的值，其次，由于有缩放因子，它们可以表示的范围大得多。另一方面，浮点运算的速度通常比整数运算慢，且精度将降低。</p>
 <h3 id="3-4-C-算数运算符"><a href="#3-4-C-算数运算符" class="headerlink" title="3.4 C++算数运算符"></a>3.4 C++算数运算符</h3><div class="table-container">
 <table>
@@ -789,7 +745,7 @@
 </div>
 <p>算数运算符遵循通常的代数优先级，先乘除，后加减。当两个运算符的优先级相同时，C++将看操作数的结合性（associativity）是从做到右，还是从右到左。</p>
 <p>除法运算符的行为取决于操作数的类型。如果两个操作数都是整数，则C++将执行整数除法，这意味着结果的小数部分将被丢弃，使得最后的结果是一个整数。如果其中有一个（或两个）操作数是浮点值，则保留结果的小数部分。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201011103356.png" alt="image-20201011103356575" style="zoom: 80%;" /></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201011103356.png" alt="image-20201011103356575" style="zoom: 80%;" /></p>
 <p>C++允许将一种类型的值赋给另一种类型的变量，这样做时，值将被转换为接收变量的类型。将一个值赋给取值范围更大的类型通常不会导致什么问题，然而进行窄转换可能会出现一些问题。</p>
 <p><table>
     <caption><strong>潜在的数值转换问题</strong></caption>
@@ -834,7 +790,7 @@
 <ul>
 <li>只有在定义数组时才能使用初始化，此后就不能使用了，也不能将一个数组赋给另一个数组；</li>
 <li>可以使用下标分别给数组中的元素赋值；</li>
-<li>如果支队数组的一部分进行初始化，则编译器将把其他元素设置为0；</li>
+<li>如果只对数组的一部分进行初始化，则编译器将把其他元素设置为0；</li>
 <li><p>c++11数组初始化：</p>
 <ol>
 <li><p>初始化数组时，可省略等号（=）；</p>
@@ -919,32 +875,26 @@
     <title>Chapter5 循环和关系表达式</title>
     <url>/2021/03/26/Chapter5_%E5%BE%AA%E7%8E%AF%E5%92%8C%E5%85%B3%E7%B3%BB%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="Chapter5-循环和关系表达式"><a href="#Chapter5-循环和关系表达式" class="headerlink" title="Chapter5 循环和关系表达式"></a>Chapter5 循环和关系表达式</h2><h3 id="5-1-for循环"><a href="#5-1-for循环" class="headerlink" title="5.1 for循环"></a>5.1 for循环</h3><p>C++在for和括号之间加上一个空格，而省略函数名和括号之间的空格，这样从视觉上强化了控制语句和函数调用之间的区别。</p>
-<p>递增运算符（++）和递减运算符（–）对操作数的影响是一样的，但是影响的时间不同。粗略的讲，a++意味着使用a的当前值计算表达式，然后将a的值加1；而++a的意思是先将a的值加1，然后使用新的值来计算表达式。（<em>对于用户定义的类型而言，前缀版本比后缀版本效率高。</em>因为后缀版本会首先复制一个副本，将其进行自增运算后再将复制的副本返回，而前缀版本直接返回加1后的结果）</p>
+<p>递增运算符（++）和递减运算符（—）对操作数的影响是一样的，但是影响的时间不同。粗略的讲，a++意味着使用a的当前值计算表达式，然后将a的值加1；而++a的意思是先将a的值加1，然后使用新的值来计算表达式。（<em>对于用户定义的类型而言，前缀版本比后缀版本效率高。</em>因为后缀版本会首先复制一个副本，将其进行自增运算后再将复制的副本返回，而前缀版本直接返回加1后的结果）</p>
 <p>副作用（side effect）指的是在计算表达式时对某些东西（如存储在变量中的值）进行了修改；顺序点（sequence point）是程序执行过程中的一个点，在这里，进入下一步之前将确保对所有的副作用都进行了评估。（<em>C++中的分号就是一个顺序点，任何完整的表达式末尾都是一个顺序点</em>）</p>
 <p>前缀递增、前缀递减和接触运算符的优先级相同，以从右到左的方式进行结合。后缀递增和后缀递减的优先级相同，但比前缀运算符的优先级高，这两个运算符以从左到右的方式进行结合。</p>
 <p>逗号运算符去额宝先计算第一个表达式，然后计算第二个表达式（逗号运算符是一个顺序点），它的值是第二部分的值，再所有表达式中都好运算符的优先级是最低的。</p>
 <p>数组名是数组的地址，用引号括起来的字符串常量也是其地址。</p>
 <p>C-风格字符串应使用strcmp()函数来比较。该函数接受两个字符串地址作为参数。如果两个字符串相同，该函数返回零；如果第一个字符串按字母顺序排在第二个字符串之前，则strcmp()将返回一个负数值；如果第一个字符串按字母顺序排在第二个字符串之后，则strcmp()将返回一个正数值。</p>
-<h3 id="5-2-while循环"><a href="#5-2-while循环" class="headerlink" title="5.2 while循环"></a>5.2 while循环</h3><p>while循环时没有初始化和更新部分的for循环，它只有测试条件和循环体：<code>while(test-condition)&#123;body&#125;</code>.</p>
+<h3 id="5-2-while循环"><a href="#5-2-while循环" class="headerlink" title="5.2 while循环"></a>5.2 while循环</h3><p>while循环时没有初始化和更新部分的for循环，它只有测试条件和循环体：<code>while(test-condition){body}</code>.</p>
 <p>在C++中，for和while循环本质上是相同的。例如，下面的for循环：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (init-expression; test-expression; update-expression)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">statement</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (init-expression; test-expression; update-expression)</span><br><span class="line">&#123;</span><br><span class="line">    statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以改写成这样：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">init-expression;</span><br><span class="line"><span class="keyword">while</span> (test-expression)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">statements</span>(s);</span><br><span class="line">    update-expression;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">init-expression;</span><br><span class="line"><span class="keyword">while</span> (test-expression)</span><br><span class="line">&#123;</span><br><span class="line">    statements(s);</span><br><span class="line">    update-expression;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>同样，下面的while循环：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (test-expression)</span><br><span class="line">	body</span><br></pre></td></tr></table></figure>
-
 <p>可以改成这样：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (;test-expression;)</span><br><span class="line">    body</span><br></pre></td></tr></table></figure>
-
 <p>C++为类型建立别名有两种方式。一种是使用预处理器，如<code>#define BYTE char</code>,另一种是使用typedef来创建别名<code>typedef char byte;</code>,通用格式为<code>typedef typeName aliasName;</code>.</p>
 <h3 id="5-3-do-while-循环"><a href="#5-3-do-while-循环" class="headerlink" title="5.3 do while 循环"></a>5.3 do while 循环</h3><p>do while循环是出口条件（exit condition）循环。这种循环将首先执行循环体，然后再判定测试表达式，决定是否应该继续执行循环，<strong>如果条件为false，则循环终止</strong>；否则进入新一轮循环。</p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201012160028.png" alt="image-20201012160021241" style="zoom:80%;" />
-
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201012160028.png" alt="image-20201012160021241" style="zoom:80%;" /></p>
 <h3 id="5-4-基于范围的for循环"><a href="#5-4-基于范围的for循环" class="headerlink" title="5.4 基于范围的for循环"></a>5.4 基于范围的for循环</h3><p>C++新增了一种循环：基于范围（range-based）的for循环（与Java中的for-each循环类似），这简化了一种常见的循环任务：对数组（或容器类）的每个元素执行相同的操作。例如：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> prices[<span class="number">5</span>] = &#123;<span class="number">4.99</span>, <span class="number">10.99</span>, <span class="number">6.87</span>, <span class="number">7.99</span>, <span class="number">8.49</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">double</span> x: prices)</span><br><span class="line">    std::cout &lt;&lt; x &lt;&lt; std::endl;</span><br><span class="line"><span class="comment">//如需修改数组的元素，使用引用即可</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">double</span> &amp;x: prices)</span><br><span class="line">    x *= <span class="number">0.80</span>;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> prices[<span class="number">5</span>] = &#123;<span class="number">4.99</span>, <span class="number">10.99</span>, <span class="number">6.87</span>, <span class="number">7.99</span>, <span class="number">8.49</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">double</span> x: prices)</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//如需修改数组的元素，使用引用即可</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">double</span> &amp;x: prices)</span><br><span class="line">    x *= <span class="number">0.80</span>;</span><br></pre></td></tr></table></figure>
 <h3 id="5-5-循环和文本输入"><a href="#5-5-循环和文本输入" class="headerlink" title="5.5 循环和文本输入"></a>5.5 循环和文本输入</h3><p>函数重载允许创建多个同名函数，条件是它们的参数列表不同。</p>
 <p>很多PC编程环境都将Ctrl+Z视为模拟的EOF。如果检测到EOF，cin将两位（eobit和failbit）都设置为1，则cin.eof()将返回bool值true，否则返回false。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>for循环和while循环时入口条件循环，这意味着程序将在执行循环体中的语句之前检查测试条件。do while循环是出口条件循环，这意味着其将在执行循环体中的语句之后检查条件。</p>
@@ -965,14 +915,12 @@
     <url>/2021/03/26/Chapter6_%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5%E5%92%8C%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
     <content><![CDATA[<h2 id="Chapter6-分支语句和逻辑运算符"><a href="#Chapter6-分支语句和逻辑运算符" class="headerlink" title="Chapter6 分支语句和逻辑运算符"></a>Chapter6 分支语句和逻辑运算符</h2><p>C++规定，||是一个顺序点（sequence point),也就是说，先修改左侧的值再对右侧的值进行判定（运算符左边的子表达式先于右边的子表达式）。</p>
 <p>逻辑AND运算符的优先级高于逻辑OR运算符。</p>
-<p>标识符and、or和not都是C++的保留字，这意味着不能将它们用作变量名。它们不是关键子，因为它们都是已有语言特性的另一种表示方法。（在c语言中包含头文件iso646.h,可以使用，c++无需包含该头文件）<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201014152716.png" alt="image-20201014152709322"></p>
-<p>C++从C语言继承了一个与字符相关的、非常方便的函数软件包，它可以简化诸如确定字符是否为大写字母、数字、标点符号等工作，这些函数的原型是在头文件cctype（ctype.h)中定义的。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201014152944.png" alt="image-20201014152944233"></p>
+<p>标识符and、or和not都是C++的保留字，这意味着不能将它们用作变量名。它们不是关键子，因为它们都是已有语言特性的另一种表示方法。（在c语言中包含头文件iso646.h,可以使用，c++无需包含该头文件）<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201014152716.png" alt="image-20201014152709322"></p>
+<p>C++从C语言继承了一个与字符相关的、非常方便的函数软件包，它可以简化诸如确定字符是否为大写字母、数字、标点符号等工作，这些函数的原型是在头文件cctype（ctype.h)中定义的。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201014152944.png" alt="image-20201014152944233"></p>
 <p>条件运算符（?:）通用格式：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">expression1 ? expression2 : expression3;</span><br><span class="line"><span class="comment">//expression1为true，则表达式的值为expression2的值；否则为expression3的值。</span></span><br></pre></td></tr></table></figure>
-
 <p>switch语句通用格式：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in"><span class="keyword">switch</span></span> (integer-expression) <span class="comment">//integer-expression必须是一个结果为整数值的表达式</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">case</span> label1: <span class="built_in">statement</span>(s) <span class="comment">//每个标签都必须是整数常量表达式</span></span><br><span class="line">	<span class="keyword">case</span> label2: <span class="built_in">statements</span>(s)</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">default</span>: <span class="built_in">statements</span>(s)</span><br><span class="line">    <span class="comment">//case标签只是行标签，而不是选项之间的界限，也就是说，程序跳到switch中特定代码行后，将依次执行之后的所有语句，除非有明确的其他指示。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (integer-expression) <span class="comment">//integer-expression必须是一个结果为整数值的表达式</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">case</span> label1: statement(s) <span class="comment">//每个标签都必须是整数常量表达式</span></span><br><span class="line">	<span class="keyword">case</span> label2: statements(s)</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">default</span>: statements(s)</span><br><span class="line">    <span class="comment">//case标签只是行标签，而不是选项之间的界限，也就是说，程序跳到switch中特定代码行后，将依次执行之后的所有语句，除非有明确的其他指示。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>switch语句将int值与枚举量标签进行比较时，将枚举量提升为int；在while循环测试条件中，也会将枚举量提升为int类型。</p>
 <p>用cin读取用户输入数字时，如果类型不匹配，将发生4种情况：<br>(1) 存储输入的变量保持不变；<br>(2) 不匹配的输入将被留在输入队列中；<br>(3) cin对象中的一个错误标记被设置；<br>(4) 对cin方法的调用将返回false（如果被转换为bool类型）。<br>方法返回false意味着可以用非数字输入来结束读取数字的循环。非数字输入设置错误标记意味着必须重置该标记，程序才能继续读取输入。clear()方法重置错误输入标记，同时也重置文件尾（EOF）。</p>
 <p>使用cin进行输入的时候，程序将输入视为一系列的字节，其中每个字节都被解释为字符编码。</p>
@@ -1026,20 +974,17 @@
     <title>Chapter8 函数探幽</title>
     <url>/2021/03/26/Chapter8_%E5%87%BD%E6%95%B0%E6%8E%A2%E5%B9%BD/</url>
     <content><![CDATA[<h2 id="Chapter8-函数探幽"><a href="#Chapter8-函数探幽" class="headerlink" title="Chapter8 函数探幽"></a>Chapter8 函数探幽</h2><h3 id="8-1-内联函数"><a href="#8-1-内联函数" class="headerlink" title="8.1 内联函数"></a>8.1 内联函数</h3><p>内联函数是C++为了提高程序运行速度所做的一项改进。<strong>常规函数和内联函数的主要区别不在于编写方式，而在于C++编译器如何将它们组合到程序中</strong>。</p>
-<p>执行常规函数调用指令时，程序将在函数调用后立即存储该指令的内存地址，并将函数参数复制到堆栈，跳到标记函数起点的内存单元，执行函数代码，然后跳回到地址被保存的指令处（<em>这与阅读文章时停下来看脚注，并在阅读完教主后返回到以前阅读的地方类似</em>）。来回跳跃并记录跳跃位置意味着使用函数时需要一定的开销。而内联函数的编译代码与其他程序代码“内联“起来了。这也就是说，编译器将使用相应的函数代码替换函数调用。<strong>对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此，内联函数的运行速度比常规函数稍快，但代价是需要占用更多的内存</strong>。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201018162900.png" alt="内联函数和常规函数"></p>
-<p>要使用内联函数，必须采取下述措施之一：<br>（1）在函数声明前加上关键字inline；<br>（2）在函数顶以前加上关键字inline。<br>通常的做法是省略原型，将整个定义放在本应该提供原型的地方。（<em><strong>内联函数不能递归</strong></em>，与常规函数一样，也是按值来传递参数的）</p>
+<p>执行常规函数调用指令时，程序将在函数调用后立即存储该指令的内存地址，并将函数参数复制到堆栈，跳到标记函数起点的内存单元，执行函数代码，然后跳回到地址被保存的指令处（<em>这与阅读文章时停下来看脚注，并在阅读完教主后返回到以前阅读的地方类似</em>）。来回跳跃并记录跳跃位置意味着使用函数时需要一定的开销。而内联函数的编译代码与其他程序代码“内联“起来了。这也就是说，编译器将使用相应的函数代码替换函数调用。<strong>对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此，内联函数的运行速度比常规函数稍快，但代价是需要占用更多的内存</strong>。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201018162900.png" alt="内联函数和常规函数"></p>
+<p>要使用内联函数，必须采取下述措施之一：<br>（1）在函数声明前加上关键字inline；<br>（2）在函数顶以前加上关键字inline。<br>通常的做法是省略原型，将整个定义放在本应该提供原型的地方。（<strong><em>内联函数不能递归</em></strong>，与常规函数一样，也是按值来传递参数的）</p>
 <p><strong>宏是通过文本替换来实现的，并非传递参数</strong>。</p>
 <h3 id="8-2-引用变量"><a href="#8-2-引用变量" class="headerlink" title="8.2 引用变量"></a>8.2 引用变量</h3><p>引用是已定义的变量的别名。通过将引用变量用作参数，函数将使用原始数据，而不是其副本。这样除指针之外，引用也为函数处理大型结构提供了一种非常方便的途径。</p>
 <h4 id="8-2-1-创建引用变量"><a href="#8-2-1-创建引用变量" class="headerlink" title="8.2.1 创建引用变量"></a>8.2.1 创建引用变量</h4><p>C和C++使用&amp;符号来指示变量的地址，而C++给&amp;符号赋予了另一个含义，将其用来声明引用。例如，要将rodents作为rats 变量的别名，可以这样做：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> rats;</span><br><span class="line"><span class="keyword">int</span> &amp; rodents = rats; <span class="comment">//makes rodents an alias for rats</span></span><br></pre></td></tr></table></figure>
-
 <p>其中，&amp;不是地址运算符，而是类型标识符的一部分。就像生命中的char * 指的是指向char的指针一样，int &amp;指的是指向int的引用。上述声明允许将rats和rodents互换——它们指向相同的值和内存单元。</p>
 <p><strong>必须在声明引用的时候进行初始化</strong>，引用更接近const 指针，必须在创建时进行初始化，一旦与某个变量关联起来，就将一直效忠于他。也就是说：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp; rodents = rats;</span><br></pre></td></tr></table></figure>
-
 <p>实际上是下述代码的伪装表示：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> pr = &amp;rats;</span><br></pre></td></tr></table></figure>
-
 <p>其中引用rodents扮演的角色与表达式*pr相同。</p>
 <h4 id="8-2-2-将引用作为函数参数"><a href="#8-2-2-将引用作为函数参数" class="headerlink" title="8.2.2 将引用作为函数参数"></a>8.2.2 将引用作为函数参数</h4><p>引用经常被用作函数参数，使得函数中的变量名称为调用程序中的变量的别名。这种传递参数的方法称为按引用传递。</p>
 <p>如果函数调用的参数不是左值或与相应的const引用参数的类型不匹配，则C++将创建类型正确的匿名变量，将函数调用的参数的值传递给该匿名变量，并让参数来引用该变量。</p>
@@ -1078,39 +1023,35 @@
 <p><strong>对于带参数列表的函数，必须从右向左添加默认值。也就是说，要为某个参数设置默认值，则必须为它右边的所有参数提供默认值</strong>。实参按从左到右的顺序依次被赋给相应的形参，而不能跳过任何参数。</p>
 <h3 id="8-4-函数重载"><a href="#8-4-函数重载" class="headerlink" title="8.4 函数重载"></a>8.4 函数重载</h3><p>函数多态（函数重载）使得能能够使用多个同名的函数。术语”多态”指的是有多种形式，因此函数多态可以有多种形式。类似地，<strong>术语“函数重载”指的是可以有多个同名的函数</strong>，因此对名称进行了重载。这两个术语指的是同一回事，但我们通常使用函数重载。可以通过函数重载来设计一系列函数——<strong>它们完成相同的工作，但使用不同的参数列表</strong>。</p>
 <p><strong>C++使用上下文来确定要使用的重载函数版本</strong>。</p>
-<p>函数重载的关键是函数的参数列表——也称为函数特征标识（function signature)。<strong>如果两个函数的参数数目和类型相同，同时参数的排列顺序也相同，则它们的特征标相同</strong>，而变量名是无关紧要的。***<u>编译器在检查函数特征标时，将把类型引用和类型本身视为同一个特征标</u>***</p>
+<p>函数重载的关键是函数的参数列表——也称为函数特征标识（function signature)。<strong>如果两个函数的参数数目和类型相同，同时参数的排列顺序也相同，则它们的特征标相同</strong>，而变量名是无关紧要的。<strong><em><u>编译器在检查函数特征标时，将把类型引用和类型本身视为同一个特征标</u></em></strong></p>
 <p>将非const值赋给const变量时合法的，但反之则是非法的。</p>
 <p>仅当函数基本上执行相同的任务，但是用不同形式的数据时，才应采用函数重载。</p>
 <p>使用C++开发工具中的编译器编写和编译程序时，C++编译器将执行<strong>名称修饰</strong>（name decoration）或<strong>名称矫正</strong>（name mangling），它<strong>根据函数原型中指定的形参类型对每个函数名进行加密</strong>。</p>
 <h3 id="8-5-函数模板"><a href="#8-5-函数模板" class="headerlink" title="8.5 函数模板"></a>8.5 函数模板</h3><p>函数模板时通用的函数描述，也就是说，它们使用泛型来定义函数，其中的泛型可用具体的类型替换。通过将类型作为参数传递给模板，可使编译器生成该类型的函数。由于模板允许以泛型的方式编写程序，因此有时也被称为通用编程。由于类型是用参数表示的，因此模板特性有时也被称为参数化类型（parameterized types）。</p>
 <p>函数模板允许以任意类型的方式来定义函数，例如，如下示建立一个交换模板：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> AnyType&gt;	<span class="comment">//建立一个模板，并把类型命名为AnyType，关键字template和typename是必须的，可用class代替typename</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(AnyType &amp;a, AnyType &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    AnyType temp;</span><br><span class="line">    temp = a;</span><br><span class="line">    a = b; </span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>模板不创建任何函数，而只是告诉编译器如何定义函数</strong>。</p>
 <p>可以提供一个具体化函数定义——称为<strong>显式具体化</strong>（explicit specialization），其中包含所需的代码。当编译器找到与函数调用相匹配的具体化定义时，将使用该定义，而不再寻找模板。如：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">job</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">40</span>];</span><br><span class="line">    <span class="keyword">double</span> salary;</span><br><span class="line">    <span class="keyword">int</span> floor</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> Swap&lt;job&gt;(job &amp;, job &amp;) <span class="comment">//显式具体化</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">job</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">40</span>];</span><br><span class="line">    <span class="keyword">double</span> salary;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">floor</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> Swap&lt;job&gt;(job &amp;, job &amp;) <span class="comment">//显式具体化</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>对于给定的函数名，可以有非模板函数、模板函数和显式具体化模板函数以及它们的重载版本</li>
-<li>显式具体化函数的原型和定义应以template&lt;&gt;打头，并通过名称来指出类型</li>
+<li>显式具体化函数的原型和定义应以template\&lt;>打头，并通过名称来指出类型</li>
 <li><strong>具体化优先于常规模板，而非模板函数优先于具体化和常规模板</strong></li>
 </ul>
 <p>在代码中包含函数模块本身并不会生成函数定义，它指示一个用于生成函数定义的方案。编译器使用模板为特定类型生成函数定义时，得到的时模板实例（instantiation）。模板并非函数定义，但某一类型的模板实例时函数定义，这种实例化方式被称为<strong>隐式实例化</strong>。</p>
-<p>最初，编译器只能通过隐式实例化，来使用模板生成函数定义，但现在C++还允许<strong>显式实例化</strong>（explicit instantiation），这意味着可以直接命令编译器创建特定的实例。其语法是，声明所需的种类——用&lt;&gt;符号指示类型，并在声明前加上关键字template：</p>
+<p>最初，编译器只能通过隐式实例化，来使用模板生成函数定义，但现在C++还允许<strong>显式实例化</strong>（explicit instantiation），这意味着可以直接命令编译器创建特定的实例。其语法是，声明所需的种类——用\&lt;>符号指示类型，并在声明前加上关键字template：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="keyword">void</span> Swap&lt;<span class="keyword">int</span>&gt; (<span class="keyword">int</span>, <span class="keyword">int</span>); <span class="comment">//explicit instantiation</span></span><br></pre></td></tr></table></figure>
-
 <p>试图在同一个文件（或转换单元）中使用同一种类型的显式实例和显式具体化将出错。</p>
 <p>隐式实例化、显式实例化和显式具体化统称为具体化（specialization），它们的相通之处在于，<strong>它们表示的都是使用具体类型的函数定义，而不是通用描述</strong>。</p>
 <p>示例：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(T &amp;, T &amp;)</span></span>; <span class="comment">// 模板原型</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">void</span> Swap&lt;job&gt;(job &amp;, job&amp;); <span class="comment">//显式具体化, job声明同上</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">template</span> <span class="keyword">void</span> Swap&lt;<span class="keyword">char</span>&gt; (<span class="keyword">char</span> &amp;, <span class="keyword">char</span> &amp;); <span class="comment">//显式实例化</span></span><br><span class="line">    <span class="keyword">short</span> a,b;</span><br><span class="line">    ...</span><br><span class="line">    <span class="built_in">Swap</span>(a,b); <span class="comment">//short隐式实例化</span></span><br><span class="line">    job n,m;</span><br><span class="line">    ...</span><br><span class="line">	<span class="built_in">Swap</span>(n,m); <span class="comment">//job结构显式具体化</span></span><br><span class="line">	<span class="keyword">char</span> g, h;</span><br><span class="line">    ...</span><br><span class="line">	<span class="built_in">Swap</span>(g, h); <span class="comment">//char型显式实例化</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Swap</span>(<span class="title">T</span> &amp;, <span class="title">T</span> &amp;);</span> <span class="comment">// 模板原型</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">void</span> Swap&lt;job&gt;(job &amp;, job&amp;); <span class="comment">//显式具体化, job声明同上</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">template</span> <span class="keyword">void</span> Swap&lt;<span class="keyword">char</span>&gt; (<span class="keyword">char</span> &amp;, <span class="keyword">char</span> &amp;); <span class="comment">//显式实例化</span></span><br><span class="line">    short a,b;</span><br><span class="line">    ...</span><br><span class="line">    Swap(a,b); <span class="comment">//short隐式实例化</span></span><br><span class="line">    job n,m;</span><br><span class="line">    ...</span><br><span class="line">	Swap(n,m); <span class="comment">//job结构显式具体化</span></span><br><span class="line">	<span class="keyword">char</span> g, h;</span><br><span class="line">    ...</span><br><span class="line">	Swap(g, h); <span class="comment">//char型显式实例化</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>对于函数重载、函数模板和函数模板重载，C++需要（且有）一个定义良好的策略，来决定为函数调用使用哪一个函数定义，尤其是有多个参数时，这个过程称为重载解析（overloading resolution），大致过程如下：</p>
 <ol>
 <li><strong>创建候选函数列表</strong>。其中包含与被调用函数的名称相同的函数和模板函数。</li>
 <li><strong>使用候选函数列表创建可行函数列表</strong>。这些都是参数数目正确的函数，为此有一个隐式转换序列，其中包括实参类型与相应的形参类型完全匹配的情况。</li>
 <li><strong>确定是否有最佳的可行函数</strong>。如果有，则使用它，否则该函数调用出错。<ol>
 <li>通常从最佳到最差的顺序如下所述：<ol>
-<li>完全匹配<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>，但常规函数优先于模板<a href="#bib2" id="bib2ref"><sup>[2]</sup></a><br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201018192526.png" alt="image-20201018192526290"></li>
+<li>完全匹配<a href="#bib1" id="bib1ref"><sup>[1]</sup></a>，但常规函数优先于模板<a href="#bib2" id="bib2ref"><sup>[2]</sup></a><br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201018192526.png" alt="image-20201018192526290"></li>
 <li>提升转换（如，char和short自动转换为int，float自动转换为double）</li>
 <li>标准转换（如int转换为char，long转换为double）</li>
 <li>用户定义的转换，如类声明中定义的转换。</li>
@@ -1122,10 +1063,8 @@
 <p>如果有多个匹配的原型，则百年一起将无法完成重载解析过程；如果没有最佳的可行函数，编译器将生成一条错误信息。</p>
 <p>重载解析将寻找最匹配的函数。如果只存在一个这样的函数，则选择它；如果存在多个这样的函数，但其中只有一个时非模板函数，则选择该函数；如果存在多个适合的函数，且它们都为模板函数，但其中有一个函数比其他函数更具体<a href="#bib3" id="bib3ref"><sup>[3]</sup></a>，则选择该函数。如果有多个同样合适的非模板函数或模板函数，但没有一个函数比其他函数更具体，则函数调用将是不确定的，因此是错误的；当然如果不存在匹配的函数，也是错误的。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">decltype</span>(x) y; <span class="comment">// make y the same type as x</span></span><br></pre></td></tr></table></figure>
-
 <p>对于无法预先得知模板返回值，可通过使用关键字decltype和后置返回类型(trailing return type)来创建模板:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line">auto func(T1 x, T2 y) -&gt;decltype(x + y)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">	<span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="title">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">auto</span> <span class="title">func</span>(<span class="title">T1</span> <span class="title">x</span>, <span class="title">T2</span> <span class="title">y</span>) -&gt;<span class="title">decltype</span>(<span class="title">x</span> + <span class="title">y</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ...</span><br><span class="line">	<span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a id="bib1" href="#bib1ref"><sup>[1]</sup></a>进行完全匹配时，C++允许某些“无关紧要”的转换</p>
 <p><a id="bib2" href="#bib2ref"><sup>[2]</sup></a>如果两个完全匹配的函数都是模板函数，则较具体<a href="#bib3" id="bib3ref"><sup>[3]</sup></a>的模板函数优先</p>
 <p><a id="bib3" href="#bib3ref"><sup>[3]</sup></a>指编译器推断使用哪种类型时执行的转换最少</p>
@@ -1142,9 +1081,8 @@
     <url>/2021/03/26/Chapter9_%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/</url>
     <content><![CDATA[<h2 id="Chapter9-内存模型和名称空间"><a href="#Chapter9-内存模型和名称空间" class="headerlink" title="Chapter9 内存模型和名称空间"></a>Chapter9 内存模型和名称空间</h2><h3 id="9-1-单独编译"><a href="#9-1-单独编译" class="headerlink" title="9.1 单独编译"></a>9.1 单独编译</h3><p>不应将函数定义或变量声明放到头文件中，这样做可能会引发麻烦。例如，如果在头文件中包含一个函数定义，然后再其他两个文件（属于同一个程序）中包含该头文件，则同一个程序中将包含同一个函数的两个定义，除非函数是内联的，否则这将出错。</p>
 <p>使用#include包含头文件时，如果文件名包含在尖括号中，则C++编译器将在存储标准头文件的主机系统的文件系统中查找；但如果文件名包含在双引号中，则编译器将首先查找当前的工作目录或源代码目录。</p>
-<p>在同一个文件中只能将同一个头文件包含一次。可以利用基于预处理器编译指令#ifndef的技术避免多次包含同一个头文件。下面的代码片段意味着仅当以前没有使用预处理器编译指令#define定义名称COORDIN_H_时，才处理#ifndef和#endif之间的语句：</p>
+<p>在同一个文件中只能将同一个头文件包含一次。可以利用基于预处理器编译指令#ifndef的技术避免多次包含同一个头文件。下面的代码片段意味着仅当以前没有使用预处理器编译指令#define定义名称COORDIN<em>H</em>时，才处理#ifndef和#endif之间的语句：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> COORDIN_H_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> COORDIN_H_</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
 <h3 id="9-2-存储持续性、作用域和链接性"><a href="#9-2-存储持续性、作用域和链接性" class="headerlink" title="9.2 存储持续性、作用域和链接性"></a>9.2 存储持续性、作用域和链接性</h3><p>C++使用三种（C++11中是四种）不同的方案来存储数据，这些方案的区别在于数据保留在内存中的时间：</p>
 <ul>
 <li><strong>自动存储持续性</strong>：在函数定义中声明的变量（包括函数参数）的存储持续性为自动的。它们<u>在程序开始执行其所属的函数或代码块时被创建，在执行完函数或代码块时，它们使用的内存被释放</u>。</li>
@@ -1161,13 +1099,14 @@
 <p>可以使用任何在声明时其值为已知的表达式来初始化自动变量。</p>
 </li>
 <li><p>自动变量和栈</p>
-<p>由于自动变量的数目随函数的开始和结束而增减，因此程序必须在运行时对自动变量进行管理。常用的方法是路i出一段内存，并将其视为栈，以管理变量的增减。（新数据被象征性地放在原有数据的上面，即数据位于相邻的内存单元中，当程序使用完后，将其从栈中删除）。</p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019180025.png" alt="image-20201019180018372" style="zoom:80%;" /></li>
+<p>由于自动变量的数目随函数的开始和结束而增减，因此程序必须在运行时对自动变量进行管理。常用的方法是路i出一段内存，并将其视为栈，以管理变量的增减。（新数据被象征性地放在原有数据的上面，即数据位于相邻的内存单元中，当程序使用完后，将其从栈中删除）。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019180025.png" alt="image-20201019180018372" style="zoom:80%;" /></p>
+</li>
 <li><p>寄存器变量<br>关键字register最初是由C语言引入的，它建议编译器使用CPU寄存器来存储自动变量以提高访问变量的速度。</p>
 </li>
 </ul>
 <h4 id="9-2-3-静态持续变量"><a href="#9-2-3-静态持续变量" class="headerlink" title="9.2.3 静态持续变量"></a>9.2.3 静态持续变量</h4><p>C++为静态存储持续性变量提供了3种链接性：外部链接性（可在其他文件中访问）、内部链接性（只能在当前文件中访问）和无链接性（只能在当前函数或代码块中访问）。这三种链接性都在整个程序执行期间存在，即静态变量在整个程序执行期间一直存在。</p>
 <p>要想创建链接性为外部的静态持续变量，必须在代码块的外面声明它；要创建链接性为内部的静态持续变量，必须在代码块的外面声明它，并使用static限定符；要创建没有链接性的静态持续变量，必须在代码块内声明它，并使用static限定符。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1176,7 +1115,8 @@
 <th>位置</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>外部</td>
 <td>无</td>
 <td>代码块外</td>
@@ -1191,17 +1131,17 @@
 <td>有</td>
 <td>代码块内</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>所有静态持续变量都有下述初始化特征：未被初始化的静态变量的所有位都被设置为0.这种变量被称为零初始化的（zero-initializated）。</p>
 <p>零初始化和常量表达式初始化统称为静态初始化，这意味着在编译器处理文件时初始化变量。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019181408.png" alt="image-20201019181408033"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019181408.png" alt="image-20201019181408033"></p>
 <h4 id="9-2-4-静态持续性、外部链接性"><a href="#9-2-4-静态持续性、外部链接性" class="headerlink" title="9.2.4 静态持续性、外部链接性"></a>9.2.4 静态持续性、外部链接性</h4><p>链接性位外部的变量通常简称为外部变量，它们的存储持续性为静态，作用域为整个文件。</p>
 <ul>
 <li><p>单定义规则</p>
 <p>在每个使用外部变量的文件中，都必须声明它；另一方面，C++有“单定义规则”（One Definition Rule， ODR），该规则指出，变量只能有一次定义。为满足这种需求，C++提供了两种变量声明。一种是<strong>定义声明</strong>（defining declaration）或简称为<strong>定义</strong>（definition），<strong>它给变量分配存储空间</strong>；另一种是<strong>引用声明</strong>（referencing declaration）或简称为<strong>声明</strong>（declaration），<strong>它不给变量分配存储空间，因为它引用已有的变量</strong>。</p>
-<p><strong>引用声明使用关键字extern，且不进行初始化</strong>。如果要在<strong>多个文件中使用外部变量</strong>，只需<strong>在一个文件中包含该变量的定义</strong>（单变量规则），但<strong>在使用该变量的其他所有文件种，都必须使用关键字extern声明它</strong>。如：</p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019183133.png" alt="image-20201019183133490" style="zoom:90%" />
-
+<p><strong>引用声明使用关键字extern，且不进行初始化</strong>。如果要在<strong>多个文件中使用外部变量</strong>，只需<strong>在一个文件中包含该变量的定义</strong>（单变量规则），但<strong>在使用该变量的其他所有文件种，都必须使用关键字extern声明它</strong>。如：<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019183133.png" alt="image-20201019183133490" style="zoom:90%" /></p>
 <p>虽然程序中可能包含多个同名的变量，但每个变量都只有一个定义。</p>
 <p><strong>C++提供了作用域解析运算符（::），将它放在变量名前面时，该运算符表示使用变量的全局版本</strong>。</p>
 </li>
@@ -1219,7 +1159,8 @@
 </li>
 <li><p>mutable</p>
 <p>可以用该关键字指出，即使结构（或类）变量为const，其某个成员也可以被修改。例如：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">30</span>];</span><br><span class="line">    <span class="keyword">mutable</span> <span class="keyword">int</span> accesses;</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> data veep = &#123;<span class="string">&quot;Claybourne Clodde&quot;</span>, <span class="number">0</span>, ...&#125;;</span><br><span class="line"><span class="built_in">strcpy</span>(veep.name, <span class="string">&quot;Joye Joux&quot;</span>); <span class="comment">//not allowed</span></span><br><span class="line">veep.accesses++; <span class="comment">// allowed</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">30</span>];</span><br><span class="line">    <span class="keyword">mutable</span> <span class="keyword">int</span> accesses;</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> data veep = &#123;<span class="string">"Claybourne Clodde"</span>, <span class="number">0</span>, ...&#125;;</span><br><span class="line"><span class="built_in">strcpy</span>(veep.name, <span class="string">"Joye Joux"</span>); <span class="comment">//not allowed</span></span><br><span class="line">veep.accesses++; <span class="comment">// allowed</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>const</p>
 <p>在C++种，const限定符对默认存储类型稍有影响，在默认情况下全局变量的链接性为外部的，但const全局变量的链接性为内部的。</p>
 </li>
@@ -1239,7 +1180,6 @@
 <p>假设名称空间和声明区域定义了相同的名称，如果试图使用using声明将名称空间的名称导入该生命区域，则这两个名称会发生冲突，从而出错。如果使用using编译指令将该名称空间的名称给导入该生命区域中，则局部版本将隐藏名称空间版本。</p>
 <p>可以使用namespace给名称空间创建别名，如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> my_very_favorite_things&#123;...&#125;;</span><br><span class="line"><span class="keyword">namespace</span> mvft = my_very_favorite_things;<span class="comment">//使mvft称为my_very_favorite_things的别名</span></span><br></pre></td></tr></table></figure>
-
 <p>可以通过省略名称空间的名称来创建未命名的名称空间，但不能在未命名的名称空间所属的文件之外的其他文件中使用该名称空间中的名称。这提供了链接性为内部的静态变量的替代品。</p>
 <p>在开发时使用多个文件的一种有效的组织策略是，使用头文件来定义用户类型，为操纵用户类型的函数提供函数原型；并将函数定义放在一个独立的源代文件中。头文件和源代码文件一起定义和实现了用户定义的类型及其使用方式。最后，将main()和其他使用这些函数的函数放在第三个文件中。</p>
 ]]></content>
@@ -1956,33 +1896,21 @@
     <title>栈</title>
     <url>/2021/03/26/%E6%A0%88/</url>
     <content><![CDATA[<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>栈</strong>是一种特殊的线性表，它所有的插入和删除都限制在表的同一端及逆行，表重允许进行插入、删除操作的一端叫做栈的<strong>顶</strong>，表中的另一端叫做栈的<strong>底</strong>，当栈中没有元素时，称之为<strong>空栈</strong>，栈的插入运算通常称为<strong>进栈</strong>或<strong>入栈</strong>，栈的删除运算通常称为<strong>退栈</strong>或<strong>出栈</strong>。</p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200326004247.png"/>
-
-<h3 id="抽象数据结构"><a href="#抽象数据结构" class="headerlink" title="抽象数据结构"></a>抽象数据结构</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ADT Stack is</span><br><span class="line">    operation</span><br><span class="line">    <span class="function">Stack <span class="title">createEmptyStack</span><span class="params">(<span class="keyword">void</span>)</span><span class="comment">/*创建一个空栈*/</span></span></span><br><span class="line"><span class="function">    <span class="keyword">int</span> <span class="title">isEmptyStack</span><span class="params">(Stack st)</span><span class="comment">/*判断栈st是否为空*/</span></span></span><br><span class="line"><span class="function">    <span class="keyword">void</span> <span class="title">push</span><span class="params">(Stack st,DataType x)</span><span class="comment">/*往栈st的栈顶插入一个值为x的元素*/</span></span></span><br><span class="line"><span class="function">    <span class="keyword">void</span> <span class="title">pop</span><span class="params">(Stack st)</span><span class="comment">/*从栈st的栈顶删除一个元素*/</span></span></span><br><span class="line"><span class="function">    DataType <span class="title">top</span><span class="params">(Stack st)</span><span class="comment">/*求栈顶元素的值*/</span></span></span><br><span class="line"><span class="function">end ADT Stack</span></span><br></pre></td></tr></table></figure>
-
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200326004247.png"/></p>
+<h3 id="抽象数据结构"><a href="#抽象数据结构" class="headerlink" title="抽象数据结构"></a>抽象数据结构</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ADT Stack is</span><br><span class="line">    operation</span><br><span class="line">    <span class="function">Stack <span class="title">createEmptyStack</span><span class="params">(<span class="keyword">void</span>)</span><span class="comment">/*创建一个空栈*/</span></span></span><br><span class="line"><span class="function">    <span class="keyword">int</span> <span class="title">isEmptyStack</span><span class="params">(Stack st)</span><span class="comment">/*判断栈st是否为空*/</span></span></span><br><span class="line"><span class="function">    <span class="keyword">void</span> <span class="title">push</span><span class="params">(Stack st,DataType x)</span><span class="comment">/*往栈st的栈顶插入一个值为x的元素*/</span></span></span><br><span class="line"><span class="function">    <span class="keyword">void</span> <span class="title">pop</span><span class="params">(Stack st)</span><span class="comment">/*从栈st的栈顶删除一个元素*/</span></span></span><br><span class="line"><span class="function">    DataType <span class="title">top</span><span class="params">(Stack st)</span><span class="comment">/*求栈顶元素的值*/</span></span></span><br><span class="line"><span class="function"><span class="built_in">end</span> ADT Stack</span></span><br></pre></td></tr></table></figure>
 <h3 id="栈的顺序实现"><a href="#栈的顺序实现" class="headerlink" title="栈的顺序实现"></a>栈的顺序实现</h3><p>用顺序的方式表示栈时，栈的类型可定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SeqStack</span>&#123;</span><span class="comment">/*顺序栈类型定义*/</span></span><br><span class="line">    <span class="keyword">int</span> MAXNUM;<span class="comment">/*栈中最大元素个数*/</span></span><br><span class="line">    <span class="keyword">int</span> t;<span class="comment">/*t&lt;MAXNUM,指示栈顶位置，而不是元素个数*/</span></span><br><span class="line">    DataType *s;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">SeqStack</span> * <span class="title">PSeqStack</span>;</span><span class="comment">/*顺序栈指针类型*/</span></span><br></pre></td></tr></table></figure>
-
 <p>由于栈是一个动态结构，而数组是静态结构，因此会出现溢出问题。当栈中已经有MAXNUM个元素时，如果再做进栈运算，则会产生溢出，通常称为上溢（overflow），而对空栈进行出栈运算时也会产生溢出，通常称为下溢（underflow)。</p>
-<h4 id="进栈运算"><a href="#进栈运算" class="headerlink" title="进栈运算"></a>进栈运算</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_seq</span><span class="params">(PSeqStack pastack,DataType x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*在栈内压入一个元素*/</span></span><br><span class="line">    <span class="keyword">if</span>(pastack-&gt;t &gt;= MAXNUM<span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Overflow!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        pastack-&gt;t = pastack-&gt;t+<span class="number">1</span>;</span><br><span class="line">        pastack-&gt;s[pastack-&gt;t] = x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="出栈运算"><a href="#出栈运算" class="headerlink" title="出栈运算"></a>出栈运算</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop_seq</span><span class="params">(PSeqStack pastack)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*删除栈顶元素*/</span></span><br><span class="line">    <span class="keyword">if</span>(pastack-&gt;t == <span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Underflow!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        pastack-&gt;t = pastack-&gt;t<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="取栈顶元素"><a href="#取栈顶元素" class="headerlink" title="取栈顶元素"></a>取栈顶元素</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">DataType <span class="title">top_seq</span><span class="params">(PSeqStack pastack)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*当pastack所指的栈不为空栈时，求栈顶元素的值*/</span></span><br><span class="line">    <span class="keyword">if</span>(pastack-&gt;t == <span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;It is empty!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in"><span class="keyword">return</span></span> (pastack-&gt;s[pastack-&gt;t]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="进栈运算"><a href="#进栈运算" class="headerlink" title="进栈运算"></a>进栈运算</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_seq</span><span class="params">(PSeqStack pastack,DataType x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*在栈内压入一个元素*/</span></span><br><span class="line">    <span class="keyword">if</span>(pastack-&gt;t &gt;= MAXNUM<span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Overflow!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        pastack-&gt;t = pastack-&gt;t+<span class="number">1</span>;</span><br><span class="line">        pastack-&gt;s[pastack-&gt;t] = x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="出栈运算"><a href="#出栈运算" class="headerlink" title="出栈运算"></a>出栈运算</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop_seq</span><span class="params">(PSeqStack pastack)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*删除栈顶元素*/</span></span><br><span class="line">    <span class="keyword">if</span>(pastack-&gt;t == <span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Underflow!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        pastack-&gt;t = pastack-&gt;t<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="取栈顶元素"><a href="#取栈顶元素" class="headerlink" title="取栈顶元素"></a>取栈顶元素</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">DataType <span class="title">top_seq</span><span class="params">(PSeqStack pastack)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*当pastack所指的栈不为空栈时，求栈顶元素的值*/</span></span><br><span class="line">    <span class="keyword">if</span>(pastack-&gt;t == <span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"It is empty!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> (pastack-&gt;s[pastack-&gt;t]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="链接表示"><a href="#链接表示" class="headerlink" title="链接表示"></a>链接表示</h3><p>每个节点的结构可以定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>;</span><span class="comment">/*单链表节点*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> * <span class="title">PNode</span>;</span><span class="comment">/*指向节点的指针类型*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">/*单链表节点定义*/</span></span><br><span class="line">    DataType info;</span><br><span class="line">    Pnode link;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*为了强调栈顶是栈的一个属性，对栈增加了一层封装，引入LinkList结构的定义*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LinkStack</span>/*链接栈类型定义*/</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    PNode top;<span class="comment">/*指向栈顶节点*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LinkStack</span> *<span class="title">PLinkStack</span>;</span></span><br><span class="line"><span class="comment">/*链接栈类型的指针类型*/</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="创建空链接栈"><a href="#创建空链接栈" class="headerlink" title="创建空链接栈"></a>创建空链接栈</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">PLinkStack <span class="title">createEmptyStack_link</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PLinkStack plstack;</span><br><span class="line">    plstack = (PLinkStack)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(struct LinkStack));</span><br><span class="line">    <span class="keyword">if</span>(plstack != <span class="literal">NULL</span>)</span><br><span class="line">        plstack-&gt;top = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Out of space!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> plstack;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="创建空链接栈"><a href="#创建空链接栈" class="headerlink" title="创建空链接栈"></a>创建空链接栈</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">PLinkStack <span class="title">createEmptyStack_link</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PLinkStack plstack;</span><br><span class="line">    plstack = (PLinkStack)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct LinkStack));</span><br><span class="line">    <span class="keyword">if</span>(plstack != <span class="literal">NULL</span>)</span><br><span class="line">        plstack-&gt;top = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Out of space!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> plstack;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="判断栈是否为空"><a href="#判断栈是否为空" class="headerlink" title="判断栈是否为空"></a>判断栈是否为空</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isEmptyStack_link</span><span class="params">(PLinkStack plstack)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (plstack-&gt;top==<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="进栈运算-1"><a href="#进栈运算-1" class="headerlink" title="进栈运算"></a>进栈运算</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_link</span><span class="params">(PLinkStack plstack,DataType x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PNode p;</span><br><span class="line">    p = (PNode)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(struct Node));</span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Out of space!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        p-&gt;info=x;</span><br><span class="line">        p-&gt;link=plstack-&gt;top;</span><br><span class="line">        plstack-&gt;top=p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="出栈运算-1"><a href="#出栈运算-1" class="headerlink" title="出栈运算"></a>出栈运算</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop_link</span><span class="params">(PLinkStack plstack)</span>    </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PNode p;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">isEmptyStack_link</span>(plstack))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Empty stack pop!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        p=plstack-&gt;top;</span><br><span class="line">        plstack-&gt;top = plstack-&gt;top-&gt;link;</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="取栈顶元素-1"><a href="#取栈顶元素-1" class="headerlink" title="取栈顶元素"></a>取栈顶元素</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">DataType <span class="title">top_link</span><span class="params">(PLinkStack plstack)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pastack-&gt;top == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Stack is empty!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in"><span class="keyword">return</span></span> (plstack-&gt;top-&gt;info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="进栈运算-1"><a href="#进栈运算-1" class="headerlink" title="进栈运算"></a>进栈运算</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_link</span><span class="params">(PLinkStack plstack,DataType x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PNode p;</span><br><span class="line">    p = (PNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct Node));</span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Out of space!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        p-&gt;info=x;</span><br><span class="line">        p-&gt;link=plstack-&gt;top;</span><br><span class="line">        plstack-&gt;top=p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="出栈运算-1"><a href="#出栈运算-1" class="headerlink" title="出栈运算"></a>出栈运算</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop_link</span><span class="params">(PLinkStack plstack)</span>    </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PNode p;</span><br><span class="line">    <span class="keyword">if</span>(isEmptyStack_link(plstack))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Empty stack pop!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        p=plstack-&gt;top;</span><br><span class="line">        plstack-&gt;top = plstack-&gt;top-&gt;link;</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="取栈顶元素-1"><a href="#取栈顶元素-1" class="headerlink" title="取栈顶元素"></a>取栈顶元素</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">DataType <span class="title">top_link</span><span class="params">(PLinkStack plstack)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pastack-&gt;top == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Stack is empty!\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> (plstack-&gt;top-&gt;info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>learning</category>
@@ -2135,8 +2063,7 @@
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class Person		<span class="comment">//class指出这是一个类，Person是类标识</span></span><br><span class="line">&#123;</span><br><span class="line">    String head;		<span class="comment">//类的属性</span></span><br><span class="line">    String hands;</span><br><span class="line">    String feet;</span><br><span class="line">    <span class="function">Public <span class="keyword">void</span> <span class="title">move</span><span class="params">()</span>		<span class="comment">//类的方法</span></span></span><br><span class="line"><span class="function">    </span>&#123;...&#125;</span><br><span class="line">    <span class="function">Public <span class="keyword">void</span> <span class="title">ShowPerson</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
+<ol>
 <li><strong>类与对象的关系</strong>：</li>
 </ol>
 <blockquote>
@@ -2156,10 +2083,9 @@
 <p>用abstract修饰符修饰的类称为抽象类。<strong>抽象类刻画了研究对象的公有行为特征，并通过继承机制将这些特征传送给它的派生类</strong>。抽象类的作用是将许多有关的类组织在一起，提供一个公共的基类，为派生具体类奠定基础。<em>当一个类中出现一个或多个用abstract修饰符定义的方法时，必须将这个类定义为抽像类</em>。</p>
 </li>
 </ol>
-<p>可以同时使用两个修饰符来修饰一个类（修饰符之间用空格分开，写在class之前，修饰符的顺序对类的性质没有任何影响。<em><strong>类不能被修饰为abstract final</strong></em>[^1]。</p>
+<p>可以同时使用两个修饰符来修饰一个类（修饰符之间用空格分开，写在class之前，修饰符的顺序对类的性质没有任何影响。<strong><em>类不能被修饰为abstract final</em></strong><sup><a href="#fn_1" id="reffn_1">1</a></sup>。</p>
 <h4 id="声明类的一般格式"><a href="#声明类的一般格式" class="headerlink" title="声明类的一般格式"></a><strong>声明类的一般格式</strong></h4><p>类的声明部分用于描述类的名称以及类的其他属性（类的访问权限、与其他类的关系等）。声明类的语法如下：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">[public] [abstract | final] class &lt;className&gt; [extends superClass-Name] [implements interfaceNameList]&#123;...&#125;</span><br></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <ol>
 <li>“[]”代表可选项，“&lt;&gt;”表示必选项，“|”表示多选一。</li>
@@ -2176,10 +2102,9 @@
 </ol>
 </li>
 </ol>
-<h4 id="数据成员-2"><a href="#数据成员-2" class="headerlink" title="数据成员[^2]"></a><strong>数据成员</strong>[^2]</h4><p><strong>一、数据成员的声明</strong></p>
+<h4 id="数据成员2"><a href="#数据成员2" class="headerlink" title="数据成员2"></a><strong>数据成员</strong><sup><a href="#fn_2" id="reffn_2">2</a></sup></h4><p><strong>一、数据成员的声明</strong></p>
 <p>一般情况下，声明一个数据成员时必须给出这个数据成员的标识符并指明它所属的数据类型，声明数据成员的语法如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">public</span> | <span class="keyword">protected</span> | <span class="keyword">private</span>] [<span class="keyword">static</span>] [<span class="keyword">final</span>] [<span class="keyword">transient</span>] [<span class="keyword">volatile</span>] &lt;type&gt;&lt;variableName&gt;</span><br></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <ol>
 <li>public、protected、private：指定变量的访问权限。</li>
@@ -2191,18 +2116,16 @@
 <li>variableName：指定数据成员的名称。</li>
 </ol>
 <p><strong>二、静态初始化器</strong></p>
-<p>静态数据成员的初始化可以有用户在定义时进行，也可以由<u>静态初始化器</u>[^3]来完成。</p>
+<p>静态数据成员的初始化可以有用户在定义时进行，也可以由<u>静态初始化器</u><sup><a href="#fn_3" id="reffn_3">3</a></sup>来完成。</p>
 <p>eg:在类ClassPractice的定义中，用静态初始化器对静态数据成员进行初始化：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassPractice</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> nn;</span><br><span class="line">    <span class="keyword">static</span></span><br><span class="line">    &#123;n = <span class="number">20</span>;&#125;</span><br><span class="line">    ClassPractice()</span><br><span class="line">    &#123;nn = n++;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> java.applet.Applet;</span><br><span class="line"><span class="keyword">import</span> java.awt.Graphics;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassPractice_1</span> <span class="keyword">extends</span> <span class="title">Applet</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ClassPractice m = <span class="keyword">new</span> ClassPractice();</span><br><span class="line">        ClassPractice n = <span class="keyword">new</span> ClassPractice();</span><br><span class="line">        g.drawString(<span class="string">&quot;m=&quot;</span>+m.nn,<span class="number">20</span>,<span class="number">50</span>);</span><br><span class="line">        g.drawString(<span class="string">&quot;n=&quot;</span>+n.nn,<span class="number">20</span>,<span class="number">90</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200227215710.png" alt="程序运行结果"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassPractice</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> nn;</span><br><span class="line">    <span class="keyword">static</span></span><br><span class="line">    &#123;n = <span class="number">20</span>;&#125;</span><br><span class="line">    ClassPractice()</span><br><span class="line">    &#123;nn = n++;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> java.applet.Applet;</span><br><span class="line"><span class="keyword">import</span> java.awt.Graphics;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassPractice_1</span> <span class="keyword">extends</span> <span class="title">Applet</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ClassPractice m = <span class="keyword">new</span> ClassPractice();</span><br><span class="line">        ClassPractice n = <span class="keyword">new</span> ClassPractice();</span><br><span class="line">        g.drawString(<span class="string">"m="</span>+m.nn,<span class="number">20</span>,<span class="number">50</span>);</span><br><span class="line">        g.drawString(<span class="string">"n="</span>+n.nn,<span class="number">20</span>,<span class="number">90</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200227215710.png" alt="程序运行结果"></p>
 <p><strong>三、用final修饰的最终数据成员</strong></p>
 <p>如果一个类的数据成员用final修饰符修饰，则这个数据成员就被限定为最终数据成员。最终数据成员可以在声明时进行初始化，也可以通过构造方法赋值，但不能在程序的其他部分赋值，他的值在程序的整个执行过程中时不能改变的。</p>
 <h4 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h4><p><strong>成员方法描述对象所具有的功能或操作，反映对象的行为，是具有某种相对独立功能的程序模块</strong>。<em>一个类或对象可以有多个成员方法，对象通过执行它的成员方法对传来的消息做出响应，完成特定的功能</em>。（按来源可分为类库成员方法和用户自定义的成员方法）</p>
 <p><strong>一、声明成员方法的格式</strong></p>
 <p>类的成员方法由方法声明和方法体两部分组成，声明成员方法的语法如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[accessLevel] [<span class="keyword">static</span>] [<span class="keyword">final</span> | <span class="keyword">abstract</span>] [<span class="keyword">native</span>] [<span class="keyword">synchronized</span>] &lt;return_type&gt;&lt;name&gt; ([&lt;argument_list&gt;]) [<span class="keyword">throws</span> &lt;exception_list&gt;]&#123;</span><br><span class="line">    [block]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <ol>
 <li><p>accessLevel：确定方法的被访问权限，可选值为public、protected和private</p>
@@ -2215,7 +2138,7 @@
 <p>（5）static方法是不能被覆盖，即这个类的子类不能由相同名及相同参数的方法。</p>
 <p>（5）main方法是静态方法。Java的每个Application程序中，都必须有且只能有一个main方方法，它是Application程序运行的入口。</p>
 </li>
-<li><p>final：指明该成员方法为最终方法不能被重写[^4]。</p>
+<li><p>final：指明该成员方法为最终方法不能被重写<sup><a href="#fn_4" id="reffn_4">4</a></sup>。</p>
 </li>
 <li><p>abstract：指名该方法是抽象成员方法。</p>
 </li>
@@ -2234,24 +2157,23 @@
 <li><p>block：方法体，描述该方法所要完成的功能，是方法的实现部分。</p>
 </li>
 <li><p>```Java<br>public class ClassPractice2{</p>
-<pre><code>public static void main(String[] args)&#123;
+<pre><code>public static void main(String[] args){
     int a=2,b=3;
     int f=add(a,b);
     System.out.println(&quot;f=&quot;+f);
-&#125;
+}
 static int add(int x,int y)
-&#123;
+{
     int z,d;
     z=x+y;
     return z;
-</code></pre>
-<p>}<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">**二、成员方法的引用**</span><br><span class="line"></span><br><span class="line">成员方法引用的四种方式：</span><br><span class="line"></span><br><span class="line">1. 方法语句。成员方法作为一个独立的语句被引用。</span><br><span class="line">2. 方法表达式。成员方法作为表达式中的一部分，通过表达式被引用。</span><br><span class="line">3. 方法作为参数。一个成员方法作为另一个成员方法的参数别引用。</span><br><span class="line">4. 通过对象来引用。</span><br><span class="line"></span><br><span class="line">#### Java类库</span><br><span class="line"></span><br><span class="line">Java的类库是系统提供的已实现的标准类的集合，是Java编程的API，在Java中，系统定义好的类根据实现功能的不同，可以划分成不同的集合，每个集合称为一个包，所有包合称为类库。</span><br><span class="line"></span><br><span class="line">对于类库中系统定义好的类，有三种使用方式：一是直接使用系统类，第二种方式是继承系统类，在用户程序里创建系统类的子类，例如每个JavaApplet的朱磊都是java.applet包中的Applet类的子类；第三种方式是创建系统类的对象。</span><br><span class="line"></span><br><span class="line">Java程序设计中常用的包：</span><br><span class="line"></span><br><span class="line">1. java.lang包</span><br><span class="line"></span><br><span class="line">   是Java的核心类库，包含了运行Java程序必不可少的系统类，每个Java程序运行时，系统都会自动地引入java.lang包。</span><br><span class="line"></span><br><span class="line">2. java.io包</span><br><span class="line"></span><br><span class="line">   包中包含了实现Java程序与操作系统、用户界面以及其他Java程序之间进行数据交换所使用的类。（凡是需要完成与操作系统有关的较低层的输入&#x2F;输出操作的Java程序都要用到java.io包）</span><br><span class="line"></span><br><span class="line">3. java.awt包</span><br><span class="line"></span><br><span class="line">   是java语言用来构建图形用户界面的类库，它包含许多界面元素和资源，主要在三个方面提供界面支持：</span><br><span class="line"></span><br><span class="line">   （1）低级绘图操作，如Graphics类等。</span><br><span class="line"></span><br><span class="line">   （2）图形界面组件和布局管理，如Checkbox类、Container类、Layout-Manager类等。</span><br><span class="line"></span><br><span class="line">   （3）界面用户交互控制和时间响应，如Event类。</span><br><span class="line"></span><br><span class="line">4. java.awt.event包</span><br><span class="line"></span><br><span class="line">   是JDK1.0版本中原有的Event类的一个扩充，它使得程序可以用不同方式来处理不同类型的事件，并使每个图形界面的元素本身可以拥有处理它上面事件的能力。</span><br><span class="line"></span><br><span class="line">5. java.awt.image包</span><br><span class="line"></span><br><span class="line">   是用来处理和操纵来自网上图片的Java工具类库。</span><br><span class="line"></span><br><span class="line">6. java.applet包</span><br><span class="line"></span><br><span class="line">   是用来实现运行于Internet浏览器中的JavaApplet工具类库，它仅包含少量几个接口和一个非常有用的类java.applet.Applet.</span><br><span class="line"></span><br><span class="line">7. java.net包</span><br><span class="line"></span><br><span class="line">   是Java语言用来实现网络功能的类库，目前已经实现的Java网络功能主要有：底层的网络通信类；编写用户自己的Telnet、FTP、邮件服务等实现网上通信的类；用于访问Internet上资源和进行CGI网关调用的类等。</span><br><span class="line"></span><br><span class="line">8. java.rmi包、java.rmi.registry包和java.rmi.server包</span><br><span class="line"></span><br><span class="line">   这三个包用来实现RMI(Remote Method Invocation,远程方法调用)功能，利用RMI功能，用户程序可以在远程计算机（服务器）上创建对象，并在本地计算机（客户机）上使用这个对象。</span><br><span class="line"></span><br><span class="line">9. java.util包</span><br><span class="line"></span><br><span class="line">   包括了Java语言中一些低级的使用工具，如处理事件的Date类，处理变长数组的Vector类，实现栈的Socket类和实现哈希表的HashTable类等。</span><br><span class="line"></span><br><span class="line">10. java.sql包</span><br><span class="line"></span><br><span class="line">    是实现JDBC的类库，利用这个包可以使Java程序具有访问不同种类数据库的功能。（只要安装了合适的驱动程序，同一个Java程序不许修改就可以存取、修改这些不同数据库中的数据。</span><br><span class="line"></span><br><span class="line">11. java.security包、java.security.acl包和java.security.interface包</span><br><span class="line"></span><br><span class="line">    这三个包提供了更完善的Java程序安全性控制和管理，利用他们可以对Java程序加密，也可以把特定的JavaApplet标记为“可信赖的”，是它能够具有于JavaApplication相近的安全权限。</span><br><span class="line"></span><br><span class="line">12. java.awt.peer包</span><br><span class="line"></span><br><span class="line">    包是实现Java语言跨平台特性的手段之一，它的作用是将不同的平台包裹、隐藏起来，是这些平台在用户程序面前呈现基本基本相同的面貌。</span><br><span class="line"></span><br><span class="line">13. java.util.zip </span><br><span class="line"></span><br><span class="line">    用来实现文件压缩功能。</span><br><span class="line"></span><br><span class="line">14. java.awt.datatransfer包</span><br><span class="line"></span><br><span class="line">    提供处理数串数的工具类，包括剪贴板、字符串发送器等。</span><br><span class="line"></span><br><span class="line">15. java.lang.reflect包</span><br><span class="line"></span><br><span class="line">    提供了用于反射对象的工具，反射允许程序监视一个正在运行的对象并获得它的构造函数、方法和属性。</span><br><span class="line"></span><br><span class="line">16. java.corba包和java.corba.orb包</span><br><span class="line"></span><br><span class="line">     这两个包将CORBA嵌入到java环境中，使得Java程序可以存取、调用CORBA对象，并于CORBA对象共同工作，这样，Java程序就可以方便、动态地使用已经存在的由Java或其他面向对象开发的部件，简化软件的开发。</span><br><span class="line"></span><br><span class="line">### 对象的创建</span><br><span class="line"></span><br><span class="line">创建对象通常包括引用变量、创建对象和初始化三步，在Java中，对象是通过类创建的，对象是类的动态实例。一个对象在程序运行期间的生命周期包括创建、使用和销毁三个阶段。</span><br><span class="line"></span><br><span class="line">#### 声明对象</span><br><span class="line"></span><br><span class="line">​	在Java中，创建一个对象前，要先声明该对象，语法如下:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;Java</span><br><span class="line">&lt;className&gt;&lt;objectName&gt;</span><br></pre></td></tr></table></figure></li>
+</code></pre><p>}<br>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">**二、成员方法的引用**</span><br><span class="line"></span><br><span class="line">成员方法引用的四种方式：</span><br><span class="line"></span><br><span class="line">1. 方法语句。成员方法作为一个独立的语句被引用。</span><br><span class="line">2. 方法表达式。成员方法作为表达式中的一部分，通过表达式被引用。</span><br><span class="line">3. 方法作为参数。一个成员方法作为另一个成员方法的参数别引用。</span><br><span class="line">4. 通过对象来引用。</span><br><span class="line"></span><br><span class="line">#### Java类库</span><br><span class="line"></span><br><span class="line">Java的类库是系统提供的已实现的标准类的集合，是Java编程的API，在Java中，系统定义好的类根据实现功能的不同，可以划分成不同的集合，每个集合称为一个包，所有包合称为类库。</span><br><span class="line"></span><br><span class="line">对于类库中系统定义好的类，有三种使用方式：一是直接使用系统类，第二种方式是继承系统类，在用户程序里创建系统类的子类，例如每个JavaApplet的朱磊都是java.applet包中的Applet类的子类；第三种方式是创建系统类的对象。</span><br><span class="line"></span><br><span class="line">Java程序设计中常用的包：</span><br><span class="line"></span><br><span class="line">1. java.lang包</span><br><span class="line"></span><br><span class="line">   是Java的核心类库，包含了运行Java程序必不可少的系统类，每个Java程序运行时，系统都会自动地引入java.lang包。</span><br><span class="line"></span><br><span class="line">2. java.io包</span><br><span class="line"></span><br><span class="line">   包中包含了实现Java程序与操作系统、用户界面以及其他Java程序之间进行数据交换所使用的类。（凡是需要完成与操作系统有关的较低层的输入&#x2F;输出操作的Java程序都要用到java.io包）</span><br><span class="line"></span><br><span class="line">3. java.awt包</span><br><span class="line"></span><br><span class="line">   是java语言用来构建图形用户界面的类库，它包含许多界面元素和资源，主要在三个方面提供界面支持：</span><br><span class="line"></span><br><span class="line">   （1）低级绘图操作，如Graphics类等。</span><br><span class="line"></span><br><span class="line">   （2）图形界面组件和布局管理，如Checkbox类、Container类、Layout-Manager类等。</span><br><span class="line"></span><br><span class="line">   （3）界面用户交互控制和时间响应，如Event类。</span><br><span class="line"></span><br><span class="line">4. java.awt.event包</span><br><span class="line"></span><br><span class="line">   是JDK1.0版本中原有的Event类的一个扩充，它使得程序可以用不同方式来处理不同类型的事件，并使每个图形界面的元素本身可以拥有处理它上面事件的能力。</span><br><span class="line"></span><br><span class="line">5. java.awt.image包</span><br><span class="line"></span><br><span class="line">   是用来处理和操纵来自网上图片的Java工具类库。</span><br><span class="line"></span><br><span class="line">6. java.applet包</span><br><span class="line"></span><br><span class="line">   是用来实现运行于Internet浏览器中的JavaApplet工具类库，它仅包含少量几个接口和一个非常有用的类java.applet.Applet.</span><br><span class="line"></span><br><span class="line">7. java.net包</span><br><span class="line"></span><br><span class="line">   是Java语言用来实现网络功能的类库，目前已经实现的Java网络功能主要有：底层的网络通信类；编写用户自己的Telnet、FTP、邮件服务等实现网上通信的类；用于访问Internet上资源和进行CGI网关调用的类等。</span><br><span class="line"></span><br><span class="line">8. java.rmi包、java.rmi.registry包和java.rmi.server包</span><br><span class="line"></span><br><span class="line">   这三个包用来实现RMI(Remote Method Invocation,远程方法调用)功能，利用RMI功能，用户程序可以在远程计算机（服务器）上创建对象，并在本地计算机（客户机）上使用这个对象。</span><br><span class="line"></span><br><span class="line">9. java.util包</span><br><span class="line"></span><br><span class="line">   包括了Java语言中一些低级的使用工具，如处理事件的Date类，处理变长数组的Vector类，实现栈的Socket类和实现哈希表的HashTable类等。</span><br><span class="line"></span><br><span class="line">10. java.sql包</span><br><span class="line"></span><br><span class="line">    是实现JDBC的类库，利用这个包可以使Java程序具有访问不同种类数据库的功能。（只要安装了合适的驱动程序，同一个Java程序不许修改就可以存取、修改这些不同数据库中的数据。</span><br><span class="line"></span><br><span class="line">11. java.security包、java.security.acl包和java.security.interface包</span><br><span class="line"></span><br><span class="line">    这三个包提供了更完善的Java程序安全性控制和管理，利用他们可以对Java程序加密，也可以把特定的JavaApplet标记为“可信赖的”，是它能够具有于JavaApplication相近的安全权限。</span><br><span class="line"></span><br><span class="line">12. java.awt.peer包</span><br><span class="line"></span><br><span class="line">    包是实现Java语言跨平台特性的手段之一，它的作用是将不同的平台包裹、隐藏起来，是这些平台在用户程序面前呈现基本基本相同的面貌。</span><br><span class="line"></span><br><span class="line">13. java.util.zip </span><br><span class="line"></span><br><span class="line">    用来实现文件压缩功能。</span><br><span class="line"></span><br><span class="line">14. java.awt.datatransfer包</span><br><span class="line"></span><br><span class="line">    提供处理数串数的工具类，包括剪贴板、字符串发送器等。</span><br><span class="line"></span><br><span class="line">15. java.lang.reflect包</span><br><span class="line"></span><br><span class="line">    提供了用于反射对象的工具，反射允许程序监视一个正在运行的对象并获得它的构造函数、方法和属性。</span><br><span class="line"></span><br><span class="line">16. java.corba包和java.corba.orb包</span><br><span class="line"></span><br><span class="line">     这两个包将CORBA嵌入到java环境中，使得Java程序可以存取、调用CORBA对象，并于CORBA对象共同工作，这样，Java程序就可以方便、动态地使用已经存在的由Java或其他面向对象开发的部件，简化软件的开发。</span><br><span class="line"></span><br><span class="line">### 对象的创建</span><br><span class="line"></span><br><span class="line">创建对象通常包括引用变量、创建对象和初始化三步，在Java中，对象是通过类创建的，对象是类的动态实例。一个对象在程序运行期间的生命周期包括创建、使用和销毁三个阶段。</span><br><span class="line"></span><br><span class="line">#### 声明对象</span><br><span class="line"></span><br><span class="line">​	在Java中，创建一个对象前，要先声明该对象，语法如下:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;Java</span><br><span class="line">&lt;className&gt;&lt;objectName&gt;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 <p>其中：className指定一个已经定义的类，objectName指定对象名称（对象名必须是合法的Java标识符）。<strong>在声明对象是，只是在内存中为其分配了一个引用空间，并置初始值为null，表示不指向任何存储空间</strong>。</p>
 <h4 id="建立对象"><a href="#建立对象" class="headerlink" title="建立对象"></a>建立对象</h4><p>在声明对象时，只确定了对象的名称和它所属的类，并没有为对象分配存储空间，此时对象还不是类的实例。只有通过建立对象，才为对象分配内存，使该对象称为类的实例，这个过程称为对象的实例化，使用关键字new来完成，它的语法如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;objectName&gt;=<span class="keyword">new</span> &lt;someClass&gt; ([argument_list])</span><br></pre></td></tr></table></figure>
-
 <p>其中：bojectName指定已经声明的对象名；someClass指定需要调用的构造方法名，即类名；argument_list指定构造方法的入口参数。</p>
 <h4 id="初始化对象"><a href="#初始化对象" class="headerlink" title="初始化对象"></a>初始化对象</h4><p>初始化对象是指由一个类生成对象时，为这个对象去欸的那个初始状态的过程，初始化对象由三种实现方法：</p>
 <p>一、用默认初始化原则赋初值</p>
@@ -2309,7 +2231,7 @@ static int add(int x,int y)
 </table>
 
 <p>二、用赋值语句赋处置。</p>
-<p>三、由Java提供的<u>构造方法</u>来完成它[^5]。每当使用new关键字创建一个对象，为新建对象开辟了内存空间之后，Java系统将自动调用构造方法初始化这个新建对象。，构造方法是类的一种特殊方法，它的特殊性体现在以下几个方面:</p>
+<p>三、由Java提供的<u>构造方法</u>来完成它<sup><a href="#fn_5" id="reffn_5">5</a></sup>。每当使用new关键字创建一个对象，为新建对象开辟了内存空间之后，Java系统将自动调用构造方法初始化这个新建对象。，构造方法是类的一种特殊方法，它的特殊性体现在以下几个方面:</p>
 <ol>
 <li>构造方法的方法名与类名相同；</li>
 <li>构造方法是类的方法，它能够简化对象数据成员的初始化操作；</li>
@@ -2322,7 +2244,6 @@ static int add(int x,int y)
 <h4 id="使用对象"><a href="#使用对象" class="headerlink" title="使用对象"></a>使用对象</h4><p>当一个对象被创建之后，这个对象就拥有了自己的数据成员和成员方法，可以通过与之关联的引用变量名来引用对象的成员。引用方法如下：<code>objectReference.variableName</code>;</p>
 <p>其中：objdctReference指定调用成员变量的对象名称（引用）；variableName指定需要调用的数据成员的名称。对象成员方法的引用方式如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">objectReference.methodName([argument_list])</span><br></pre></td></tr></table></figure>
-
 <p>其中objectReference指定调用成员变量的对象名称，methodName指定需要调用的成员方法的名称，argument_list指定需要调用的成员方法的参数列表。</p>
 <h4 id="对象的消除"><a href="#对象的消除" class="headerlink" title="对象的消除"></a>对象的消除</h4><p>在Java中程序员创建的对象可以不必删除，因为Java系统提供的垃圾回收机制可以自动判断对象是否还在使用，并能够自动销毁不再使用的对象，回收对象所占用的资源。</p>
 <p>Object类提供了finalize()方法，自定义的Java类可以覆盖finalize()方法，并在这个方法中进行释放对象所占资源的操作。当垃圾回收器要释放无用对象的存储空间时，将先调用该对象的finalize()方法。</p>
@@ -2337,54 +2258,71 @@ static int add(int x,int y)
     <caption><b>Java类成员的四种访问控制权限及其可见性</b></caption>
 </table>
 
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"></th>
-<th align="center">同一个类</th>
-<th align="center">同一个包</th>
-<th align="center">不同包的子类</th>
-<th align="center">任何场合</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">同一个类</th>
+<th style="text-align:center">同一个包</th>
+<th style="text-align:center">不同包的子类</th>
+<th style="text-align:center">任何场合</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">private</td>
-<td align="center">√</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
+<tbody>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">protected</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center"></td>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">public</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center">√</td>
+<td style="text-align:center">public</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
 </tr>
 <tr>
-<td align="center">default</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center">default</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="package和import"><a href="#package和import" class="headerlink" title="package和import"></a>package和import</h4><p>一、package</p>
-<p>包的创建就是将原程序文件中的接口与类纳入指定的包中，创建包可以通过类和接口的源文件使用package语句实现。声明package语句的语法如下：<code>package pk1[.pk2]…</code>，其中符号“.”代表目录分隔符，pk<del>n</del>为包。</p>
+<p>包的创建就是将原程序文件中的接口与类纳入指定的包中，创建包可以通过类和接口的源文件使用package语句实现。声明package语句的语法如下：<code>package pk1[.pk2]…</code>，其中符号“.”代表目录分隔符，pk~n~为包。</p>
 <p>创建一个包就是在当前文件夹下床架一个子文件夹，粗放这个包中包含的所有类的.class文件。Java编译器把包对应于文件系统的目录进行管理，因此包可以嵌套使用。</p>
 <p>二、import</p>
 <p>将类组织成包的目的是为了更好地利用包中的类，通常，一个类只能引用与它在同一个包中的类，如果要使用其他包中的public类，可以通过两种方式实现：</p>
 <p>（1）使用长名导入包中的类，这种方法是在想要导入的每个类名前面加上完整的包名。</p>
 <p>（2）使用import语句导入包中的类，语句格式为：</p>
 <p><code>import pkg1[.pkg2]&lt;类名|*&gt;</code>其中<code>pkg1[.pkg2]</code>表示包的层次，与package语句相同，它对应于文件的目录，类名指明所要导入的类，“*”可用来导入多个类。</p>
-<p>[^1]: abstract类自身没有对象，需要派生子类后再创建对象，而final类不能派生子类，所以不存在用abstract final两个修饰符<br>[^2]: 类中用来表述研究对象静态特征的变量称为数据成员，也称为成员变量或变量<br>[^3]: 静态初始化器是由关键字static引导的一对花括号括起来的语法快，其作用是在它所属的类加载到内存时，由系统调用执行，初始化类的静态数据成员。<br>[^4]: 如果类某个方法被final修饰符所限定，则该类的子类就不能覆盖父类的方法，即不能重新定义与此方法同名的自己的方法，而仅能使用从父类继承来的方法。<br>[^5]: 构造方法是一个类的方法中方法名与类名相同的类方法。</p>
+<blockquote id="fn_1">
+<sup>1</sup>. abstract类自身没有对象，需要派生子类后再创建对象，而final类不能派生子类，所以不存在用abstract final两个修饰符<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. 类中用来表述研究对象静态特征的变量称为数据成员，也称为成员变量或变量<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. 静态初始化器是由关键字static引导的一对花括号括起来的语法快，其作用是在它所属的类加载到内存时，由系统调用执行，初始化类的静态数据成员。<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>. 如果类某个方法被final修饰符所限定，则该类的子类就不能覆盖父类的方法，即不能重新定义与此方法同名的自己的方法，而仅能使用从父类继承来的方法。<a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_5">
+<sup>5</sup>. 构造方法是一个类的方法中方法名与类名相同的类方法。<a href="#reffn_5" title="Jump back to footnote [5] in the text."> &#8617;</a>
+</blockquote>
 ]]></content>
       <categories>
         <category>learning</category>
@@ -2397,56 +2335,51 @@ static int add(int x,int y)
     <title>二叉树</title>
     <url>/2021/03/26/%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
     <content><![CDATA[<h2 id="二叉树学习笔记"><a href="#二叉树学习笔记" class="headerlink" title="二叉树学习笔记"></a>二叉树学习笔记</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>二叉树可以定义为节点的有限集合，这个集合或者为空集，或者由一个根及两棵不相交的分别称作这个根的左子树和右子树的二叉树组成。（<strong>二叉树的定义是一个递归定义</strong>），二叉树可以是空集合，此时的二叉树称为空二叉树；二叉树也可可以是只有一个节点的集合，这个节点只能是根；它的左子树和右子树均是空二叉树。（图片源自张乃孝$PPT$）</p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200407213059.png"/>
-
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200407213221.png"/>
-
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200407213059.png"/></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200407213221.png"/></p>
 <ul>
 <li><strong>满二叉树</strong>：如果一棵二叉树的任何节点或者是树叶，或有两棵非空子树，则此二叉树称作满二叉树。</li>
 <li><strong>完全二叉树</strong>：如果一棵二叉树至多只有最下面的两层节点读书可以小于2，其余各层节点度数^节点分支数^都必须为2，并且最下面一层的节点都集中在该层最左边的若干位置上，则此二叉树称为完全二叉树。（<em>完全二叉树不一定是满二叉树</em>）</li>
 </ul>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200407215308.png"/>
-
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200407215308.png"/></p>
 <ul>
 <li><strong>扩容二叉树</strong>：把原二叉树的节点都变为度数为2的分支节点，也就是说，如果原节点的度数为2，则不变；度数为1，则增加一个分支；度数为0，则增加两个分支。新增加的节点都用小方框表示，称为<strong>外部节点</strong>，树中原有的节点称为<strong>内部节点</strong>。特别地，对空二叉树扩容得到的扩容二叉树只有一个外部节点。</li>
 </ul>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200407220724.png"/>
-
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200407220724.png"/></p>
 <ul>
 <li><strong>外部路径长度E</strong>:在扩容的二叉树中从根到每个外部节点的路径长度之和。<strong>内部路径长度I</strong>：在扩容的二叉树中从根到每个内部节点的路径长度之和。</li>
 </ul>
 <h3 id="主要性质"><a href="#主要性质" class="headerlink" title="主要性质"></a>主要性质</h3><p>1、在二叉树的$i$层上至多有$2^i$个节点（$i\ge 0$）</p>
 <p>2、高度为$k$的二叉树中最多有$2^{k+1}-1$个节点（$k \ge 0$）</p>
-<p>3、对于任何一棵二叉树，如果叶节点个数为$n_{0}$，度<a href="%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%A6%E6%98%AF%E6%8C%87%E6%A0%91%E4%B8%AD%E6%89%80%E4%BB%A5%E7%BB%93%E7%82%B9%E7%9A%84%E5%BA%A6%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC,%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%A6%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E2%E3%80%82">^1</a>为2的节点个数为$n_{2}$，则有：$n_{0}=n_{2}+1$。（$n_{0}+n_{1}+n_{2}=n_{1}+2*n_{2}+1$）</p>
+<p>3、对于任何一棵二叉树，如果叶节点个数为$n<em>{0}$，度<sup><a href="#fn_1" id="reffn_1">1</a></sup>为2的节点个数为$n</em>{2}$，则有：$n<em>{0}=n</em>{2}+1$。（$n<em>{0}+n</em>{1}+n<em>{2}=n</em>{1}+2*n_{2}+1$）</p>
 <p>4、具有$n$个节点的完全二叉树的深度$k$为$[log_{2}n]$。</p>
 <p>5、对于具有$n$个节点的完全二叉树，如果按照从上（根节点）到下（叶节点）和从左到右的顺序对二叉树中的所有节点从0开始到$n-1$进行编号，则对于任意的下表为$i$的节点，有：</p>
 <p>​    (1).如果$i=0$，则它是根节点，它没有父节点；如果$i\gt 0$，则它的父节点的下表为$[(i-1)/2]$；</p>
 <p>​    (2).如果$2i+1 \le n-1$，则下标为$i$的节点的下标为$2i+1$；否则，下标为$i$的节点没有左子节点；</p>
 <p>​    (3).如果$2i+2 \le n-1$，则下标为$i$的节点的右子节点的下标为$2i+2$；否则，下标$i$的节点没有右子节点。</p>
-<p>6、在满二叉树中，叶节点的个数比分支节点个数多1。（$n_{0}=n_{2}+1$）</p>
+<p>6、在满二叉树中，叶节点的个数比分支节点个数多1。（$n<em>{0}=n</em>{2}+1$）</p>
 <p>7、在扩充二叉树中，外部节点个数比内部节点个数多1。</p>
 <p>8、对任意扩充二叉树，外部路径长度$E$和内部路径长度$I$之间满足关系：$E=I+2n$，其中$n$是内部节点个数。</p>
-<h3 id="抽象数据结构"><a href="#抽象数据结构" class="headerlink" title="抽象数据结构"></a>抽象数据结构</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">ADT BinTree is</span><br><span class="line">    operations</span><br><span class="line">    <span class="function">BinTree <span class="title">createEmptyBinTree</span><span class="params">(<span class="keyword">void</span>)</span><span class="comment">/*创建一棵空的二叉树*/</span></span></span><br><span class="line"><span class="function">    BinTree <span class="title">consBinTree</span><span class="params">(BinTreeNode root,BinTree left,BinTree right)</span><span class="comment">/*返回一棵二叉树，其根节点是root，左右二叉树分别为left和right。*/</span></span></span><br><span class="line"><span class="function">    <span class="keyword">int</span> <span class="title">isNull</span><span class="params">(BinTree t)</span><span class="comment">/*判断二叉树t是否为空*/</span></span></span><br><span class="line"><span class="function">    BinTreeNode <span class="title">root</span><span class="params">(BinTree t)</span><span class="comment">/*返回二叉树t的根节点。若为空二叉树，则返回一特殊值*/</span></span></span><br><span class="line"><span class="function">    BinTreeNode <span class="title">parent</span><span class="params">(BinTree t,BinTreeNode p)</span></span></span><br><span class="line"><span class="function">    <span class="comment">/*返回节点p的父节点，当指定的节点为根时，返回一个特殊值*/</span></span></span><br><span class="line"><span class="function">    BinTree <span class="title">leftChild</span><span class="params">(BinTree t,BinTreeNode p)</span></span></span><br><span class="line"><span class="function">    <span class="comment">/*返回p节点的左子树，当指定节点没有左子树时，返回一个特殊值*/</span></span></span><br><span class="line"><span class="function">    BinTree <span class="title">rightChild</span><span class="params">(BinTree t,BinTreeNode p)</span></span></span><br><span class="line"><span class="function">    <span class="comment">/*返回p节点的右子树，当指定节点没有右子树时，返回一个特殊值*/</span></span></span><br><span class="line"><span class="function">end ADT BinTree    </span></span><br></pre></td></tr></table></figure>
-
+<h3 id="抽象数据结构"><a href="#抽象数据结构" class="headerlink" title="抽象数据结构"></a>抽象数据结构</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">ADT BinTree is</span><br><span class="line">    operations</span><br><span class="line">    <span class="function">BinTree <span class="title">createEmptyBinTree</span><span class="params">(<span class="keyword">void</span>)</span><span class="comment">/*创建一棵空的二叉树*/</span></span></span><br><span class="line"><span class="function">    BinTree <span class="title">consBinTree</span><span class="params">(BinTreeNode root,BinTree left,BinTree right)</span><span class="comment">/*返回一棵二叉树，其根节点是root，左右二叉树分别为left和right。*/</span></span></span><br><span class="line"><span class="function">    <span class="keyword">int</span> <span class="title">isNull</span><span class="params">(BinTree t)</span><span class="comment">/*判断二叉树t是否为空*/</span></span></span><br><span class="line"><span class="function">    BinTreeNode <span class="title">root</span><span class="params">(BinTree t)</span><span class="comment">/*返回二叉树t的根节点。若为空二叉树，则返回一特殊值*/</span></span></span><br><span class="line"><span class="function">    BinTreeNode <span class="title">parent</span><span class="params">(BinTree t,BinTreeNode p)</span></span></span><br><span class="line"><span class="function">    <span class="comment">/*返回节点p的父节点，当指定的节点为根时，返回一个特殊值*/</span></span></span><br><span class="line"><span class="function">    BinTree <span class="title">leftChild</span><span class="params">(BinTree t,BinTreeNode p)</span></span></span><br><span class="line"><span class="function">    <span class="comment">/*返回p节点的左子树，当指定节点没有左子树时，返回一个特殊值*/</span></span></span><br><span class="line"><span class="function">    BinTree <span class="title">rightChild</span><span class="params">(BinTree t,BinTreeNode p)</span></span></span><br><span class="line"><span class="function">    <span class="comment">/*返回p节点的右子树，当指定节点没有右子树时，返回一个特殊值*/</span></span></span><br><span class="line"><span class="function"><span class="built_in">end</span> ADT BinTree</span></span><br></pre></td></tr></table></figure>
 <h3 id="二叉树的周游"><a href="#二叉树的周游" class="headerlink" title="二叉树的周游"></a>二叉树的周游</h3><p><strong>二叉树的周游</strong>是指按某种方式访问二叉树中的所有节点，使每个节点被访问一次且只能被访问一次。</p>
 <h4 id="深度优先周游"><a href="#深度优先周游" class="headerlink" title="深度优先周游"></a>深度优先周游</h4><p>若以符号$D$、$L$、$R$分别表示根节点、左子树、右子树，则二叉树的周游共有六种方式：$DLR$、$LDR$、$LRD$、$DRL$、$RDL$和$RLD$。如果限定先左后右，则只能采用前三种周游方式：</p>
 <ul>
-<li>$DLR$ &lt;—-&gt; 先根次序（简称先序或前序）周游</li>
+<li>$DLR$ &lt;——&gt; 先根次序（简称先序或前序）周游</li>
 </ul>
 <p>若二叉树不空，则先访问根；然后按先根次序周游左子树；最后按先根次序周游右子树。$eg$.下图二叉树先根次序周游得到的节点序列为：A、B、D、C、E、G、F、H、I。  </p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200407232739.png"/>
-
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200407232739.png"/></p>
 <ul>
-<li>$LRD$ &lt;—-&gt; 后根次序（简称后序）周游</li>
+<li>$LRD$ &lt;——&gt; 后根次序（简称后序）周游</li>
 </ul>
 <p>若二叉树不空，则先按后根次序周游左子树；然后按后根次序周游右子树；最后访问根。上图所示的二叉树，后根次序周游得到的节点序列为：D、B、G、E、H、I、F、C、A。</p>
 <ul>
-<li>$LDR$ &lt;—-&gt; 中根次序（简称中序或对称序）周游</li>
+<li>$LDR$ &lt;——&gt; 中根次序（简称中序或对称序）周游</li>
 </ul>
 <p>若二叉树不空，则先按对称序周游左子树，然后访问根；最后按对称序周游右子树。前图所示的二叉树，按对称序周游一棵二叉树得到的节点序列为：D、B、A、E、G、C、H、F、I。</p>
 <p>对于给定的二叉树，可以唯一确定它的先根序列、后根序列和对称序列。但是反过来，给定一个二叉树的任意一种周游的序列，无法唯一确定这个二叉树。如果已知一个二叉树的对称序列，又知道另外一种周游序列就可以唯一确定这个二叉树。</p>
 <h4 id="广度优先周游"><a href="#广度优先周游" class="headerlink" title="广度优先周游"></a>广度优先周游</h4><p>若二叉树的高度为$h$，则从0到$h$逐层如下处理：从左到右逐个访问存在的节点。广度优先周游一棵二叉树所得到的节点序列，叫做这棵二叉树的<strong>层次序列</strong>。前图二叉树广度优先周游所得到的节点层次序列为：A、B、C、D、E、F、G、H、I。</p>
 <p>$eg$.对下图二叉树进行先根、后根和中根周游所得到的线性序列分别为：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2454,27 +2387,27 @@ static int add(int x,int y)
 <th>结果</th>
 </tr>
 </thead>
-<tbody><tr>
-<td><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200407234932.png"/></td>
-<td><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200407235600.png"/></td>
+<tbody>
+<tr>
+<td><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200407234932.png"/></td>
+<td><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200407235600.png"/></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>上述结果分别被称为表达式的前缀表达式、后缀表达式和中缀表达式。</p>
 <h4 id="周游的抽象算法"><a href="#周游的抽象算法" class="headerlink" title="周游的抽象算法"></a>周游的抽象算法</h4><h5 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a>递归算法</h5><ul>
 <li>先根次序周游</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(BinTree t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    visit(root(t));</span><br><span class="line">    preOrder(leftChild(t));</span><br><span class="line">    preOrder(rightChild(t));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>对称序周游</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(BinTree t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    inOrder(leftChild(t));</span><br><span class="line">    visit(root(t));</span><br><span class="line">    inOrder(rightChild(t));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>后根次序周游</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(BinTree t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    postOrder(leftChild(t));</span><br><span class="line">    postOrder(rightChild(t));</span><br><span class="line">    visit(root(t));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h5 id="非递归算法"><a href="#非递归算法" class="headerlink" title="非递归算法"></a>非递归算法</h5><ul>
 <li>先根次序周游</li>
 </ul>
@@ -2483,7 +2416,6 @@ static int add(int x,int y)
 </ol>
 <p>算法时间代价：假设栈的主要操作只要常量时间，算法中每个二叉树恰好进栈、出栈各一次，所以它的时间代价为$O(n)$，其中$n$为二叉树中子二叉树（也是节点）的个数。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nPreOrder</span><span class="params">(BinTree t)</span></span>&#123;</span><br><span class="line">    Stack s;<span class="comment">/*栈元素的类型是BinTree*/</span></span><br><span class="line">    BinTreeNode *c;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    s = createEmptyStack();</span><br><span class="line">    push(s,t);</span><br><span class="line">    <span class="keyword">while</span>(!isEmptyStack(s)&#123;<span class="comment">/*每当栈不为空*/</span></span><br><span class="line">        c = top(s);pop(s);	<span class="comment">/*取栈顶，出栈*/</span></span><br><span class="line">        <span class="keyword">if</span>(c!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">            visit(root(c));<span class="comment">/*访问*/</span></span><br><span class="line">            push(s,rightChild(c));<span class="comment">/*右子树进栈*/</span></span><br><span class="line">            push(s,leftChild(c));<span class="comment">/*左子树进栈*/</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>对称序周游</li>
 </ul>
@@ -2494,7 +2426,6 @@ static int add(int x,int y)
 <p>重复上述过程，直到当前二叉树没有右子树并且栈也为空时，周游结束。</p>
 <p>算法时间代价：假设栈的主要操作只要常量时间，算法中每个二叉树恰好进栈、出栈各一次，所以它的时间代价为$O(n)$，其中$n$为二叉树中子二叉树（也是节点）的个数。（外表看上去是一个双重循环，但时间代价还是线性的）。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nInOrder</span><span class="params">(BinTree t)</span></span>&#123;</span><br><span class="line">    Stack s = createEmptyStack();<span class="comment">/*栈元素类型为BinTree*/</span></span><br><span class="line">    BinTree c = t;</span><br><span class="line">    <span class="keyword">if</span>(c==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(c!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">            push(s,c);</span><br><span class="line">            c=leftChild(c);</span><br><span class="line">        &#125;</span><br><span class="line">        c=top(s);pop(s);visit(root(c));</span><br><span class="line">        c=rightChild(c);</span><br><span class="line">    &#125;<span class="keyword">while</span>(c!=<span class="literal">NULL</span> || !isEmptyStack(s));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>后根次序周游</li>
 </ul>
@@ -2503,46 +2434,33 @@ static int add(int x,int y)
 <p>3、最后才能访问该二叉树的根结点。</p>
 <p>为此必须在算法中增加对二叉树出栈的判断： 如果是从栈顶二叉树的左子树回来，就直接进入右子树周游；如果是从栈顶二叉树的右子树回来，就执行出栈，访问该二叉树的根结点。（时间代价仍为$O(n)$）。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nPostOrder</span><span class="params">(BinTree t)</span></span>&#123;</span><br><span class="line">    Stack s = createEmptyStack();</span><br><span class="line">    BinTree p = t;</span><br><span class="line">    <span class="keyword">while</span>(p!=<span class="literal">NULL</span> || !isEmptyStack(s))&#123;</span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">            push(s,p);</span><br><span class="line">            p=leftChild(p)?leftChild(p):rightChild(p);</span><br><span class="line">            <span class="comment">/*循环到当前需要处理的节点*/</span></span><br><span class="line">		&#125;</span><br><span class="line">        p=top(s);pop(s);visit(root(p));</span><br><span class="line">        <span class="comment">/*栈顶二叉树的根时应访问节点*/</span></span><br><span class="line">        <span class="keyword">if</span>(!isEmptyStack(s) &amp;&amp; leftChild(top(s)==p))</span><br><span class="line">            p=rightChild(top(s));<span class="comment">/*栈不空，且为从左子树退回*/</span></span><br><span class="line">        <span class="keyword">else</span> p=<span class="literal">NULL</span>;<span class="comment">/*从右子树回来，推到上一层处理*/</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>广度优先周游</li>
 </ul>
 <p>首先把二叉树送入队列；其后，每当从队首取出一个二叉树访问根之后，马上把它的子二叉树按从左到右的次序送入队列尾端；重复此过程直到队列为空。</p>
 <p>算法代价：每个二叉树进队列一次出队列一次，所需时间代价为$O(n)$。主要空间代价时需要队列的附加空间。若二叉树节点个数为$n$，最坏的情况出现再完全二叉树时，需要大约$n/2$个队列元素的空间。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">(BinTree t)</span></span>&#123;</span><br><span class="line">    BinTree c,cc;</span><br><span class="line">    Queue q=createEmptyQueue();</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    c=t;enQueue(q,c);<span class="comment">/*将二叉树送入队列*/</span></span><br><span class="line">    <span class="keyword">while</span>(!isEmptyQueue(q))&#123;</span><br><span class="line">        c=frontQueue(q);deQueue(q);visit(root(c));</span><br><span class="line">        <span class="comment">/*从队列首部取出二叉树并访问*/</span></span><br><span class="line">        cc=leftChild(c);<span class="keyword">if</span>(cc!=<span class="literal">NULL</span>) enQueue(q,cc);</span><br><span class="line">        <span class="comment">/*将左子树送入队列*/</span></span><br><span class="line">        cc=rightChild(c);<span class="keyword">if</span>(cc!=<span class="literal">NULL</span>) enQueue(q,cc);</span><br><span class="line">        <span class="comment">/*将右子树送入队列*/</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="二叉树的实现"><a href="#二叉树的实现" class="headerlink" title="二叉树的实现"></a>二叉树的实现</h3><h4 id="顺序表示"><a href="#顺序表示" class="headerlink" title="顺序表示"></a>顺序表示</h4><p>采用一组连续的存储单元来存放二叉树中的节点</p>
-<p>对于完全二叉树，按照从上（根节点）到下（叶节点）和从左到右的顺序，对二叉树中的所有节点从0到$n-1$编号，这样存放到一维数组中，只要通过数组元素的下标关系，就可以确定二叉树中节点之间的逻辑关系。<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200408130456.png"/></p>
-<p>对于一般的二叉树，采用顺序表示，首先要对它进行扩充，增加一些并不存在的空节点，使之成为一棵完全二叉树，然后再用一维数组顺序存储。<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200408130929.png"/></p>
+<p>对于完全二叉树，按照从上（根节点）到下（叶节点）和从左到右的顺序，对二叉树中的所有节点从0到$n-1$编号，这样存放到一维数组中，只要通过数组元素的下标关系，就可以确定二叉树中节点之间的逻辑关系。<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200408130456.png"/></p>
+<p>对于一般的二叉树，采用顺序表示，首先要对它进行扩充，增加一些并不存在的空节点，使之成为一棵完全二叉树，然后再用一维数组顺序存储。<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200408130929.png"/></p>
 <h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SeqBinTree</span>&#123;</span>	<span class="comment">/*顺序二叉树类型定义*/</span></span><br><span class="line">    <span class="keyword">int</span> MAXNUM;	<span class="comment">/*完全二叉树中允许节点的最大个数*/</span></span><br><span class="line">    <span class="keyword">int</span> n;	<span class="comment">/*改造成完全二叉树后，节点的实际个数*/</span></span><br><span class="line">    DataType * nodelist;	<span class="comment">/*存放节点的数组*/</span></span><br><span class="line">&#125;;	</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">SeqBinTree</span> * <span class="title">PSeqBinTree</span>;</span></span><br><span class="line"><span class="comment">/*顺序二叉树类型的指针类型*/</span></span><br></pre></td></tr></table></figure>
-
 <h5 id="运算实现"><a href="#运算实现" class="headerlink" title="运算实现"></a>运算实现</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*返回下标为p的节点的父节点的下标*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">parent_seq</span><span class="params">(PSeqBinTree t,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p&lt;<span class="number">0</span> || p&gt;= t-&gt;n)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> (p<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*返回下标为p的节点的左子节点的下标*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">leftChild_seq</span><span class="params">(PSeqBinTree t,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p&lt;<span class="number">0</span> || p&gt;= t-&gt;n) </span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>*p+<span class="number">1</span> <span class="comment">/*可能不存在*/</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*返回下标为p的节点的右子节点的下标*/</span></span><br><span class="line"><span class="keyword">int</span> rightChild_seq(PSeqBinTree t,<span class="keyword">int</span> p)&#123;</span><br><span class="line">    <span class="keyword">if</span>(p&lt;<span class="number">0</span> || p&gt;= t-&gt;n)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>*(p+<span class="number">1</span>);<span class="comment">/*可能不存在*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="链接表示"><a href="#链接表示" class="headerlink" title="链接表示"></a>链接表示</h4><p>二叉树中的每个节点对应链表中的一个节点，每个节点中，除了存储节点本身的数据外，再设置两个指针字段：llink和rlink，分别存储节点的左子节点和右子节点的位置。当节点的某个子树为空时，则相应的指针为空指针。这种表示方法称为<strong>左-右指针表示法</strong>。</p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200408132328.png"/>
-
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200408132328.png"/></p>
 <h5 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BinTreeNode</span>;</span>	<span class="comment">/*二叉树中节点*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BinTreeNode</span> *<span class="title">PBinTreeNode</span>;</span></span><br><span class="line"><span class="comment">/*节点的指针类型*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BinTreeNode</span>&#123;</span></span><br><span class="line">    DataType info;	<span class="comment">/*数据域*/</span></span><br><span class="line">    PBinTreeNode llink;	<span class="comment">/*指向左子节点*/</span>	</span><br><span class="line">    PBinTreeNode rlink;	<span class="comment">/*指向右子节点*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h5 id="运算实现-1"><a href="#运算实现-1" class="headerlink" title="运算实现"></a>运算实现</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*返回节点p的左子节点的地址*/</span></span><br><span class="line"><span class="function">PBinTreeNode <span class="title">leftChild_link</span><span class="params">(PBinTreeNode p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> p-&gt;llink;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*返回节点p的右子节点的地址*/</span></span><br><span class="line"><span class="function">PBinTreeNode <span class="title">rightChild_link</span><span class="params">(PBinTreeNode p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> p-&gt;rlink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h5 id="线索二叉树"><a href="#线索二叉树" class="headerlink" title="线索二叉树"></a>线索二叉树</h5><p>线索二叉树是对于左-右指针表示法的一种修改，它利用节点的空左指针（$llink$)存储该节点再某种周游序列中的前驱节点的位置；利用节点的空右指针（$rlink$）存储该节点在同种周游序列中的后继节点的位置。这种附加的指向前驱节点和后继节点的指针称作<strong>线索</strong>，加进了线索的二叉树左-右指针表示称作<strong>线索二叉树</strong>。</p>
-<p>为区分左右指针和线索，需要在每个节点里增加两个标志位$ltag$,和$rtag$。<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200408185612.png"/></p>
-<p>增加了标志域的节点结构为：<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200408185709.png"/></p>
-<p><strong>线索二叉树示例：</strong><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20200408185813.png"/></p>
+<p>为区分左右指针和线索，需要在每个节点里增加两个标志位$ltag$,和$rtag$。<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200408185612.png"/></p>
+<p>增加了标志域的节点结构为：<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200408185709.png"/></p>
+<p><strong>线索二叉树示例：</strong><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20200408185813.png"/></p>
 <h6 id="线索二叉树定义"><a href="#线索二叉树定义" class="headerlink" title="线索二叉树定义"></a>线索二叉树定义</h6><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ThrTreeNode</span>;</span>	<span class="comment">/*线索二叉树中的节点*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ThrTreeNode</span> * <span class="title">PThrTreeNode</span>;</span></span><br><span class="line"><span class="comment">/*指向线索二叉树节点的指针类型*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ThrTreeNode</span>&#123;</span>	<span class="comment">/*线索二叉树中节点的定义*/</span></span><br><span class="line">    DataType info;</span><br><span class="line">    PThrTreeNode llink,rlink;</span><br><span class="line">    <span class="keyword">int</span> ltag,rtag;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ThrTreeNode</span> * <span class="title">ThrTree</span>;</span></span><br><span class="line"><span class="comment">/*线索二叉树类型的定义*/</span></span><br><span class="line"><span class="keyword">typedef</span> ThrTree * PThrTree;<span class="comment">/*线索二叉树类型的指针类型*/</span></span><br></pre></td></tr></table></figure>
-
 <h6 id="按对称序线索化二叉树"><a href="#按对称序线索化二叉树" class="headerlink" title="按对称序线索化二叉树"></a>按对称序线索化二叉树</h6><p>在未线索化之前，所有结点的$llink$和$rlink$ 都是指向子结点指针，因此所有$ltag$和$rtag$ 的初始状态都为0。给出一棵二叉树，要 将它按对称序线索化，其做法就是按对称 序周游此二叉树，在周游的过程中用线索 代替空指针。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">thread</span><span class="params">(ThrTree t)</span></span>&#123;</span><br><span class="line">    PSeqStack st = createEmptyStack(M);</span><br><span class="line">    <span class="comment">/*栈元素的类型是ThrTree，M一般取t的高度*/</span></span><br><span class="line">    ThrTree p, pr;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    p = t; pr = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            push_seq(st,p);</span><br><span class="line">            p = p-&gt;link;</span><br><span class="line">        &#125;</span><br><span class="line">        p=top_seq(st);</span><br><span class="line">        pop_seq(st);</span><br><span class="line">        <span class="keyword">if</span>(pr!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(pr-&gt;rlink==<span class="literal">NULL</span>)&#123;</span><br><span class="line">                <span class="comment">/*修改前驱节点的右指针*/</span></span><br><span class="line">                pr-&gt;rlink=p;</span><br><span class="line">                pr-&gt;rtag=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;llink==<span class="literal">NULL</span>)&#123;</span><br><span class="line">                <span class="comment">/*修改该节点的左指针*/</span></span><br><span class="line">                p-&gt;llink=pr;</span><br><span class="line">                p-&gt;ltag=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        pr=p;p=p-&gt;rlink;</span><br><span class="line">    &#125;<span class="keyword">while</span>(!isEmptyStack_seq(st)||p!=<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h6 id="按对称序周游对称序线索二叉树"><a href="#按对称序周游对称序线索二叉树" class="headerlink" title="按对称序周游对称序线索二叉树"></a>按对称序周游对称序线索二叉树</h6><p>要按对称序周游对称序线索二叉树，首先找到对称序列 中的第一个结点，然后依次找到结点的后继结点，直至其后继结点为空即可。<br>        第一个结点很容易找，只要从根结点出发沿着左指针不断往下走，直至左指针为空，到达“最左下”的结点， 这就是对称序第一个结点。<br>        找任意结点的对称序后继时，也非常容易做：一个结点的右指针字段如果是线索，则它就指向该结点在对称序 下的后继；如果不是线索，则它指向该结点右子树的根， 而该结点在对称序下的后继应是此右子树的最左下结点。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nInOrder</span><span class="params">(ThrTree t)</span></span>&#123;</span><br><span class="line">    ThrTree p = t;</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">while</span>(p-&gt;llink!=<span class="literal">NULL</span> &amp;&amp; p-&gt;ltag==<span class="number">0</span>)</span><br><span class="line">        p=p-&gt;llink;</span><br><span class="line">    <span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">        visit(*p);</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;rlink!=<span class="literal">NULL</span> &amp;&amp; p-&gt;rtag==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">/*右子树不是线索时*/</span></span><br><span class="line">            p = p-&gt;rlink;</span><br><span class="line">            <span class="keyword">while</span>(p-&gt;llink!=<span class="literal">NULL</span> &amp;&amp; p-&gt;ltag==<span class="number">0</span>)</span><br><span class="line">                p=p-&gt;llink;</span><br><span class="line">            <span class="comment">/*顺右子树的左子树一直向下*/</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            p=p-&gt;rlink;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
+<blockquote id="fn_1">
+<sup>1</sup>. 二叉树的度是指树中所以结点的度数的最大值,二叉树的度小于等于2。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
 ]]></content>
       <categories>
         <category>learning</category>
@@ -2556,9 +2474,8 @@ static int add(int x,int y)
     <url>/2022/03/03/ibus%20%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</url>
     <content><![CDATA[<h1 id="ibus-无法在某些应用里面输入中文"><a href="#ibus-无法在某些应用里面输入中文" class="headerlink" title="ibus 无法在某些应用里面输入中文"></a>ibus 无法在某些应用里面输入中文</h1><p>在启动文件(<code>.sh</code>)中输入：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export XMODIFIERS="@im=ibus"</span><br><span class="line">export GTK_IM_MODULE="ibus"</span><br><span class="line">export QT_IM_MODULE="ibus"</span><br></pre></td></tr></table></figure>
-
 <p>重启后wps可以正常输入中文，但webstorm仍无法输入，随后查询官网得到解决方案，<a href="https://youtrack.jetbrains.com/issue/IDEA-246833" target="_blank" rel="noopener">链接</a>。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/image-20220303154136768.png" alt="image-20220303154136768"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/image-20220303154136768.png" alt="image-20220303154136768"></p>
 ]]></content>
       <categories>
         <category>solution</category>

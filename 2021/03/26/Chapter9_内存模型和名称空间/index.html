@@ -85,15 +85,15 @@
 <meta property="og:url" content="http://mwszksnmdys.xyz/2021/03/26/Chapter9_%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/index.html">
 <meta property="og:site_name" content="MWS&#39;s Blog">
 <meta property="og:description" content="Chapter9 内存模型和名称空间9.1 单独编译不应将函数定义或变量声明放到头文件中，这样做可能会引发麻烦。例如，如果在头文件中包含一个函数定义，然后再其他两个文件（属于同一个程序）中包含该头文件，则同一个程序中将包含同一个函数的两个定义，除非函数是内联的，否则这将出错。 使用#include包含头文件时，如果文件名包含在尖括号中，则C++编译器将在存储标准头文件的主机系统的文件系统中查找；但">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019180025.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019181408.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019183133.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019180025.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019181408.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019183133.png">
 <meta property="article:published_time" content="2021-03-26T06:46:18.535Z">
-<meta property="article:modified_time" content="2020-10-19T11:31:48.000Z">
+<meta property="article:modified_time" content="2022-03-28T06:12:19.952Z">
 <meta property="article:author" content="MWSzksnmdys">
 <meta property="article:tag" content="C++ premier plus学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019180025.png">
+<meta name="twitter:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019180025.png">
 
 
 
@@ -411,9 +411,8 @@
       
         <h2 id="Chapter9-内存模型和名称空间"><a href="#Chapter9-内存模型和名称空间" class="headerlink" title="Chapter9 内存模型和名称空间"></a>Chapter9 内存模型和名称空间</h2><h3 id="9-1-单独编译"><a href="#9-1-单独编译" class="headerlink" title="9.1 单独编译"></a>9.1 单独编译</h3><p>不应将函数定义或变量声明放到头文件中，这样做可能会引发麻烦。例如，如果在头文件中包含一个函数定义，然后再其他两个文件（属于同一个程序）中包含该头文件，则同一个程序中将包含同一个函数的两个定义，除非函数是内联的，否则这将出错。</p>
 <p>使用#include包含头文件时，如果文件名包含在尖括号中，则C++编译器将在存储标准头文件的主机系统的文件系统中查找；但如果文件名包含在双引号中，则编译器将首先查找当前的工作目录或源代码目录。</p>
-<p>在同一个文件中只能将同一个头文件包含一次。可以利用基于预处理器编译指令#ifndef的技术避免多次包含同一个头文件。下面的代码片段意味着仅当以前没有使用预处理器编译指令#define定义名称COORDIN_H_时，才处理#ifndef和#endif之间的语句：</p>
+<p>在同一个文件中只能将同一个头文件包含一次。可以利用基于预处理器编译指令#ifndef的技术避免多次包含同一个头文件。下面的代码片段意味着仅当以前没有使用预处理器编译指令#define定义名称COORDIN<em>H</em>时，才处理#ifndef和#endif之间的语句：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> COORDIN_H_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> COORDIN_H_</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
 <h3 id="9-2-存储持续性、作用域和链接性"><a href="#9-2-存储持续性、作用域和链接性" class="headerlink" title="9.2 存储持续性、作用域和链接性"></a>9.2 存储持续性、作用域和链接性</h3><p>C++使用三种（C++11中是四种）不同的方案来存储数据，这些方案的区别在于数据保留在内存中的时间：</p>
 <ul>
 <li><strong>自动存储持续性</strong>：在函数定义中声明的变量（包括函数参数）的存储持续性为自动的。它们<u>在程序开始执行其所属的函数或代码块时被创建，在执行完函数或代码块时，它们使用的内存被释放</u>。</li>
@@ -430,13 +429,14 @@
 <p>可以使用任何在声明时其值为已知的表达式来初始化自动变量。</p>
 </li>
 <li><p>自动变量和栈</p>
-<p>由于自动变量的数目随函数的开始和结束而增减，因此程序必须在运行时对自动变量进行管理。常用的方法是路i出一段内存，并将其视为栈，以管理变量的增减。（新数据被象征性地放在原有数据的上面，即数据位于相邻的内存单元中，当程序使用完后，将其从栈中删除）。</p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019180025.png" alt="image-20201019180018372" style="zoom:80%;" /></li>
+<p>由于自动变量的数目随函数的开始和结束而增减，因此程序必须在运行时对自动变量进行管理。常用的方法是路i出一段内存，并将其视为栈，以管理变量的增减。（新数据被象征性地放在原有数据的上面，即数据位于相邻的内存单元中，当程序使用完后，将其从栈中删除）。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019180025.png" alt="image-20201019180018372" style="zoom:80%;" /></p>
+</li>
 <li><p>寄存器变量<br>关键字register最初是由C语言引入的，它建议编译器使用CPU寄存器来存储自动变量以提高访问变量的速度。</p>
 </li>
 </ul>
 <h4 id="9-2-3-静态持续变量"><a href="#9-2-3-静态持续变量" class="headerlink" title="9.2.3 静态持续变量"></a>9.2.3 静态持续变量</h4><p>C++为静态存储持续性变量提供了3种链接性：外部链接性（可在其他文件中访问）、内部链接性（只能在当前文件中访问）和无链接性（只能在当前函数或代码块中访问）。这三种链接性都在整个程序执行期间存在，即静态变量在整个程序执行期间一直存在。</p>
 <p>要想创建链接性为外部的静态持续变量，必须在代码块的外面声明它；要创建链接性为内部的静态持续变量，必须在代码块的外面声明它，并使用static限定符；要创建没有链接性的静态持续变量，必须在代码块内声明它，并使用static限定符。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -445,7 +445,8 @@
 <th>位置</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>外部</td>
 <td>无</td>
 <td>代码块外</td>
@@ -460,17 +461,17 @@
 <td>有</td>
 <td>代码块内</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>所有静态持续变量都有下述初始化特征：未被初始化的静态变量的所有位都被设置为0.这种变量被称为零初始化的（zero-initializated）。</p>
 <p>零初始化和常量表达式初始化统称为静态初始化，这意味着在编译器处理文件时初始化变量。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019181408.png" alt="image-20201019181408033"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019181408.png" alt="image-20201019181408033"></p>
 <h4 id="9-2-4-静态持续性、外部链接性"><a href="#9-2-4-静态持续性、外部链接性" class="headerlink" title="9.2.4 静态持续性、外部链接性"></a>9.2.4 静态持续性、外部链接性</h4><p>链接性位外部的变量通常简称为外部变量，它们的存储持续性为静态，作用域为整个文件。</p>
 <ul>
 <li><p>单定义规则</p>
 <p>在每个使用外部变量的文件中，都必须声明它；另一方面，C++有“单定义规则”（One Definition Rule， ODR），该规则指出，变量只能有一次定义。为满足这种需求，C++提供了两种变量声明。一种是<strong>定义声明</strong>（defining declaration）或简称为<strong>定义</strong>（definition），<strong>它给变量分配存储空间</strong>；另一种是<strong>引用声明</strong>（referencing declaration）或简称为<strong>声明</strong>（declaration），<strong>它不给变量分配存储空间，因为它引用已有的变量</strong>。</p>
-<p><strong>引用声明使用关键字extern，且不进行初始化</strong>。如果要在<strong>多个文件中使用外部变量</strong>，只需<strong>在一个文件中包含该变量的定义</strong>（单变量规则），但<strong>在使用该变量的其他所有文件种，都必须使用关键字extern声明它</strong>。如：</p>
-<img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201019183133.png" alt="image-20201019183133490" style="zoom:90%" />
-
+<p><strong>引用声明使用关键字extern，且不进行初始化</strong>。如果要在<strong>多个文件中使用外部变量</strong>，只需<strong>在一个文件中包含该变量的定义</strong>（单变量规则），但<strong>在使用该变量的其他所有文件种，都必须使用关键字extern声明它</strong>。如：<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201019183133.png" alt="image-20201019183133490" style="zoom:90%" /></p>
 <p>虽然程序中可能包含多个同名的变量，但每个变量都只有一个定义。</p>
 <p><strong>C++提供了作用域解析运算符（::），将它放在变量名前面时，该运算符表示使用变量的全局版本</strong>。</p>
 </li>
@@ -488,7 +489,8 @@
 </li>
 <li><p>mutable</p>
 <p>可以用该关键字指出，即使结构（或类）变量为const，其某个成员也可以被修改。例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">30</span>];</span><br><span class="line">    <span class="keyword">mutable</span> <span class="keyword">int</span> accesses;</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> data veep = &#123;<span class="string">&quot;Claybourne Clodde&quot;</span>, <span class="number">0</span>, ...&#125;;</span><br><span class="line"><span class="built_in">strcpy</span>(veep.name, <span class="string">&quot;Joye Joux&quot;</span>); <span class="comment">//not allowed</span></span><br><span class="line">veep.accesses++; <span class="comment">// allowed</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">30</span>];</span><br><span class="line">    <span class="keyword">mutable</span> <span class="keyword">int</span> accesses;</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> data veep = &#123;<span class="string">"Claybourne Clodde"</span>, <span class="number">0</span>, ...&#125;;</span><br><span class="line"><span class="built_in">strcpy</span>(veep.name, <span class="string">"Joye Joux"</span>); <span class="comment">//not allowed</span></span><br><span class="line">veep.accesses++; <span class="comment">// allowed</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>const</p>
 <p>在C++种，const限定符对默认存储类型稍有影响，在默认情况下全局变量的链接性为外部的，但const全局变量的链接性为内部的。</p>
 </li>
@@ -508,7 +510,6 @@
 <p>假设名称空间和声明区域定义了相同的名称，如果试图使用using声明将名称空间的名称导入该生命区域，则这两个名称会发生冲突，从而出错。如果使用using编译指令将该名称空间的名称给导入该生命区域中，则局部版本将隐藏名称空间版本。</p>
 <p>可以使用namespace给名称空间创建别名，如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> my_very_favorite_things&#123;...&#125;;</span><br><span class="line"><span class="keyword">namespace</span> mvft = my_very_favorite_things;<span class="comment">//使mvft称为my_very_favorite_things的别名</span></span><br></pre></td></tr></table></figure>
-
 <p>可以通过省略名称空间的名称来创建未命名的名称空间，但不能在未命名的名称空间所属的文件之外的其他文件中使用该名称空间中的名称。这提供了链接性为内部的静态变量的替代品。</p>
 <p>在开发时使用多个文件的一种有效的组织策略是，使用头文件来定义用户类型，为操纵用户类型的函数提供函数原型；并将函数定义放在一个独立的源代文件中。头文件和源代码文件一起定义和实现了用户定义的类型及其使用方式。最后，将main()和其他使用这些函数的函数放在第三个文件中。</p>
 

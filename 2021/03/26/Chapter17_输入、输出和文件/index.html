@@ -85,21 +85,21 @@
 <meta property="og:url" content="http://mwszksnmdys.xyz/2021/03/26/Chapter17_%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E5%92%8C%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="MWS&#39;s Blog">
 <meta property="og:description" content="Chapter17 输入、输出和文件C++程序把输入和输出看作字节流。输入时，程序从输入流中抽取字节；输出时，程序将字节插入到输出流中。流充当了程序和流源或流文件之间的桥梁，这使得C++程序可以以相同的方式对待来自键盘的输入和来自文件的输入。因此管理输入包含两步：  将流与输入去向的程序关联起来 将流与文件连接起来   通过使用缓冲区可以更高效地处理输入和输出。缓冲区是用作中介的内存块，它是将信息">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109152900.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109153626.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109174146.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109174730.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109175554.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109180459.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109180720.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109181714.png">
-<meta property="og:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109181942.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109152900.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109153626.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109174146.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109174730.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109175554.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109180459.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109180720.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109181714.png">
+<meta property="og:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109181942.png">
 <meta property="article:published_time" content="2021-03-26T06:46:18.523Z">
-<meta property="article:modified_time" content="2020-11-09T10:20:58.000Z">
+<meta property="article:modified_time" content="2022-03-28T06:12:19.956Z">
 <meta property="article:author" content="MWSzksnmdys">
 <meta property="article:tag" content="C++ premier plus学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109152900.png">
+<meta name="twitter:image" content="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109152900.png">
 
 
 
@@ -420,9 +420,9 @@
 <li>将流与输入去向的程序关联起来</li>
 <li>将流与文件连接起来</li>
 </ul>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109152900.png" alt="image-20201109152852856"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109152900.png" alt="image-20201109152852856"></p>
 <p>通过使用缓冲区可以更高效地处理输入和输出。缓冲区是用作中介的内存块，它是将信息从设备传输到程序或从程序传输给设备的临时存储工具。输出时，程序首先填满缓冲区，然后把整块数据传输给硬盘，并清空缓冲区，以备下一批输出使用，这被称为刷新缓冲区（flushing the buffer）。</p>
-<p>streambuf类为缓冲区提供了内存，并提供了用于填充缓冲区、访问缓冲区内容、刷新缓冲区和管理缓冲区内存的类方法；<br>iso_base类表示流的一般特征，如是否可读取、是二进制流还是文本流等；<br>iso类基于ios_base，其中包括了一个指向streabuf对象的指针成员；<br>ostream类是从ios类派生来的，提供了输出方法；<br>istream也是从ios类派生而来的，提供了输入方法；<br>iostream类是基于istream和ostream类的，因此继承了输入方法和输出方法。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109153626.png" align="center" style="zoom:75%;" /></p>
+<p>streambuf类为缓冲区提供了内存，并提供了用于填充缓冲区、访问缓冲区内容、刷新缓冲区和管理缓冲区内存的类方法；<br>iso_base类表示流的一般特征，如是否可读取、是二进制流还是文本流等；<br>iso类基于ios_base，其中包括了一个指向streabuf对象的指针成员；<br>ostream类是从ios类派生来的，提供了输出方法；<br>istream也是从ios类派生而来的，提供了输入方法；<br>iostream类是基于istream和ostream类的，因此继承了输入方法和输出方法。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109153626.png" align="center" style="zoom:75%;" /></p>
 <p>在程序中包含iostream头文件将自动创建8个流对象（4个用于窄字符流，4个用于宽字符流）</p>
 <ul>
 <li>cin对象对应于标准输入流。wcin对象与此类似，但处理的是wchar_t类型；</li>
@@ -431,22 +431,18 @@
 <li>clog对象也对应着标准错误流，与cerr不同的是这个流被缓冲。wclog对象与此类似，单处理的是wchar_t类型。</li>
 </ul>
 <h3 id="17-1-使用cout进行输出"><a href="#17-1-使用cout进行输出" class="headerlink" title="17.1 使用cout进行输出"></a>17.1 使用cout进行输出</h3><p>ostream类将数据内部表示（二进制位模式）转换为由字符字节组成的输出流。</p>
-<p>&lt;&lt;运算符的默认含义是左移运算符，ostream类重新定义了&lt;&lt;运算符，方法是将其重载为输出，在这种情况下，&lt;&lt;叫作插入运算符。</p>
+<p>\&lt;\&lt;运算符的默认含义是左移运算符，ostream类重新定义了\&lt;\&lt;运算符，方法是将其重载为输出，在这种情况下，\&lt;\&lt;叫作插入运算符。</p>
 <p>C++用指向字符串位置的指针来表示字符串。指针的形式可以是char数组名、显式的char指针或用引号扩起的字符串。</p>
 <p>插入运算符的所有化身的返回类型都是ostream &amp;，也就是说，原型格式如下:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(type);</span><br></pre></td></tr></table></figure>
-
-<p>除了各种operator&lt;&lt;()函数外，ostream类还提供了put()方法和write()方法，前者用于显示字符，后者用于显示字符串。</p>
+<p>除了各种operator\&lt;\&lt;()函数外，ostream类还提供了put()方法和write()方法，前者用于显示字符，后者用于显示字符串。</p>
 <p>最初put()方法的原型如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ostream &amp; <span class="title">put</span><span class="params">(<span class="keyword">char</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>当前标准与此相同，但被模板化，以适用于wchar_t。可以用类方法表示法来调用它：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout.<span class="built_in">put</span>(<span class="string">&#x27;w&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>其中cout是调用方法的对象，put()是类成员函数，和&lt;&lt;运算符函数一样，该函数也返回一个指向调用对象的引用，因此可以用它将输出拼接。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>.<span class="built_in">put</span>(<span class="string">'w'</span>);</span><br></pre></td></tr></table></figure>
+<p>其中cout是调用方法的对象，put()是类成员函数，和\&lt;\&lt;运算符函数一样，该函数也返回一个指向调用对象的引用，因此可以用它将输出拼接。</p>
 <p>write()方法显示整个字符串，其模板原型如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">basic_ostream &lt;charT, traits&gt; &amp; <span class="built_in">write</span>(<span class="keyword">const</span> char_type * s, streamsize n);</span><br></pre></td></tr></table></figure>
-
 <p>write()的第一个参数提供了要显示的字符串的地址，第二个参数指出了要显示多少个字符。</p>
 <p>write()方法并不会在遇到空字符时自动停止打印字符，而只是打印指定数目的字符，即使超出了字符串的边界！、</p>
 <p>控制符flush刷新缓冲区，而控制符endl刷新缓冲区并插入一个换行符。</p>
@@ -458,16 +454,13 @@
 </ul>
 <p><strong>1、修改显示时使用的计数系统</strong></p>
 <p>ios_base  类存储了描述格式状态的信息，如要控制整数以十进制、十六进制还是八进制显示，可以使用dec、hex和oct控制符。如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">hex</span>(cout);<span class="comment">//将cout对象的计数系统格式状态设置为十六进制</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hex(<span class="built_in">cout</span>);<span class="comment">//将cout对象的计数系统格式状态设置为十六进制</span></span><br></pre></td></tr></table></figure>
 <p>虽然控制符不是成员函数，因此不必通过对象来调用，但它们通常的使用方式为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; hex;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; hex;</span><br></pre></td></tr></table></figure>
 <p>可以单独使用控制符，也可以将其作为一系列插入的组成部分。</p>
 <p><strong>2、调整字段宽度</strong></p>
 <p>可以使用width()成员函数将长度不同的数字放到宽度相同的字段中，该方法的原型为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">width</span><span class="params">()</span></span>;<span class="comment">//返回字段宽度的当前设置；</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">width</span><span class="params">(<span class="keyword">int</span> i)</span></span>; <span class="comment">//将字段宽度设置为i个空格，并返回以前的字段宽度值。</span></span><br></pre></td></tr></table></figure>
-
 <p>width()方法只影响将显示的下一个项目，然后字段宽度将恢复为默认值。</p>
 <p>C++永远不会截断数据，因此如果在宽度为2的字段中打印一个7位值，C++将增宽字段，以容纳该数据。</p>
 <p><strong>3、填充字符</strong></p>
@@ -478,30 +471,28 @@
 <p>ios_base类有一个受保护的数据成员，其中的各位（标记）分别控制这格式化的各个方面，例如计数系统、是否显示末尾的0等。</p>
 <p>setf()函数由两个原型，第一个为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">fmtflags <span class="title">setf</span><span class="params">(fmtflags)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>其中fmtflags是bitmask<a id="tag1" href="#test1"><sup>[1]</sup></a>类型的typedef名，用于存储格式标记 。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109174146.png" alt="image-20201109174146091"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109174146.png" alt="image-20201109174146091"></p>
 <p>第二个setf()原型接受两个参数，并返回以前的设置：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">fmtflags <span class="title">setf</span><span class="params">(fmtflags, fmtflags)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109174730.png" alt="image-20201109174730908"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109174730.png" alt="image-20201109174730908"></p>
 <p>调用setf()的效果可以通过unsetf()消除，后者原型如下：<code>void unsetf(fmtflags mask);</code>.</p>
 <p><strong>6、标准控制符</strong></p>
-<p>使用setf()不是进行格式化、对用户最为有好的方法，C++提供了多个控制符，能够调用setf()，并自动提供正确的参数。<br><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109175554.png" alt="image-20201109175554821"></p>
+<p>使用setf()不是进行格式化、对用户最为有好的方法，C++提供了多个控制符，能够调用setf()，并自动提供正确的参数。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109175554.png" alt="image-20201109175554821"></p>
 <p><strong>8、头文件iomanip</strong></p>
 <p>使用iostream工具来设置一些个是指不太方便，为了简化工作，C++在头文件iomanip中提供了其他一些控制符，3个最常用的控制符分别是setprecision()、setfill()和setw(),分别用来设置精度、填充字符和字段宽度。</p>
 <h3 id="17-2-使用cin进行输入"><a href="#17-2-使用cin进行输入" class="headerlink" title="17.2 使用cin进行输入"></a>17.2 使用cin进行输入</h3><p>不同版本的抽取运算符查看输入流的方法是相同的，它们跳过空白（空格、换行符和制表符），直到遇到非空白字符。</p>
 <p>cin或cout对像包含一个描述流状态的数据成员。流状态（被定义为iostate类型，而iostate是一种bitmask类型）由3个ios_base元素组成：eobit、badbit和failbit，其中每一个元素都是一位。当全部3个状态位都设置为0时，说明一切顺利。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109180459.png" alt="image-20201109180459398"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109180459.png" alt="image-20201109180459398"></p>
 <p>设置流状态位有一个非常重要的后果：流将对后面的输入或输出关闭，直到位被清楚。如果希望程序在流状态为被设置后能够读取后面的输入，就必须将流状态重置为良好。这可以通过调用clear()方法来实现。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109180720.png" alt="image-20201109180720414"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109180720.png" alt="image-20201109180720414"></p>
 <p>read()函数读取指定数目的字节，并将它们存储在指定的位置中。<br>peek()函数返回输入中的下一个字符，但不愁去输入流中的下一个字符。<br>gount()函数返回最后一个非格式化抽取方法读取的字符数。<br>putback()函数将一个字符插入到输入字符串中，被插入的字符将是下一条输入语句读取的第一个字符。</p>
 <h3 id="17-3-文件输入和输出"><a href="#17-3-文件输入和输出" class="headerlink" title="17.3 文件输入和输出"></a>17.3 文件输入和输出</h3><p>由于ofstream是ostream的派生类，因此可以使用所有的ostream方法，包括各种插入运算符定义、格式化方法和控制符。</p>
 <p>以默认模式打开文件进行输出将自动把文件的长度截断位零，这相当于删除已有的内容。</p>
 <p>ios_base类定义了一个openmode类型，用于表示模式；与fmtflags和iostate类型一样，它也是一种bitmask类型。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109181714.png" alt="image-20201109181713995"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109181714.png" alt="image-20201109181713995"></p>
 <p>ios_base::ate和ios_base::app都将文件指针指向打开的文件尾。二者的区别在于，后者只允许将数据添加到文件尾，而前者将指针放到文件尾。</p>
-<p><img src="https://gitee.com/mwszksnmdyz/image/raw/master/img/20201109181942.png" alt="image-20201109181942871"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109181942.png" alt="image-20201109181942871"></p>
 <p><a id="test1" href="#tag1">[1]</a>:bitmask类型是一种用来存储各个位值的类型。它可以是整型、枚举，也可以是STL bitset容器，这里的主要思想是每一位都是可以单独访问的。</p>
 
       
