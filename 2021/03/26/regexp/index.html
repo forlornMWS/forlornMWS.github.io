@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  854
+                  830
                 </span>
               
 
@@ -513,7 +513,7 @@
 <li><p>match()</p>
 <p>从字符串起始位置匹配正则表达式，如果匹配，就返回匹配成功的结果，如果不匹配，就返回None</p>
 <p>示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re </span><br><span class="line">content = <span class="string">&#x27;Hello 123 4567 World_This is a Regex Demo&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(content))</span><br><span class="line">result = re.match(<span class="string">r&#x27;^Hello\s\d\d\d\s\d&#123;4&#125;\s\w&#123;10&#125;&#x27;</span>,content)</span><br><span class="line"><span class="comment">#使用正则表达式时记得在字符串前面加r，以免出错</span></span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="built_in">print</span>(result.group())<span class="comment">#输出匹配内容</span></span><br><span class="line"><span class="built_in">print</span>(result.span())<span class="comment">#输出匹配的范围</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re </span><br><span class="line">content = <span class="string">'Hello 123 4567 World_This is a Regex Demo'</span></span><br><span class="line">print(len(content))</span><br><span class="line">result = re.match(<span class="string">r'^Hello\s\d\d\d\s\d&#123;4&#125;\s\w&#123;10&#125;'</span>,content)</span><br><span class="line"><span class="comment">#使用正则表达式时记得在字符串前面加r，以免出错</span></span><br><span class="line">print(result)</span><br><span class="line">print(result.group())<span class="comment">#输出匹配内容</span></span><br><span class="line">print(result.span())<span class="comment">#输出匹配的范围</span></span><br></pre></td></tr></table></figure>
 
 <p>常用修饰符：</p>
 <table>
@@ -549,6 +549,8 @@
 </tr>
 </tbody></table>
 </li>
+</ul>
+<ul>
 <li><p>search()</p>
 <p>匹配时扫描整个字符串，然后返回第一个成功匹配的结果，即正则表达式可以是字符串的一部分，不必从头开始匹配。</p>
 <blockquote>
@@ -561,11 +563,14 @@
 <li><p>sub()</p>
 <p>可由于修改文本</p>
 <p>示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">content = <span class="string">&#x27;sjdowo23-958utuo0eut&#x27;</span></span><br><span class="line">content = re.sub(<span class="string">&#x27;\d+&#x27;</span>,content)<span class="comment">#除去文本中的数字</span></span><br><span class="line"><span class="built_in">print</span>(content)</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">content = <span class="string">'sjdowo23-958utuo0eut'</span></span><br><span class="line">content = re.sub(<span class="string">'\d+'</span>,content)<span class="comment">#除去文本中的数字</span></span><br><span class="line">print(content)</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>compile()</p>
 <p>该方法可以将正则字符串编译成正则表达式对象，以便在后面的匹配中复用。</p>
 <p>示例：</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">content1 = <span class="string">&#x27;2016-12-15 12:00&#x27;</span></span><br><span class="line">content2 = <span class="string">&#x27;2016-12-17 12:55&#x27;</span></span><br><span class="line">content3 = <span class="string">&#x27;2016-12-22 13:21&#x27;</span></span><br><span class="line">pattern = re.<span class="built_in">compile</span>(<span class="string">&#x27;\d&#123;2&#125;:\d&#123;2&#125;&#x27;</span>)<span class="comment">#匹配时间</span></span><br><span class="line"><span class="comment">#使用compile方法将正则表达式编译成一个正则表达对象</span></span><br><span class="line">result1 = re.sub(pattern,<span class="string">&#x27;&#x27;</span>,content1)</span><br><span class="line">result2 = re.sub(pattern,<span class="string">&#x27;&#x27;</span>,content2)</span><br><span class="line">result3 = re.sub(pattern,<span class="string">&#x27;&#x27;</span>,content3)</span><br><span class="line"><span class="built_in">print</span>(result1,result2,result3,sep=<span class="string">&#x27;\n&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">content1 = <span class="string">'2016-12-15 12:00'</span></span><br><span class="line">content2 = <span class="string">'2016-12-17 12:55'</span></span><br><span class="line">content3 = <span class="string">'2016-12-22 13:21'</span></span><br><span class="line">pattern = re.compile(<span class="string">'\d&#123;2&#125;:\d&#123;2&#125;'</span>)<span class="comment">#匹配时间</span></span><br><span class="line"><span class="comment">#使用compile方法将正则表达式编译成一个正则表达对象</span></span><br><span class="line">result1 = re.sub(pattern,<span class="string">''</span>,content1)</span><br><span class="line">result2 = re.sub(pattern,<span class="string">''</span>,content2)</span><br><span class="line">result3 = re.sub(pattern,<span class="string">''</span>,content3)</span><br><span class="line">print(result1,result2,result3,sep=<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
 
       
@@ -603,8 +608,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/26/jsonpath/" rel="next" title="JsonPath">
-                <i class="fa fa-chevron-left"></i> JsonPath
+              <a href="/2021/03/26/selenium%E7%94%A8%E6%B3%95/" rel="next" title="Selenium">
+                <i class="fa fa-chevron-left"></i> Selenium
               </a>
             
           </div>
@@ -613,8 +618,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/26/selenium%E7%94%A8%E6%B3%95/" rel="prev" title="Selenium">
-                Selenium <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/26/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="prev" title="字符串">
+                字符串 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -697,7 +702,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>

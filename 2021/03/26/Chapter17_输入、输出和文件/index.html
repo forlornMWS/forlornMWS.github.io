@@ -431,18 +431,22 @@
 <li>clog对象也对应着标准错误流，与cerr不同的是这个流被缓冲。wclog对象与此类似，单处理的是wchar_t类型。</li>
 </ul>
 <h3 id="17-1-使用cout进行输出"><a href="#17-1-使用cout进行输出" class="headerlink" title="17.1 使用cout进行输出"></a>17.1 使用cout进行输出</h3><p>ostream类将数据内部表示（二进制位模式）转换为由字符字节组成的输出流。</p>
-<p>\&lt;\&lt;运算符的默认含义是左移运算符，ostream类重新定义了\&lt;\&lt;运算符，方法是将其重载为输出，在这种情况下，\&lt;\&lt;叫作插入运算符。</p>
+<p>&lt;&lt;运算符的默认含义是左移运算符，ostream类重新定义了&lt;&lt;运算符，方法是将其重载为输出，在这种情况下，&lt;&lt;叫作插入运算符。</p>
 <p>C++用指向字符串位置的指针来表示字符串。指针的形式可以是char数组名、显式的char指针或用引号扩起的字符串。</p>
 <p>插入运算符的所有化身的返回类型都是ostream &amp;，也就是说，原型格式如下:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(type);</span><br></pre></td></tr></table></figure>
-<p>除了各种operator\&lt;\&lt;()函数外，ostream类还提供了put()方法和write()方法，前者用于显示字符，后者用于显示字符串。</p>
+
+<p>除了各种operator&lt;&lt;()函数外，ostream类还提供了put()方法和write()方法，前者用于显示字符，后者用于显示字符串。</p>
 <p>最初put()方法的原型如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ostream &amp; <span class="title">put</span><span class="params">(<span class="keyword">char</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>当前标准与此相同，但被模板化，以适用于wchar_t。可以用类方法表示法来调用它：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>.<span class="built_in">put</span>(<span class="string">'w'</span>);</span><br></pre></td></tr></table></figure>
-<p>其中cout是调用方法的对象，put()是类成员函数，和\&lt;\&lt;运算符函数一样，该函数也返回一个指向调用对象的引用，因此可以用它将输出拼接。</p>
+
+<p>其中cout是调用方法的对象，put()是类成员函数，和&lt;&lt;运算符函数一样，该函数也返回一个指向调用对象的引用，因此可以用它将输出拼接。</p>
 <p>write()方法显示整个字符串，其模板原型如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">basic_ostream &lt;charT, traits&gt; &amp; <span class="built_in">write</span>(<span class="keyword">const</span> char_type * s, streamsize n);</span><br></pre></td></tr></table></figure>
+
 <p>write()的第一个参数提供了要显示的字符串的地址，第二个参数指出了要显示多少个字符。</p>
 <p>write()方法并不会在遇到空字符时自动停止打印字符，而只是打印指定数目的字符，即使超出了字符串的边界！、</p>
 <p>控制符flush刷新缓冲区，而控制符endl刷新缓冲区并插入一个换行符。</p>
@@ -455,12 +459,15 @@
 <p><strong>1、修改显示时使用的计数系统</strong></p>
 <p>ios_base  类存储了描述格式状态的信息，如要控制整数以十进制、十六进制还是八进制显示，可以使用dec、hex和oct控制符。如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hex(<span class="built_in">cout</span>);<span class="comment">//将cout对象的计数系统格式状态设置为十六进制</span></span><br></pre></td></tr></table></figure>
+
 <p>虽然控制符不是成员函数，因此不必通过对象来调用，但它们通常的使用方式为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; hex;</span><br></pre></td></tr></table></figure>
+
 <p>可以单独使用控制符，也可以将其作为一系列插入的组成部分。</p>
 <p><strong>2、调整字段宽度</strong></p>
 <p>可以使用width()成员函数将长度不同的数字放到宽度相同的字段中，该方法的原型为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">width</span><span class="params">()</span></span>;<span class="comment">//返回字段宽度的当前设置；</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">width</span><span class="params">(<span class="keyword">int</span> i)</span></span>; <span class="comment">//将字段宽度设置为i个空格，并返回以前的字段宽度值。</span></span><br></pre></td></tr></table></figure>
+
 <p>width()方法只影响将显示的下一个项目，然后字段宽度将恢复为默认值。</p>
 <p>C++永远不会截断数据，因此如果在宽度为2的字段中打印一个7位值，C++将增宽字段，以容纳该数据。</p>
 <p><strong>3、填充字符</strong></p>
@@ -471,10 +478,12 @@
 <p>ios_base类有一个受保护的数据成员，其中的各位（标记）分别控制这格式化的各个方面，例如计数系统、是否显示末尾的0等。</p>
 <p>setf()函数由两个原型，第一个为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">fmtflags <span class="title">setf</span><span class="params">(fmtflags)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>其中fmtflags是bitmask<a id="tag1" href="#test1"><sup>[1]</sup></a>类型的typedef名，用于存储格式标记 。</p>
 <p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109174146.png" alt="image-20201109174146091"></p>
 <p>第二个setf()原型接受两个参数，并返回以前的设置：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">fmtflags <span class="title">setf</span><span class="params">(fmtflags, fmtflags)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201109174730.png" alt="image-20201109174730908"></p>
 <p>调用setf()的效果可以通过unsetf()消除，后者原型如下：<code>void unsetf(fmtflags mask);</code>.</p>
 <p><strong>6、标准控制符</strong></p>
@@ -530,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/26/Chapter16_string%E7%B1%BB%E5%92%8C%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/" rel="next" title="Chapter16 string类和标准模板库">
-                <i class="fa fa-chevron-left"></i> Chapter16 string类和标准模板库
+              <a href="/2021/03/26/Chapter15_%E5%8F%8B%E5%85%83%E3%80%81%E5%BC%82%E5%B8%B8%E5%92%8C%E5%85%B6%E4%BB%96/" rel="next" title="Chapter15 友元、异常和其他">
+                <i class="fa fa-chevron-left"></i> Chapter15 友元、异常和其他
               </a>
             
           </div>
@@ -540,8 +549,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/26/Chapter2_%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0C++/" rel="prev" title="Chapter2 开始学习C++">
-                Chapter2 开始学习C++ <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/26/Chapter4_%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/" rel="prev" title="Chapter4 复合类型">
+                Chapter4 复合类型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -624,7 +633,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>

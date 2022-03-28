@@ -424,9 +424,11 @@
 <h4 id="14-2-1-保护继承"><a href="#14-2-1-保护继承" class="headerlink" title="14.2.1 保护继承"></a>14.2.1 保护继承</h4><p>保护继承是私有继承的变体。<strong>使用保护继承时，基类的公有成员和保护成员都将称为派生类的保护成员</strong>。和私有继承一样，保护继承中基类的接口在派生类中也是可用的，但在继承层次结构之外是不可用的。使用私有继承时，第三代类将不能使用基类的接口，这是因为基类的公有方法在派生类中编程私有方法；使用保护继承时，基类的公有方法在第二代中将变成受保护的，因此第三代派生类可以使用它们。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201031140137.png" alt="image-20201031140051194"></p>
 <h4 id="14-2-2-使用using重新定义访问权限"><a href="#14-2-2-使用using重新定义访问权限" class="headerlink" title="14.2.2 使用using重新定义访问权限"></a>14.2.2 使用using重新定义访问权限</h4><p>使用保护派生或私有派生时，基类的公有成员建更成为保护成员或私有成员。若要让基类的方法在派生类外可用，方法之一是<strong>定义一个使用该基类方法的派生类方法</strong>。例如，假设希望Student类能够使用valarray类的sum()方法，可以在Student类的声明中声明一个sum()方法，然后像下面这样定义该方法：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">Student::sum</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::sum();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样Student对象便能够调用Student::sum()，后者进而将valarray\<double\>::sum()方法应用于被包含的valarray对象。</p>
+
+<p>这样Student对象便能够调用Student::sum()，后者进而将valarray&lt;double&gt;::sum()方法应用于被包含的valarray对象。</p>
 <p>另一种方法是，<strong>将函数调用包装在另一个函数调用中</strong>，即<strong>使用一个using声明来指出派生类可以使用特定的基类成员</strong>，即使采用的是私有派生。例如，假设希望Student类能够使用valarray类的sum()方法，可以在Student类的声明的公有部分中加入如下using声明：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">private</span> <span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">private</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="keyword">using</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::sum();</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p><strong>using声明只是用成员名</strong>——没有圆括号、函数特征标和返回类型。</p>
 <h3 id="14-3-多重继承"><a href="#14-3-多重继承" class="headerlink" title="14.3 多重继承"></a>14.3 多重继承</h3><p>MI描述的是有多个直接基类的类。与单继承一样，公有MI表示的也是is-a关系，私有MI和保护MI可以表示has-a关系。</p>
 <p>虚基类使得从多个类派生出的对象只继承一个基类对象。</p>
@@ -440,6 +442,7 @@
 <p>如果一个类从两个不同的类那里继承了两个同名的成员，则需要在派生类中使用类限定符来区分它们。</p>
 <p>当派生类使用关键字virtual来指示派生时，基类就成为了虚基类：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">marketing</span>:</span> <span class="keyword">public</span> <span class="keyword">virtual</span> reality&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>从虚基类的一个或多个示例派生而来的类将只继承一个基类对象。为实现这种特征，必须满足其他要求：</p>
 <ul>
 <li>有间接虚基类的派生类包含直接调用间接基类构造函数的构造函数，这对于间接非虚基类来说时非法的</li>
@@ -454,6 +457,7 @@
 <li><p>隐式实例化</p>
 <p>声明一个或多个对象，指出所需的类型，而编译器使用通用模板生成具体的类定义：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayTP&lt;<span class="keyword">int</span>, <span class="number">100</span>&gt; staff;<span class="comment">// 隐式实例化</span></span><br></pre></td></tr></table></figure>
+
 <p>编译器在需要对象之前，不会生成类的隐式实例化。</p>
 </li>
 <li><p>显式实例化</p>
@@ -467,7 +471,8 @@
 <li><p>部分具体化</p>
 <p>即部分限制模板的通用性。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tempalte &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="title">class</span> <span class="title">T2</span>&gt; <span class="title">class</span> <span class="title">Pair</span>&#123;</span>...&#125;;<span class="comment">//通用模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>&gt; <span class="title">class</span> <span class="title">Pair</span>&lt;T1, int&gt;&#123;</span>...&#125;;<span class="comment">//部分具体化</span></span><br></pre></td></tr></table></figure>
-<p>如果指定所有的类型，则\&lt;>内将为空，这将导致显式具体化。</p>
+
+<p>如果指定所有的类型，则&lt;&gt;内将为空，这将导致显式具体化。</p>
 </li>
 </ul>
 <p>如果有多个模板可供选择，编译器将使用具体化程度最高的模板。</p>
@@ -480,16 +485,21 @@
 <p>友元函数本身成为模板。</p>
 <p>（1）在类定义前声明每个模板函数。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;  <span class="function"><span class="keyword">void</span> <span class="title">counts</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">report</span><span class="params">(T &amp;)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>（2）在函数中再次将模板声明为友元。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> TT&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HasFriendT</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> counts&lt;TT&gt;();</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> reprot&lt;&gt;(HasFriendT&lt;TT&gt; &amp;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>模板类的非约束模板友元函数</p>
 <p>通过在类内部声明模板，可以创建非约束友元函数，即每个函数具体化都是每个类具体化。对于非约束友元，友元模板类型参数与模板类类型参数是不同的。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManyFriend</span>&#123;</span></span><br><span class="line">    ...</span><br><span class="line">    template&lt;typename C, typename D&gt; friend void show2(C &amp;, D &amp;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <p>C++11允许将语法using =用于非模板，用于非模板时，何种语法与常规的typedef等价。如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">const</span> <span class="keyword">char</span> * pc1;</span><br><span class="line"><span class="keyword">using</span> pc2 = <span class="keyword">const</span> <span class="keyword">char</span> *;</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
@@ -526,8 +536,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/26/Chapter11_%E4%BD%BF%E7%94%A8%E7%B1%BB/" rel="next" title="Chapter11 使用类">
-                <i class="fa fa-chevron-left"></i> Chapter11 使用类
+              <a href="/2021/03/26/Chapter16_string%E7%B1%BB%E5%92%8C%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/" rel="next" title="Chapter16 string类和标准模板库">
+                <i class="fa fa-chevron-left"></i> Chapter16 string类和标准模板库
               </a>
             
           </div>
@@ -620,7 +630,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>

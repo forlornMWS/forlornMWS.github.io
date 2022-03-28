@@ -419,19 +419,25 @@
 <p>要创建对象，可以声明类变量，也可以使用new为类对象分配存储空间。可以将对象作为函数的参数和返回值，也可以将一个对象赋给另一个。</p>
 <p>指定类设计的第一步是提供类声明。类声明类似结构声明，可以包括数据成员和函数成员。声明有四有部分，在其中生命的成员只能通过成员函数进行访问；声明还具有公有部分，在其中生命的成员可被使用类对象的程序直接访问。典型的类声明格式如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">className</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	data member declarations</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	member function prototypes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <h3 id="10-2-类的构造函数和析构函数"><a href="#10-2-类的构造函数和析构函数" class="headerlink" title="10.2 类的构造函数和析构函数"></a>10.2 类的构造函数和析构函数</h3><h4 id="10-2-1-构造函数"><a href="#10-2-1-构造函数" class="headerlink" title="10.2.1 构造函数"></a>10.2.1 构造函数</h4><p>程序声明对象时，将自动调用构造函数。（*构造函数的参数表示的不是类成员，而是赋给类成员的值，因此，参数名不能与类成员相同）</p>
 <p>C++提供了两种使用构造函数来初始化对象的方式，一种是显式地调用构造函数：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stock food = Stock(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
+
 <p>另一种是隐式地调用构造函数：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stock <span class="title">food</span><span class="params">(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>也可以使用new运算符创建对象：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stock * pt = <span class="keyword">new</span> Stock(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
+
 <p>C++无法使用对象来调用构造函数，<strong>因为在构造函数构造出对象之前，对象是不存在的</strong>。</p>
 <p>默认构造函数是在未提供显式初始值时，用来创建对象的构造函数。默认构造函数没有参数，因为声明中不包含值。<em>当且仅当没有定义任何构造函数时，编译器才会提供默认构造函数</em>。</p>
 <p>如果要创建对象而不显式地初始化，则必须定义一个不接受任何参数的默认构造函数。定义默认构造函数的方式有两种。一种是<strong>给已有构造函数的所有参数提供默认值</strong>：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stock(<span class="keyword">const</span> <span class="keyword">String</span> &amp; co = <span class="string">"Error"</span>, <span class="keyword">int</span> n = <span class="number">0</span>, <span class="keyword">double</span> pr = <span class="number">0.0</span>);</span><br></pre></td></tr></table></figure>
+
 <p>另一种方式是通过函数重载来定义另一个构造函数——<strong>没有参数的构造函数</strong>：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stock();</span><br></pre></td></tr></table></figure>
+
 <h4 id="10-2-2-析构函数"><a href="#10-2-2-析构函数" class="headerlink" title="10.2.2 析构函数"></a>10.2.2 析构函数</h4><p>和构造函数一样，析构函数的名称也很特殊：在类名前加上~，另外析构函数和构造函数一样，也没有返回值和声明类型。与构造函数不同的是，析构函数没有参数。</p>
 <p>如果创建的是静态存储类对象，则其析构函数将在程序结束时自动被调用。如果创建的是自动存储类对象，则将其析构函数将在程序执行完代码块时自动被调用给。如果对象是通过new创建的，则它将驻留在占内存或自由存储区中，当使用delete来释放内存时，其析构函数将自动被调用。</p>
 <p>由于在类对象过期时析构函数将被自动调用，因此必须有一个析构函数。如果程序员没有提供析构函数，编译器将隐式地声明一个默认析构函数，并在发现导致对象被删除的代码后，提供析构函数的定义。</p>
@@ -446,9 +452,11 @@
 <h3 id="10-4-类作用域"><a href="#10-4-类作用域" class="headerlink" title="10.4 类作用域"></a>10.4 类作用域</h3><p>在类中定义的名称的作用域都为整个类，作用域为整个类的名称只在该类种是已知的，在类外是不可知的。类作用域意味着不能从外部直接访问类的成员，公有成员函数也是如此，要调用公有成员函数，必须通过对象，同样，在定义成员函数时，必须使用作用域解析运算符。</p>
 <p>在类声明种声明的枚举的作用域为整个类，因此可以用枚举为整型常量提供作用域为整个类的符号名称。例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="keyword">enum</span> &#123;Months = <span class="number">12</span>&#125;;</span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>用这种方式声明枚举并不会创建类数据成员。也就是说，所有对象中都不包含枚举。</p>
 <p>C++提供了另一种在类中定义常量的方法——使用关键字static：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> Months = <span class="number">12</span>;<span class="comment">/*创建名为Months的常量，该常量将与其他静态变量存储在一起</span></span><br><span class="line"><span class="comment">    	，而不是存储在对象中*/</span></span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>作用域内枚举不能隐式地转换为整型。</p>
 <h3 id="10-5-总结"><a href="#10-5-总结" class="headerlink" title="10.5 总结"></a>10.5 总结</h3><p>面向对象编程强调的是程序如何表示数据。使用OOP方法解决编程问题的第一步是根据它与程序之间的接口来描述数据，从而指定如何使用数据。然后，设计一个类来实现该接口，一般来说，私有数据成员存储信息，公有成员函数（又称为方法）提供访问数据的唯一途径。</p>
 <p>类是用户定义的类型，对象是类的实例。</p>
@@ -579,7 +587,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>

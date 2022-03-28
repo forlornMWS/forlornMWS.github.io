@@ -436,45 +436,45 @@
 <p>头文件climits（老式实现中位limits.h）中包含了关于整型限制的信息。具体来说，它定义了表示各种限制的符号名称。</p>
 <h3 id="3-2-const限定符"><a href="#3-2-const限定符" class="headerlink" title="3.2 const限定符"></a>3.2 const限定符</h3><p>创建常量的通用格式如下：<code>const type name  = value;</code>应在声明中对常量进行初始化，如果在声明常量时没有提供值，则该常量的值将是不确定的，且无法修改。</p>
 <h3 id="3-3-浮点数"><a href="#3-3-浮点数" class="headerlink" title="3.3 浮点数"></a>3.3 浮点数</h3><p>使用浮点类型可以表示带小数部分的数字。计算机将这样的值分成两部分存储，一部分表示值（基准值），另一部分用于对值进行放大或缩小（缩放因子）。（d.dddE+n指的是将小数点向右移动n位，而d.dddE-n指的是将小数点向左移动n位，之所以称为“浮点数”，就是因为小数点可移动）</p>
-<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201011101447.png" alt="image-20201011101439767" style="zoom: 67%;" /></p>
+<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201011101447.png" alt="image-20201011101439767" style="zoom: 67%;" />
+
+
+
 <p>与整数相比，浮点数有两大优点。首先，它们可以表示整数之间的值，其次，由于有缩放因子，它们可以表示的范围大得多。另一方面，浮点运算的速度通常比整数运算慢，且精度将降低。</p>
-<h3 id="3-4-C-算数运算符"><a href="#3-4-C-算数运算符" class="headerlink" title="3.4 C++算数运算符"></a>3.4 C++算数运算符</h3><div class="table-container">
-<table>
+<h3 id="3-4-C-算数运算符"><a href="#3-4-C-算数运算符" class="headerlink" title="3.4 C++算数运算符"></a>3.4 C++算数运算符</h3><table>
 <thead>
 <tr>
-<th style="text-align:center">运算符</th>
-<th style="text-align:center">操作</th>
+<th align="center">运算符</th>
+<th align="center">操作</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">对操作数执行加法运算</td>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center">对操作数执行加法运算</td>
 </tr>
 <tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">从第一个数中减去第二个数</td>
+<td align="center">-</td>
+<td align="center">从第一个数中减去第二个数</td>
 </tr>
 <tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">将操作数相乘</td>
+<td align="center">*</td>
+<td align="center">将操作数相乘</td>
 </tr>
 <tr>
-<td style="text-align:center">/</td>
-<td style="text-align:center">用第一个数除以第二个数，如果两个操作数都是整数，则结果位商的整数部分，小数部分被舍弃</td>
+<td align="center">/</td>
+<td align="center">用第一个数除以第二个数，如果两个操作数都是整数，则结果位商的整数部分，小数部分被舍弃</td>
 </tr>
 <tr>
-<td style="text-align:center">%</td>
-<td style="text-align:center">生成第一个数除以第二个数后的余数（<strong>两个操作数必须都是整型，该运算符用于浮点数将导致编译错误，如果其中一个是负数，则结果的符号满足如下规则：</strong>$(a/b)*b+a%b=a$）</td>
+<td align="center">%</td>
+<td align="center">生成第一个数除以第二个数后的余数（<strong>两个操作数必须都是整型，该运算符用于浮点数将导致编译错误，如果其中一个是负数，则结果的符号满足如下规则：</strong>$(a/b)*b+a%b=a$）</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>算数运算符遵循通常的代数优先级，先乘除，后加减。当两个运算符的优先级相同时，C++将看操作数的结合性（associativity）是从做到右，还是从右到左。</p>
 <p>除法运算符的行为取决于操作数的类型。如果两个操作数都是整数，则C++将执行整数除法，这意味着结果的小数部分将被丢弃，使得最后的结果是一个整数。如果其中有一个（或两个）操作数是浮点值，则保留结果的小数部分。</p>
-<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201011103356.png" alt="image-20201011103356575" style="zoom: 80%;" /></p>
+<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201011103356.png" alt="image-20201011103356575" style="zoom: 80%;" />
+
 <p>C++允许将一种类型的值赋给另一种类型的变量，这样做时，值将被转换为接收变量的类型。将一个值赋给取值范围更大的类型通常不会导致什么问题，然而进行窄转换可能会出现一些问题。</p>
-<p><table>
+<table>
     <caption><strong>潜在的数值转换问题</strong></caption>
     <tr>
     <th align="center">转换</th>
@@ -492,7 +492,9 @@
     <td>将较大的整数转换为较小的整数</td>
     <td>原来的值可能超出目标类型的取值范围，通常只复制右边的字节</td>
     </tr>
-</table><br><strong>列表初始化</strong>：C++将使用大括号的初始化称为列表初始化（List-initialization)，因为这种初始化常用于给复杂的数据类型提供值列表。列表初始化不允许缩窄（narrowing），及变量的类型可能无法表示赋给它的值。</p>
+</table>
+**列表初始化**：C++将使用大括号的初始化称为列表初始化（List-initialization)，因为这种初始化常用于给复杂的数据类型提供值列表。列表初始化不允许缩窄（narrowing），及变量的类型可能无法表示赋给它的值。
+
 <p>C++允许通过强制类型转换显式地进行类型转换，强制类型转换不会修改变量本身，而是创建一个新的、指定类型的值，可以在表达式中使用这个值。</p>
 <p>C++11新增了一个工具，让编译器能够根据初始值的类型推断变量的类型，为此重新定义了auto的含义，在初始化声明中，如果使用关键字auto，而不指定变量的类型，编译器将把变量的类型设置成与初始值相同。</p>
 
@@ -541,8 +543,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/26/Chapter8_%E5%87%BD%E6%95%B0%E6%8E%A2%E5%B9%BD/" rel="prev" title="Chapter8 函数探幽">
-                Chapter8 函数探幽 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/26/Chapter2_%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0C++/" rel="prev" title="Chapter2 开始学习C++">
+                Chapter2 开始学习C++ <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -625,7 +627,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>

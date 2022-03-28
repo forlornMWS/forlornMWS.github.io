@@ -81,7 +81,7 @@
 
 <meta name="description" content="Markdown[toc] Markdown的格式 简单的文本文件格式，通常保存为.md扩展名，中文内容使用UTF-8编码，有一些简单的格式标注方法：两个星号之间转换为斜体，缩进四个空格或者一个制表符的内容会堪称代码。 适用于简单的文章，源程序说明，不适合用于过多公式等复杂文档。可以转换为docx, pdf等格式。通过使用R 的扩展包knitr, rmarkdown, bookdown与pando">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MWS&#39;s Blog">
+<meta property="og:title" content="R_ Markdown">
 <meta property="og:url" content="http://mwszksnmdys.xyz/2021/03/26/R_%20Markdown/index.html">
 <meta property="og:site_name" content="MWS&#39;s Blog">
 <meta property="og:description" content="Markdown[toc] Markdown的格式 简单的文本文件格式，通常保存为.md扩展名，中文内容使用UTF-8编码，有一些简单的格式标注方法：两个星号之间转换为斜体，缩进四个空格或者一个制表符的内容会堪称代码。 适用于简单的文章，源程序说明，不适合用于过多公式等复杂文档。可以转换为docx, pdf等格式。通过使用R 的扩展包knitr, rmarkdown, bookdown与pando">
@@ -89,7 +89,7 @@
 <meta property="og:image" content="https://gitee.com/shixiuxinya/image/raw/master/img/Snipaste_2020-02-25_23-31-14.png">
 <meta property="og:image" content="https://gitee.com/shixiuxinya/image/raw/master/img/Snipaste_2020-02-25_23-35-14.png">
 <meta property="article:published_time" content="2021-03-26T06:46:23.247Z">
-<meta property="article:modified_time" content="2020-02-26T09:02:44.000Z">
+<meta property="article:modified_time" content="2022-03-25T14:26:38.881Z">
 <meta property="article:author" content="MWSzksnmdys">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/shixiuxinya/image/raw/master/img/Snipaste_2020-02-25_23-10-01.png">
@@ -129,7 +129,7 @@
 
 
 <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  <title> | MWS's Blog</title>
+  <title>R_ Markdown | MWS's Blog</title>
   
 
 
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">R_ Markdown</h1>
         
 
         <div class="post-meta">
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4.2k
+                  2.4k
                 </span>
               
 
@@ -446,10 +446,11 @@
 </li>
 </ol>
 <h3 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h3><ol>
-<li>```R<blockquote>
-<p>x&lt;-rnorm(100)<br>hist(x)</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. R的knitr包在Markdown格式的文件中插入R可执行代码时，就用了这样的方法。而且R Markdown格式的代码块不需要用空行与前后分隔开</span><br><span class="line"></span><br><span class="line">### 链接</span><br><span class="line"></span><br><span class="line">1. 最简单的链接是原样显示的可点击的链接，只要把链接地址用小于号和大于号包在中间，两边用空格和其他内容隔开。如果是网页，需要使用http:&#x2F;&#x2F;,如果是邮箱，需要加上http:&#x2F;&#x2F;its.pku.edu.cn    mailto:shixiuxinya@gmail.com。</span><br><span class="line"></span><br><span class="line">2. 除此之外Markdown还支持两种形式的连接语法：行内式和引用式两种形式。不管哪一种，链接的显示文字都是用方括号[……]来标记。要建立一个行内式的链接，只要在方括号内写链接的显示文字，右方括号后面紧接着圆括号，并在圆括号中间插入网址链接即可。方括号部分与圆括号部分之间不能断开。如：</span><br><span class="line"></span><br><span class="line">   请参考：[李东风的教学主页](http:&#x2F;&#x2F;www.math.pku.edu.cn&#x2F;teachers&#x2F;lidf&#x2F;course&#x2F;index.htm)，在圆括号中，连接后面还可以包含用双撇号包围的标题文字，与连接之间用空格分开</span><br><span class="line"></span><br><span class="line">   引用式的链接：需要在某处（比如文章结尾）定义一些链接的标识符，然后用方括号包围链接的显示文字，后面紧接着方括号包围着链接的标识符。</span><br><span class="line"></span><br><span class="line">   为了定义连接标识符，用方括号包围连接标识符，前面可以用至多三个空格缩进，右方括号后面紧接着冒号和一个空格，空格后写链接地址，然后空格，在两个双撇号中间写一个链接地址的标题。如：[北大][pku]。</span><br><span class="line"></span><br><span class="line">   还有一种链接是内部链接，用于文内跳转。在各级标题行的末尾，可以添加&#123;# 自定义标签&#125;这样的内容，其中自定义标签是一个自己写的标识符，仅使用英文字母、数字、下划线、减号，用来区分不同的位置。如[回到列表](# 列表)。</span><br><span class="line"></span><br><span class="line">### 插入图形</span><br><span class="line"></span><br><span class="line">1. 图形只能用连接形式，不可能保存到一个纯文本文件内。图形文件可以存在于远程服务器上，也可以是与生成的HTML文件在同一目录结构中的文件。语法仍使用行内式和参考式两种形式。转化成HTML、PDF、Word格式后可以把图形内嵌在输出文件内部</span><br><span class="line"></span><br><span class="line">2. 行内式图片链接：普通行内连接格式前面添加了一个叹号，方括号内写图片的标题，圆括号内写图片链接，标题可以缺。</span><br><span class="line"></span><br><span class="line">   ![两仪式](https:&#x2F;&#x2F;gitee.com&#x2F;shixiuxinya&#x2F;image&#x2F;raw&#x2F;master&#x2F;img&#x2F;622762d0f703918f97f2e0cb5e3d269759eec494.jpg)</span><br><span class="line"></span><br><span class="line">   与连接类似，也可以在文章某处定义图片的标识符，然后把行内图片引用中图片地址替换成图片标识符即可</span><br><span class="line"></span><br><span class="line">   ![两仪式][shiki]</span><br><span class="line"></span><br><span class="line">   [shiki]: https:&#x2F;&#x2F;gitee.com&#x2F;shixiuxinya&#x2F;image&#x2F;raw&#x2F;master&#x2F;img&#x2F;622762d0f703918f97f2e0cb5e3d269759eec494.jpg</span><br><span class="line"></span><br><span class="line">### 表格</span><br><span class="line"></span><br><span class="line">* 管道表</span><br><span class="line"></span><br><span class="line">  1、管道表在两列之间用竖线分开，在列标题下面用减号画横线，用如下方法指定各对齐方式：</span><br><span class="line"></span><br><span class="line">  1. 在列标题下的横线开始加冒号，表示左对齐；</span><br><span class="line">  2. 在列标题下的横线末尾加冒好，表示右对齐</span><br><span class="line">  3. 在列标题下的横线两端加冒号，表示居中对齐</span><br><span class="line"></span><br><span class="line">  4. 列标题下面仅有横线，没有冒号，表示缺省对齐方式，一般是左对齐</span><br><span class="line"></span><br><span class="line">     ![管道表](https:&#x2F;&#x2F;gitee.com&#x2F;shixiuxinya&#x2F;image&#x2F;raw&#x2F;master&#x2F;img&#x2F;Snipaste_2020-02-25_22-04-46.png)</span><br><span class="line"></span><br><span class="line">* 简单表</span><br><span class="line"></span><br><span class="line">  简单表的格式是，第一行是各列标题，第二行是各标题下面用减号组成的表格线，同一行的不同列要用空格分开，从第三行开始是内容。在表格前或表格后用空行隔开的以Table: 开头的行是表格说明或标题。为了确定表格每列单元格内容如何对齐，用列标题下的表格线给出提示：</span><br><span class="line"></span><br><span class="line">  1. 表格线与列标题右对齐，表示该列右对齐；</span><br><span class="line"></span><br><span class="line">  2. 表格线与列标题左对齐，表示该列左对齐；</span><br><span class="line"></span><br><span class="line">  3. 列标题在表格线中间，表示该列居中对齐；</span><br><span class="line"></span><br><span class="line">  4. 列标题左右都与表格线对齐，表示该列为缺省对齐方式，一般是左对齐</span><br><span class="line"></span><br><span class="line">     ![简单表](https:&#x2F;&#x2F;gitee.com&#x2F;shixiuxinya&#x2F;image&#x2F;raw&#x2F;master&#x2F;img&#x2F;Snipaste_2020-02-25_22-09-34.png)</span><br><span class="line"></span><br><span class="line">* 换行表</span><br><span class="line"></span><br><span class="line">  换行表在输入列标题和单元格内容时，允许输入内容拆分行，但是转化后并不拆分行。这样的表以一行减号开始，以一行减号结束，中间的表格用空行分开实际的不同行。</span><br><span class="line"></span><br><span class="line">* 有格表</span><br><span class="line"></span><br><span class="line">  完全用减号、竖线、等于号、加号画出表格线。这样的表在文本格式下呈现出很好的表格形状。转化后不能指定对齐方式。</span><br><span class="line"></span><br><span class="line"># RMarkdown</span><br><span class="line"></span><br><span class="line">## R Markdown文件</span><br><span class="line"></span><br><span class="line">1、借助于R的knitr和rmarkdown扩展包的帮助，可以在Markdown格式的源文件中插入R代码，使得R代码的结果能够自动插入到最后生成的研究报告中。这种格式成为R Markdown格式，简称为Rmd格式，相应的源文件扩展名为.rmd。R Markdown 的基础格式是markdown 格式，严格说来是Pandoc 软件支持的增强版的markdown格式，比如，支持LaTex 格式的数学公式，支持各种编程语言语法彩色加亮显示等等。</span><br><span class="line"></span><br><span class="line">2、一个Rmd 文件中包含元数据(metadata)、正文内容和R 代码三种成分。在文件开头用三个减号组成的行包围的内容称为元数据，可以用来规定文章标题、作者、日期、输出格式、输出设置等属性。</span><br><span class="line"></span><br><span class="line">## R Markdown文件的编译</span><br><span class="line"></span><br><span class="line">1、在RStudio 软件中，用菜单“File–New File–R Markdown” 新建一个R Markdown文件，扩展名为.Rmd。用快捷图标Knit 可以将文件转换成HTML 格式、PDF 格式（需要安装LaTeX 编译软件）、MS Word 格式。</span><br><span class="line"></span><br><span class="line">2、从HTML 格式可以转换成PDF 格式。为此，安装Google 的Chrome 浏览</span><br><span class="line">器，在Chrome 中打开HTML 文件后，从Chrome 浏览器的菜单中找到打印</span><br><span class="line">菜单，从中选择打印机为“保存到PDF” 选项，就可以将HTML 网页转换成</span><br><span class="line">PDF，其中的数学公式、表格、图形都可以比较好地转换。</span><br><span class="line"></span><br><span class="line">3、如果想将R Markdown 文件借助于LaTeX 格式转换为PDF，需要在系统中</span><br><span class="line">安装一个TeX 编译器，如MS Windows 下有MikTeX 软件包。如果仅在R</span><br><span class="line">Markdown 文件中使用LaTeX 功能，可以安装谢益辉的TinyTeX软件包。</span><br><span class="line"></span><br><span class="line">4、假设test.Rmd 是一个这样的R Markdown 格式的文件，注意一定要使用UTF-8 编码保存，可以在R 或RStudio 中运行如下命令以生成含有运行结果的html 文件:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;R</span><br><span class="line">rmarkdown::render(&quot;myfile.Rmd&quot;, output_format &#x3D; &quot;html_document&quot;, encoding&#x3D;&quot;UTF-8&quot;)</span><br></pre></td></tr></table></figure></li>
+<li><pre><code class="R">&gt;x&lt;-rnorm(<span class="number">100</span>)
+&gt;hist(x)
+&lt;!--￼<span class="number">0</span>--&gt;
+</code></pre>
+</li>
 </ol>
 <p>其中myfile.Rmd 是源文件，产生的HTML 文件带有图形、支持数学公式。</p>
 <ul>
@@ -466,7 +467,7 @@
 </li>
 <li><p>代码块</p>
 <p>代码块则把结果当作单独的段落，按照Markdown 格式的规定，代码块的前后需要有空行，但是R Markdown 实际上放松了这个要求，允许前后不空行。R代码段以单独的一行开头，此行以三个反单撇号开始，然后是{r}，如```{r}。代码段以占据单独一行的三个反单撇号```结尾。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">x&lt;-<span class="built_in">round</span>(rnorm(<span class="number">10</span>),<span class="number">2</span>)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">x&lt;-round(rnorm(<span class="number">10</span>),<span class="number">2</span>)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
 
 <p>## [1] -0.63 0.18 -0.84 1.60 0.33 -0.82 0.49 0.74 0.58 -0.31</p>
 <p>可以看出，代码段程序会被插入到最终结果中，代码段的文本型输出会插入到程序的后面。代码块也可以嵌入到引用、列表等环境中。代码块中作的图将自动插入到当前位置。</p>
@@ -523,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/26/%E7%BA%BF%E6%80%A7%E8%A1%A8/" rel="next" title="线性表c">
-                <i class="fa fa-chevron-left"></i> 线性表c
+              <a href="/2021/03/26/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="next" title="二叉树">
+                <i class="fa fa-chevron-left"></i> 二叉树
               </a>
             
           </div>
@@ -533,8 +534,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/26/java%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/" rel="prev" title="Java类与对象">
-                Java类与对象 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/26/%E7%BA%BF%E6%80%A7%E8%A1%A8/" rel="prev" title="线性表c">
+                线性表c <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -617,7 +618,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>

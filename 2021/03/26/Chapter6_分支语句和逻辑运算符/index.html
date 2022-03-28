@@ -414,8 +414,10 @@
 <p>C++从C语言继承了一个与字符相关的、非常方便的函数软件包，它可以简化诸如确定字符是否为大写字母、数字、标点符号等工作，这些函数的原型是在头文件cctype（ctype.h)中定义的。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201014152944.png" alt="image-20201014152944233"></p>
 <p>条件运算符（?:）通用格式：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expression1 ? expression2 : expression3;</span><br><span class="line"><span class="comment">//expression1为true，则表达式的值为expression2的值；否则为expression3的值。</span></span><br></pre></td></tr></table></figure>
+
 <p>switch语句通用格式：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (integer-expression) <span class="comment">//integer-expression必须是一个结果为整数值的表达式</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">case</span> label1: statement(s) <span class="comment">//每个标签都必须是整数常量表达式</span></span><br><span class="line">	<span class="keyword">case</span> label2: statements(s)</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">default</span>: statements(s)</span><br><span class="line">    <span class="comment">//case标签只是行标签，而不是选项之间的界限，也就是说，程序跳到switch中特定代码行后，将依次执行之后的所有语句，除非有明确的其他指示。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>switch语句将int值与枚举量标签进行比较时，将枚举量提升为int；在while循环测试条件中，也会将枚举量提升为int类型。</p>
 <p>用cin读取用户输入数字时，如果类型不匹配，将发生4种情况：<br>(1) 存储输入的变量保持不变；<br>(2) 不匹配的输入将被留在输入队列中；<br>(3) cin对象中的一个错误标记被设置；<br>(4) 对cin方法的调用将返回false（如果被转换为bool类型）。<br>方法返回false意味着可以用非数字输入来结束读取数字的循环。非数字输入设置错误标记意味着必须重置该标记，程序才能继续读取输入。clear()方法重置错误输入标记，同时也重置文件尾（EOF）。</p>
 <p>使用cin进行输入的时候，程序将输入视为一系列的字节，其中每个字节都被解释为字符编码。</p>
@@ -467,8 +469,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/26/Chapter9_%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/" rel="prev" title="Chapter9 内存模型和名称空间">
-                Chapter9 内存模型和名称空间 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/26/Chapter7_%E5%87%BD%E6%95%B0--C++%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9D%97/" rel="prev" title="Chapter7 函数--C++的编程模块">
+                Chapter7 函数--C++的编程模块 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -551,7 +553,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>

@@ -430,7 +430,7 @@
 <h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><ul>
 <li>默认的赋值运算符用于处理同类对象之间的赋值。（<strong>如果语句创建新的对象，则使用初始化；如果语句修改已有对象的值，则是赋值</strong>）</li>
 <li>默认赋值为成员赋值。如果成员为类对象，则默认成员赋值将使用相应类的赋值运算符。如果需要显式定义复制构造函数，则基于相同的原因，也需要显式定义赋值运算符。</li>
-<li>编译器不会生成将一种类型赋给另一种类型的赋值运算符，如果希望这样做的话，可以显式定义运算符，例如将字符串付给Star对象，可以显式定义如下运算符：<code>Star &amp; Star::operator=(const char *)&#123;&#125;</code>;另一种方法是使用转换函数将字符串转换为Star对象，然后使用将Star赋给Star的赋值函数。</li>
+<li>编译器不会生成将一种类型赋给另一种类型的赋值运算符，如果希望这样做的话，可以显式定义运算符，例如将字符串付给Star对象，可以显式定义如下运算符：<code>Star &amp; Star::operator=(const char *){}</code>;另一种方法是使用转换函数将字符串转换为Star对象，然后使用将Star赋给Star的赋值函数。</li>
 </ul>
 <h3 id="其它的类方法"><a href="#其它的类方法" class="headerlink" title="其它的类方法"></a>其它的类方法</h3><h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><ul>
 <li>构造函数不同于其它类方法，因为它创建新的对象，而其他类方法只是被现有的对象调用。这是构造函数不被继承的原因之一。继承意味着派生类对象可以使用基类的方法，然而，构造函数在完成其工作之前，对象并不存在。</li>
@@ -444,7 +444,8 @@
 <li><p>将可转换的类型传递给以类为参数的函数时，将调用转换构造函数。</p>
 </li>
 <li><p>要将类对象转换为其他类型，应定义转换函数。转换函数可以是<strong>没有参数的类成员函数</strong>，也可以是<strong>返回类型被声明为目标类型的类成员函数</strong>，即使没有声明返回类型，函数也应返回所需的转换值。示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Star::Star <span class="title">double</span><span class="params">()</span></span>&#123;...&#125;  <span class="comment">//将Star对象类型转换为double</span></span><br><span class="line">Star::Star <span class="keyword">const</span> <span class="keyword">char</span> *()&#123;...&#125; <span class="comment">//将对象转换为const char</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Star::Star <span class="title">double</span><span class="params">()</span></span>&#123;...&#125;  <span class="comment">//将Star对象类型转换为double</span></span><br><span class="line">Star::Star <span class="keyword">const</span> <span class="keyword">char</span> *()&#123;...&#125; <span class="comment">//将对象转换为const char</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>C++11支持将关键字explicit用于转换函数。与构造函数一样，explicit允许使用强制类型转换进行显式转换，但不允许隐式转换。</p>
 </li>
 </ul>
@@ -501,8 +502,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/26/Chapter13_%E7%B1%BB%E7%BB%A7%E6%89%BF/" rel="prev" title="Chapter13 类继承">
-                Chapter13 类继承 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/26/Chapter11_%E4%BD%BF%E7%94%A8%E7%B1%BB/" rel="prev" title="Chapter11 使用类">
+                Chapter11 使用类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -585,7 +586,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>

@@ -436,7 +436,7 @@
 <li>type_info结构存储了有关特定类型的信息。</li>
 </ul>
 <p>只能将RTTI用于包含虚函数的类层次结构中，原因在于只有对于这种类层次结构，才应该将派生对象的地址赋给基类指针。</p>
-<p>通常，如果指向的对象（<em>pt）的类型为Type或是从Type直接或间接派生而来的类型，则下面的表达式将指针pt转换为Type类型的指针：`dynamic_cast&lt;Type </em>&gt;(pt)`，否则，结果为0，即空指针。</p>
+<p>通常，如果指向的对象（*pt）的类型为Type或是从Type直接或间接派生而来的类型，则下面的表达式将指针pt转换为Type类型的指针：<code>dynamic_cast&lt;Type *&gt;(pt)</code>，否则，结果为0，即空指针。</p>
 <p>typeid运算符使得能够确定两个对象是否为同种类型，它接受两种参数：类名、结果为对象的表达式。typeid运算符返回一个对type_info对象的引用。其中type_info是在头文件typeinfo中定义的一个类，它重载了==和！=运算符，以便可以使用这些运算符来对类型进行比较。</p>
 <h3 id="15-5-类型转换运算符"><a href="#15-5-类型转换运算符" class="headerlink" title="15.5 类型转换运算符"></a>15.5 类型转换运算符</h3><p>static_cast用于数据类型的强制转换，强制将一种数据类型转换为另一种数据类型。</p>
 <p>reinterpret_cast主要有三种强制转换用途：<strong><em>改变指针或引用的类型、将指针或引用转换为一个足够长度的整形、将整型转换为指针或引用类型</em></strong></p>
@@ -488,8 +488,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/03/26/Chapter16_string%E7%B1%BB%E5%92%8C%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93/" rel="prev" title="Chapter16 string类和标准模板库">
-                Chapter16 string类和标准模板库 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/03/26/Chapter17_%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E5%92%8C%E6%96%87%E4%BB%B6/" rel="prev" title="Chapter17 输入、输出、和文件">
+                Chapter17 输入、输出、和文件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -572,7 +572,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20archive">
+               <a href="/">
               
                   <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
