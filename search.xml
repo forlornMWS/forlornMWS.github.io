@@ -938,7 +938,7 @@
     <title>Chapter7 函数--C++的编程模块</title>
     <url>/2021/03/26/Chapter7_%E5%87%BD%E6%95%B0--C++%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9D%97/</url>
     <content><![CDATA[<h2 id="Chapter7-函数–C-的编程模块"><a href="#Chapter7-函数–C-的编程模块" class="headerlink" title="Chapter7 函数–C++的编程模块"></a>Chapter7 函数–C++的编程模块</h2><h3 id="7-1-复习函数基本知识"><a href="#7-1-复习函数基本知识" class="headerlink" title="7.1 复习函数基本知识"></a>7.1 复习函数基本知识</h3><h4 id="7-1-1-定义函数"><a href="#7-1-1-定义函数" class="headerlink" title="7.1.1 定义函数"></a>7.1.1 定义函数</h4><p>可以将函数分为两类：没有返回值的函数和有返回值的函数。没有返回值的函数称为void函数，其通用格式如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">functionName</span><span class="params">(parameterList)</span></span>&#123;</span><br><span class="line">    <span class="built_in">statement</span>(s);</span><br><span class="line">    <span class="keyword">return</span> ;<span class="comment">//optional</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">functionName</span><span class="params">(parameterList)</span></span>&#123;</span><br><span class="line">    statement(s);</span><br><span class="line">    <span class="keyword">return</span> ;<span class="comment">//optional</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可选的返回语句标记了函数的结尾；否则，函数将在右花括号处结束。void函数相当与Pascal中的过程、FORTRAN中的子程序和现代BASIC中的子程序过程。</p>
 <p>对于有返回值的函数，必须使用返回语句，C++对与有返回值的类型有一定的限制：不能是数组，但可以是其他任何类型（<em>虽然C++函数不能直接返回数组，但可以将数组作为结构或对象组成部分来返回</em>）。</p>
@@ -2482,6 +2482,38 @@ static int add(int x,int y)
       </categories>
       <tags>
         <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gitee图床迁移到腾讯云COS</title>
+    <url>/2022/03/28/Gitee%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91COS/</url>
+    <content><![CDATA[<h1 id="Gitee图床迁移到腾讯云COS"><a href="#Gitee图床迁移到腾讯云COS" class="headerlink" title="Gitee图床迁移到腾讯云COS"></a>Gitee图床迁移到腾讯云COS</h1><p>gitee添加了防盗连后，无法正常访问图片，购买腾讯云COS后将原先的图片迁移，并重新配置picgo和typora。</p>
+<h2 id="图片迁移"><a href="#图片迁移" class="headerlink" title="图片迁移"></a>图片迁移</h2><p>首先在gitee上下载用作图床的仓库并解压。</p>
+<p>在腾讯云上购买COS</p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/Selection_007.png" alt="Selection_007"></p>
+<p>进入存储桶列表创建存储桶，访问权限设置为共有读私有写，服务端选不加密，随后选择创建即可。</p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328153643392.png" alt="image-20220328153643392"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328153807650.png" alt="image-20220328153807650"></p>
+<p>创建完成后进入新建的存储桶新建与gitee仓库里存放图片同名的文件夹，并将下载到本地的照片上传。图片上传完成后点击详情可以获得对象的详细信息。</p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328154400649.png" alt="image-20220328154400649"></p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328154606283.png" alt=""></p>
+<p>随后复制对象地址，用vscode或其他编辑器打开markdown文件所在的文件夹，点击Edit-&gt;Replace in Files或按快捷键Ctrl+Shift+H</p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328154912106.png" alt="image-20220328154912106"></p>
+<p>将原本gitee的路径替换为之前复制的cos路径，点击全部替换即可。</p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328155034883.png" alt="image-20220328155034883"></p>
+<h2 id="配置picgo"><a href="#配置picgo" class="headerlink" title="配置picgo"></a>配置picgo</h2><p>新建访问密钥：云产品-&gt;访问密钥，为了方便访问可以添加到快速访问。</p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328155811769.png" alt="image-20220328155811769"></p>
+<p>进入访问密钥页面后会弹出高风险提示，点击切换使用子账号密钥按照网页引导创建子账号随后登陆访问，也可以直接访问，随后点击新建密钥，这样就新建了一个访问密钥。</p>
+<p>打开picgo，点击图床设置，选择腾讯云COS版本V5，随后对应填写配置，点击确定就可以了。</p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328160757321.png" alt="image-20220328160757321"></p>
+<p>配置完成之后点击picgo设置-&gt;打开配置文件并复制文件内容，随后打开typora,点击文件-&gt;偏好设置-&gt;图像，上传服务选择PicGo-Core，然后点击下载或更新，下载完成后点打开配置文件将之前复制的内容粘贴保存即可。</p>
+<p><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/typora/image-20220328161409578.png" alt="image-20220328161409578"></p>
+]]></content>
+      <categories>
+        <category>solution</category>
+      </categories>
+      <tags>
+        <tag>picgo</tag>
       </tags>
   </entry>
 </search>
