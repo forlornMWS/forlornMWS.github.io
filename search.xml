@@ -257,32 +257,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Chapter6 分支语句和逻辑运算符</title>
-    <url>/2021/03/26/Chapter6_%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5%E5%92%8C%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
-    <content><![CDATA[<h2 id="Chapter6-分支语句和逻辑运算符"><a href="#Chapter6-分支语句和逻辑运算符" class="headerlink" title="Chapter6 分支语句和逻辑运算符"></a>Chapter6 分支语句和逻辑运算符</h2><p>C++规定，||是一个顺序点（sequence point),也就是说，先修改左侧的值再对右侧的值进行判定（运算符左边的子表达式先于右边的子表达式）。</p>
-<p>逻辑AND运算符的优先级高于逻辑OR运算符。</p>
-<p>标识符and、or和not都是C++的保留字，这意味着不能将它们用作变量名。它们不是关键子，因为它们都是已有语言特性的另一种表示方法。（在c语言中包含头文件iso646.h,可以使用，c++无需包含该头文件）<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201014152716.png" alt="image-20201014152709322"></p>
-<p>C++从C语言继承了一个与字符相关的、非常方便的函数软件包，它可以简化诸如确定字符是否为大写字母、数字、标点符号等工作，这些函数的原型是在头文件cctype（ctype.h)中定义的。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201014152944.png" alt="image-20201014152944233"></p>
-<p>条件运算符（?:）通用格式：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">expression1 ? expression2 : expression3;</span><br><span class="line"><span class="comment">//expression1为true，则表达式的值为expression2的值；否则为expression3的值。</span></span><br></pre></td></tr></table></figure>
-
-<p>switch语句通用格式：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (integer-expression) <span class="comment">//integer-expression必须是一个结果为整数值的表达式</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">case</span> label1: statement(s) <span class="comment">//每个标签都必须是整数常量表达式</span></span><br><span class="line">	<span class="keyword">case</span> label2: statements(s)</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">default</span>: statements(s)</span><br><span class="line">    <span class="comment">//case标签只是行标签，而不是选项之间的界限，也就是说，程序跳到switch中特定代码行后，将依次执行之后的所有语句，除非有明确的其他指示。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>switch语句将int值与枚举量标签进行比较时，将枚举量提升为int；在while循环测试条件中，也会将枚举量提升为int类型。</p>
-<p>用cin读取用户输入数字时，如果类型不匹配，将发生4种情况：<br>(1) 存储输入的变量保持不变；<br>(2) 不匹配的输入将被留在输入队列中；<br>(3) cin对象中的一个错误标记被设置；<br>(4) 对cin方法的调用将返回false（如果被转换为bool类型）。<br>方法返回false意味着可以用非数字输入来结束读取数字的循环。非数字输入设置错误标记意味着必须重置该标记，程序才能继续读取输入。clear()方法重置错误输入标记，同时也重置文件尾（EOF）。</p>
-<p>使用cin进行输入的时候，程序将输入视为一系列的字节，其中每个字节都被解释为字符编码。</p>
-<p>打开已有文件接受输入时，默认将它的长度截断为零，因此原来的的内容将会丢失。</p>
-<p>函数exit()的原型是在cstdlib中定义的，在该头文件中，还定义了一个用于同操作系统通信的参数值EXIT_FAILURE.函数exit()终止程序。</p>
-]]></content>
-      <categories>
-        <category>learning</category>
-      </categories>
-      <tags>
-        <tag>C++ premier plus学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Chapter7 函数--C++的编程模块</title>
     <url>/2021/03/26/Chapter7_%E5%87%BD%E6%95%B0--C++%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9D%97/</url>
     <content><![CDATA[<h2 id="Chapter7-函数–C-的编程模块"><a href="#Chapter7-函数–C-的编程模块" class="headerlink" title="Chapter7 函数–C++的编程模块"></a>Chapter7 函数–C++的编程模块</h2><h3 id="7-1-复习函数基本知识"><a href="#7-1-复习函数基本知识" class="headerlink" title="7.1 复习函数基本知识"></a>7.1 复习函数基本知识</h3><h4 id="7-1-1-定义函数"><a href="#7-1-1-定义函数" class="headerlink" title="7.1.1 定义函数"></a>7.1.1 定义函数</h4><p>可以将函数分为两类：没有返回值的函数和有返回值的函数。没有返回值的函数称为void函数，其通用格式如下：</p>
@@ -310,6 +284,32 @@
 </li>
 </ul>
 <p>函数定义是实现函数功能的代码；函数原型提供了函数的接口：传递给函数的值的数目和种类以及函数的返回类型。函数调用使得程序将参数传递给函数，并执行函数的代码。</p>
+]]></content>
+      <categories>
+        <category>learning</category>
+      </categories>
+      <tags>
+        <tag>C++ premier plus学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Chapter6 分支语句和逻辑运算符</title>
+    <url>/2021/03/26/Chapter6_%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5%E5%92%8C%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[<h2 id="Chapter6-分支语句和逻辑运算符"><a href="#Chapter6-分支语句和逻辑运算符" class="headerlink" title="Chapter6 分支语句和逻辑运算符"></a>Chapter6 分支语句和逻辑运算符</h2><p>C++规定，||是一个顺序点（sequence point),也就是说，先修改左侧的值再对右侧的值进行判定（运算符左边的子表达式先于右边的子表达式）。</p>
+<p>逻辑AND运算符的优先级高于逻辑OR运算符。</p>
+<p>标识符and、or和not都是C++的保留字，这意味着不能将它们用作变量名。它们不是关键子，因为它们都是已有语言特性的另一种表示方法。（在c语言中包含头文件iso646.h,可以使用，c++无需包含该头文件）<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201014152716.png" alt="image-20201014152709322"></p>
+<p>C++从C语言继承了一个与字符相关的、非常方便的函数软件包，它可以简化诸如确定字符是否为大写字母、数字、标点符号等工作，这些函数的原型是在头文件cctype（ctype.h)中定义的。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201014152944.png" alt="image-20201014152944233"></p>
+<p>条件运算符（?:）通用格式：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">expression1 ? expression2 : expression3;</span><br><span class="line"><span class="comment">//expression1为true，则表达式的值为expression2的值；否则为expression3的值。</span></span><br></pre></td></tr></table></figure>
+
+<p>switch语句通用格式：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (integer-expression) <span class="comment">//integer-expression必须是一个结果为整数值的表达式</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">case</span> label1: statement(s) <span class="comment">//每个标签都必须是整数常量表达式</span></span><br><span class="line">	<span class="keyword">case</span> label2: statements(s)</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">default</span>: statements(s)</span><br><span class="line">    <span class="comment">//case标签只是行标签，而不是选项之间的界限，也就是说，程序跳到switch中特定代码行后，将依次执行之后的所有语句，除非有明确的其他指示。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>switch语句将int值与枚举量标签进行比较时，将枚举量提升为int；在while循环测试条件中，也会将枚举量提升为int类型。</p>
+<p>用cin读取用户输入数字时，如果类型不匹配，将发生4种情况：<br>(1) 存储输入的变量保持不变；<br>(2) 不匹配的输入将被留在输入队列中；<br>(3) cin对象中的一个错误标记被设置；<br>(4) 对cin方法的调用将返回false（如果被转换为bool类型）。<br>方法返回false意味着可以用非数字输入来结束读取数字的循环。非数字输入设置错误标记意味着必须重置该标记，程序才能继续读取输入。clear()方法重置错误输入标记，同时也重置文件尾（EOF）。</p>
+<p>使用cin进行输入的时候，程序将输入视为一系列的字节，其中每个字节都被解释为字符编码。</p>
+<p>打开已有文件接受输入时，默认将它的长度截断为零，因此原来的的内容将会丢失。</p>
+<p>函数exit()的原型是在cstdlib中定义的，在该头文件中，还定义了一个用于同操作系统通信的参数值EXIT_FAILURE.函数exit()终止程序。</p>
 ]]></content>
       <categories>
         <category>learning</category>
@@ -932,6 +932,71 @@
       </tags>
   </entry>
   <entry>
+    <title>Chapter10 对象和类</title>
+    <url>/2021/03/26/Chapter10_%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/</url>
+    <content><![CDATA[<h2 id="Chapter10-类和对象"><a href="#Chapter10-类和对象" class="headerlink" title="Chapter10 类和对象"></a>Chapter10 类和对象</h2><h3 id="10-1-抽象和类"><a href="#10-1-抽象和类" class="headerlink" title="10.1 抽象和类"></a>10.1 抽象和类</h3><p>一般来说，类规范由两个部分组成：<br>（1）类声明：以数据成员的方式描述数据部分，以成员函数（被称为方法）的方式描述公有接口。<br>（2）类方法定义：描述如何实现类成员函数。<br>（<em>简单地说，类声明提供了类的蓝图，而方法定义则提供了细节</em>）</p>
+<p>接口是一个共享框架，供两个系统交互时使用。</p>
+<p>使用类对象的程序都可以直接访问公有部分，但只能通过公有成员函数（或友元函数）来访问对象的私有成员。公有成员函数是程序和对象的私有成员之间的桥梁，提供了对象和程序之间的接口，防止程序直接访问数据（数据隐藏）。</p>
+<p>类设计应尽可能将公有接口和实现细节分开，公有接口表示设计的抽象组件，将实现细节放在一起并将它们与抽象分开被称为封装。</p>
+<p>C++对结构进行了扩展，使它之具有与类相同的特性。它们之间唯一的区别是，结构的默认访问类型为public，而类为private。</p>
+<p>成员函数定义与常规函数定义非常相似，它们有函数头和函数体，也可以有返回类型和参数，但是它们还有两个特殊的特征：（1）定义成员函数时，使用作用域解析运算符（::）来标识函数所属的类（<em>类方法的完整名称中包括类名</em>）（2）类方法可以访问类的private组件。</p>
+<p>定义位于类声明中的函数都将自动称为内联函数，此外也可以在类声明之外定义成员函数，并使其称为内联函数，为此，只需在类实现部分中定义函数时使用inline限定符即可。</p>
+<p>内联函数的特殊规则要求在每个使用它们的文件中都对其进行定义。（根据改写规则，在类声明中定义方法，等同于用原型替换方法定义，然后在类声明的后面将定义改写为内联函数）。</p>
+<p>创建的每个新对象都有自己的存储空间，用于存储其内部变量和类成员；但同一个类的所有对象共享同一组类方法，即每种方法只有一个副本。在OOP中，调用成员函数被称为发送消息，因此将同样的消息发送给两个不同的对象将调用同一个方法，但该方法被用于两个不同的对象。<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201023160922.png" alt="image-20201023160915489"></p>
+<p>要创建对象，可以声明类变量，也可以使用new为类对象分配存储空间。可以将对象作为函数的参数和返回值，也可以将一个对象赋给另一个。</p>
+<p>指定类设计的第一步是提供类声明。类声明类似结构声明，可以包括数据成员和函数成员。声明有四有部分，在其中生命的成员只能通过成员函数进行访问；声明还具有公有部分，在其中生命的成员可被使用类对象的程序直接访问。典型的类声明格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">className</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	data member declarations</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	member function prototypes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-2-类的构造函数和析构函数"><a href="#10-2-类的构造函数和析构函数" class="headerlink" title="10.2 类的构造函数和析构函数"></a>10.2 类的构造函数和析构函数</h3><h4 id="10-2-1-构造函数"><a href="#10-2-1-构造函数" class="headerlink" title="10.2.1 构造函数"></a>10.2.1 构造函数</h4><p>程序声明对象时，将自动调用构造函数。（*构造函数的参数表示的不是类成员，而是赋给类成员的值，因此，参数名不能与类成员相同）</p>
+<p>C++提供了两种使用构造函数来初始化对象的方式，一种是显式地调用构造函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock food = Stock(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
+
+<p>另一种是隐式地调用构造函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Stock <span class="title">food</span><span class="params">(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用new运算符创建对象：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock * pt = <span class="keyword">new</span> Stock(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
+
+<p>C++无法使用对象来调用构造函数，<strong>因为在构造函数构造出对象之前，对象是不存在的</strong>。</p>
+<p>默认构造函数是在未提供显式初始值时，用来创建对象的构造函数。默认构造函数没有参数，因为声明中不包含值。<em>当且仅当没有定义任何构造函数时，编译器才会提供默认构造函数</em>。</p>
+<p>如果要创建对象而不显式地初始化，则必须定义一个不接受任何参数的默认构造函数。定义默认构造函数的方式有两种。一种是<strong>给已有构造函数的所有参数提供默认值</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock(<span class="keyword">const</span> <span class="keyword">String</span> &amp; co = <span class="string">"Error"</span>, <span class="keyword">int</span> n = <span class="number">0</span>, <span class="keyword">double</span> pr = <span class="number">0.0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>另一种方式是通过函数重载来定义另一个构造函数——<strong>没有参数的构造函数</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock();</span><br></pre></td></tr></table></figure>
+
+<h4 id="10-2-2-析构函数"><a href="#10-2-2-析构函数" class="headerlink" title="10.2.2 析构函数"></a>10.2.2 析构函数</h4><p>和构造函数一样，析构函数的名称也很特殊：在类名前加上~，另外析构函数和构造函数一样，也没有返回值和声明类型。与构造函数不同的是，析构函数没有参数。</p>
+<p>如果创建的是静态存储类对象，则其析构函数将在程序结束时自动被调用。如果创建的是自动存储类对象，则将其析构函数将在程序执行完代码块时自动被调用给。如果对象是通过new创建的，则它将驻留在占内存或自由存储区中，当使用delete来释放内存时，其析构函数将自动被调用。</p>
+<p>由于在类对象过期时析构函数将被自动调用，因此必须有一个析构函数。如果程序员没有提供析构函数，编译器将隐式地声明一个默认析构函数，并在发现导致对象被删除的代码后，提供析构函数的定义。</p>
+<p>在默认情况下，将一个对象赋给同类型的另一个对象时，C++将源对象的每个数据成员的内容复制到目标对象中相应的数据成员中。</p>
+<p>如果既可以通过初始化，也可以通过复制来设置对象的值，则应采用初始化方式。通常这种方式的效率更高。（<em>在赋值语句中使用构造函数总会导致在赋值前创建一个临时对象，而初始化语句则不一定</em>）</p>
+<h4 id="10-2-3-构造函数和析构函数小结"><a href="#10-2-3-构造函数和析构函数小结" class="headerlink" title="10.2.3 构造函数和析构函数小结"></a>10.2.3 构造函数和析构函数小结</h4><p>构造函数是一种特殊的类成员函数，在创建类对象时被调用。构造函数的名称和类名相同，但通过函数重载，可以创建多个同名的构造函数，条件是每个函数的特征标（函数参数）都不同。另外，构造函数没有声明类型。</p>
+<p>接受一个参数的构造函数允许使用赋值语法将一个对象初始化为一个值。但这种方法可能会导致问题。（可以使用关键字explicit关闭隐式转换）</p>
+<p>默认构造函数没有参数，因此如果创建对象时候没有进行显示地初始化，则将调用默认构造函数。如果程序中没有提供任何构造函数，则编译器会为程序定义一个默认构造函数；否则，必须自己提供默认构造函数。默认构造函数可以没有任何参数；如果有，则必须给所有参数都提供默认值。</p>
+<p>如果构造函数使用了new，则必须提供使用delete的析构函数。</p>
+<h3 id="10-3-this指针"><a href="#10-3-this指针" class="headerlink" title="10.3 this指针"></a>10.3 this指针</h3><p>每个成员函数（包括构造函数和析构函数）都有一个this指针。this指针指向调用对象，如果方法需要引用整个调用对象，则可以使用表达式*this。</p>
+<p>初始化数组的方案式，首先使用默认构造函数创建数组元素，然后花括号中的构造函数将创建临时对象，然后将临时对象的内容复制到相应的元素中。因此，<strong>要创建类对象数组，则这个类必须有默认构造函数</strong>。</p>
+<h3 id="10-4-类作用域"><a href="#10-4-类作用域" class="headerlink" title="10.4 类作用域"></a>10.4 类作用域</h3><p>在类中定义的名称的作用域都为整个类，作用域为整个类的名称只在该类种是已知的，在类外是不可知的。类作用域意味着不能从外部直接访问类的成员，公有成员函数也是如此，要调用公有成员函数，必须通过对象，同样，在定义成员函数时，必须使用作用域解析运算符。</p>
+<p>在类声明种声明的枚举的作用域为整个类，因此可以用枚举为整型常量提供作用域为整个类的符号名称。例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="keyword">enum</span> &#123;Months = <span class="number">12</span>&#125;;</span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用这种方式声明枚举并不会创建类数据成员。也就是说，所有对象中都不包含枚举。</p>
+<p>C++提供了另一种在类中定义常量的方法——使用关键字static：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> Months = <span class="number">12</span>;<span class="comment">/*创建名为Months的常量，该常量将与其他静态变量存储在一起</span></span><br><span class="line"><span class="comment">    	，而不是存储在对象中*/</span></span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>作用域内枚举不能隐式地转换为整型。</p>
+<h3 id="10-5-总结"><a href="#10-5-总结" class="headerlink" title="10.5 总结"></a>10.5 总结</h3><p>面向对象编程强调的是程序如何表示数据。使用OOP方法解决编程问题的第一步是根据它与程序之间的接口来描述数据，从而指定如何使用数据。然后，设计一个类来实现该接口，一般来说，私有数据成员存储信息，公有成员函数（又称为方法）提供访问数据的唯一途径。</p>
+<p>类是用户定义的类型，对象是类的实例。</p>
+<p>如果希望成员函数对多个对象进行操作，可以将额外的对象作为参数传递给它。如果方法需要显式地引用调用它的对象，则可以使用this指针，由于this指针被设置为调用对象的地址，因此*this是该对象的别名。</p>
+]]></content>
+      <categories>
+        <category>learning</category>
+      </categories>
+      <tags>
+        <tag>C++ premier plus学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Chapter12 类和动态内存分配</title>
     <url>/2021/03/26/Chapter12_%E7%B1%BB%E5%92%8C%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/</url>
     <content><![CDATA[<h2 id="Chapter12-类和动态内存分配"><a href="#Chapter12-类和动态内存分配" class="headerlink" title="Chapter12 类和动态内存分配"></a>Chapter12 类和动态内存分配</h2><p>静态类成员有一个特点：无论创建了多少对象，程序都只创建一个静态类变量副本。也就是说，类的所有对象共享同一个静态成员。<br><img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201025121320.png" alt="image-20201025121313087"></p>
@@ -1036,71 +1101,6 @@
 
 
 
-]]></content>
-      <categories>
-        <category>learning</category>
-      </categories>
-      <tags>
-        <tag>C++ premier plus学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Chapter10 对象和类</title>
-    <url>/2021/03/26/Chapter10_%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/</url>
-    <content><![CDATA[<h2 id="Chapter10-类和对象"><a href="#Chapter10-类和对象" class="headerlink" title="Chapter10 类和对象"></a>Chapter10 类和对象</h2><h3 id="10-1-抽象和类"><a href="#10-1-抽象和类" class="headerlink" title="10.1 抽象和类"></a>10.1 抽象和类</h3><p>一般来说，类规范由两个部分组成：<br>（1）类声明：以数据成员的方式描述数据部分，以成员函数（被称为方法）的方式描述公有接口。<br>（2）类方法定义：描述如何实现类成员函数。<br>（<em>简单地说，类声明提供了类的蓝图，而方法定义则提供了细节</em>）</p>
-<p>接口是一个共享框架，供两个系统交互时使用。</p>
-<p>使用类对象的程序都可以直接访问公有部分，但只能通过公有成员函数（或友元函数）来访问对象的私有成员。公有成员函数是程序和对象的私有成员之间的桥梁，提供了对象和程序之间的接口，防止程序直接访问数据（数据隐藏）。</p>
-<p>类设计应尽可能将公有接口和实现细节分开，公有接口表示设计的抽象组件，将实现细节放在一起并将它们与抽象分开被称为封装。</p>
-<p>C++对结构进行了扩展，使它之具有与类相同的特性。它们之间唯一的区别是，结构的默认访问类型为public，而类为private。</p>
-<p>成员函数定义与常规函数定义非常相似，它们有函数头和函数体，也可以有返回类型和参数，但是它们还有两个特殊的特征：（1）定义成员函数时，使用作用域解析运算符（::）来标识函数所属的类（<em>类方法的完整名称中包括类名</em>）（2）类方法可以访问类的private组件。</p>
-<p>定义位于类声明中的函数都将自动称为内联函数，此外也可以在类声明之外定义成员函数，并使其称为内联函数，为此，只需在类实现部分中定义函数时使用inline限定符即可。</p>
-<p>内联函数的特殊规则要求在每个使用它们的文件中都对其进行定义。（根据改写规则，在类声明中定义方法，等同于用原型替换方法定义，然后在类声明的后面将定义改写为内联函数）。</p>
-<p>创建的每个新对象都有自己的存储空间，用于存储其内部变量和类成员；但同一个类的所有对象共享同一组类方法，即每种方法只有一个副本。在OOP中，调用成员函数被称为发送消息，因此将同样的消息发送给两个不同的对象将调用同一个方法，但该方法被用于两个不同的对象。<img src="https://image-1301321401.cos.ap-chengdu.myqcloud.com/img/20201023160922.png" alt="image-20201023160915489"></p>
-<p>要创建对象，可以声明类变量，也可以使用new为类对象分配存储空间。可以将对象作为函数的参数和返回值，也可以将一个对象赋给另一个。</p>
-<p>指定类设计的第一步是提供类声明。类声明类似结构声明，可以包括数据成员和函数成员。声明有四有部分，在其中生命的成员只能通过成员函数进行访问；声明还具有公有部分，在其中生命的成员可被使用类对象的程序直接访问。典型的类声明格式如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">className</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	data member declarations</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	member function prototypes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="10-2-类的构造函数和析构函数"><a href="#10-2-类的构造函数和析构函数" class="headerlink" title="10.2 类的构造函数和析构函数"></a>10.2 类的构造函数和析构函数</h3><h4 id="10-2-1-构造函数"><a href="#10-2-1-构造函数" class="headerlink" title="10.2.1 构造函数"></a>10.2.1 构造函数</h4><p>程序声明对象时，将自动调用构造函数。（*构造函数的参数表示的不是类成员，而是赋给类成员的值，因此，参数名不能与类成员相同）</p>
-<p>C++提供了两种使用构造函数来初始化对象的方式，一种是显式地调用构造函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock food = Stock(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
-
-<p>另一种是隐式地调用构造函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Stock <span class="title">food</span><span class="params">(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>也可以使用new运算符创建对象：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock * pt = <span class="keyword">new</span> Stock(<span class="string">"test"</span>, <span class="number">230</span>, <span class="number">1.25</span>);</span><br></pre></td></tr></table></figure>
-
-<p>C++无法使用对象来调用构造函数，<strong>因为在构造函数构造出对象之前，对象是不存在的</strong>。</p>
-<p>默认构造函数是在未提供显式初始值时，用来创建对象的构造函数。默认构造函数没有参数，因为声明中不包含值。<em>当且仅当没有定义任何构造函数时，编译器才会提供默认构造函数</em>。</p>
-<p>如果要创建对象而不显式地初始化，则必须定义一个不接受任何参数的默认构造函数。定义默认构造函数的方式有两种。一种是<strong>给已有构造函数的所有参数提供默认值</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock(<span class="keyword">const</span> <span class="keyword">String</span> &amp; co = <span class="string">"Error"</span>, <span class="keyword">int</span> n = <span class="number">0</span>, <span class="keyword">double</span> pr = <span class="number">0.0</span>);</span><br></pre></td></tr></table></figure>
-
-<p>另一种方式是通过函数重载来定义另一个构造函数——<strong>没有参数的构造函数</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Stock();</span><br></pre></td></tr></table></figure>
-
-<h4 id="10-2-2-析构函数"><a href="#10-2-2-析构函数" class="headerlink" title="10.2.2 析构函数"></a>10.2.2 析构函数</h4><p>和构造函数一样，析构函数的名称也很特殊：在类名前加上~，另外析构函数和构造函数一样，也没有返回值和声明类型。与构造函数不同的是，析构函数没有参数。</p>
-<p>如果创建的是静态存储类对象，则其析构函数将在程序结束时自动被调用。如果创建的是自动存储类对象，则将其析构函数将在程序执行完代码块时自动被调用给。如果对象是通过new创建的，则它将驻留在占内存或自由存储区中，当使用delete来释放内存时，其析构函数将自动被调用。</p>
-<p>由于在类对象过期时析构函数将被自动调用，因此必须有一个析构函数。如果程序员没有提供析构函数，编译器将隐式地声明一个默认析构函数，并在发现导致对象被删除的代码后，提供析构函数的定义。</p>
-<p>在默认情况下，将一个对象赋给同类型的另一个对象时，C++将源对象的每个数据成员的内容复制到目标对象中相应的数据成员中。</p>
-<p>如果既可以通过初始化，也可以通过复制来设置对象的值，则应采用初始化方式。通常这种方式的效率更高。（<em>在赋值语句中使用构造函数总会导致在赋值前创建一个临时对象，而初始化语句则不一定</em>）</p>
-<h4 id="10-2-3-构造函数和析构函数小结"><a href="#10-2-3-构造函数和析构函数小结" class="headerlink" title="10.2.3 构造函数和析构函数小结"></a>10.2.3 构造函数和析构函数小结</h4><p>构造函数是一种特殊的类成员函数，在创建类对象时被调用。构造函数的名称和类名相同，但通过函数重载，可以创建多个同名的构造函数，条件是每个函数的特征标（函数参数）都不同。另外，构造函数没有声明类型。</p>
-<p>接受一个参数的构造函数允许使用赋值语法将一个对象初始化为一个值。但这种方法可能会导致问题。（可以使用关键字explicit关闭隐式转换）</p>
-<p>默认构造函数没有参数，因此如果创建对象时候没有进行显示地初始化，则将调用默认构造函数。如果程序中没有提供任何构造函数，则编译器会为程序定义一个默认构造函数；否则，必须自己提供默认构造函数。默认构造函数可以没有任何参数；如果有，则必须给所有参数都提供默认值。</p>
-<p>如果构造函数使用了new，则必须提供使用delete的析构函数。</p>
-<h3 id="10-3-this指针"><a href="#10-3-this指针" class="headerlink" title="10.3 this指针"></a>10.3 this指针</h3><p>每个成员函数（包括构造函数和析构函数）都有一个this指针。this指针指向调用对象，如果方法需要引用整个调用对象，则可以使用表达式*this。</p>
-<p>初始化数组的方案式，首先使用默认构造函数创建数组元素，然后花括号中的构造函数将创建临时对象，然后将临时对象的内容复制到相应的元素中。因此，<strong>要创建类对象数组，则这个类必须有默认构造函数</strong>。</p>
-<h3 id="10-4-类作用域"><a href="#10-4-类作用域" class="headerlink" title="10.4 类作用域"></a>10.4 类作用域</h3><p>在类中定义的名称的作用域都为整个类，作用域为整个类的名称只在该类种是已知的，在类外是不可知的。类作用域意味着不能从外部直接访问类的成员，公有成员函数也是如此，要调用公有成员函数，必须通过对象，同样，在定义成员函数时，必须使用作用域解析运算符。</p>
-<p>在类声明种声明的枚举的作用域为整个类，因此可以用枚举为整型常量提供作用域为整个类的符号名称。例：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="keyword">enum</span> &#123;Months = <span class="number">12</span>&#125;;</span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用这种方式声明枚举并不会创建类数据成员。也就是说，所有对象中都不包含枚举。</p>
-<p>C++提供了另一种在类中定义常量的方法——使用关键字static：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bakery</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> Months = <span class="number">12</span>;<span class="comment">/*创建名为Months的常量，该常量将与其他静态变量存储在一起</span></span><br><span class="line"><span class="comment">    	，而不是存储在对象中*/</span></span><br><span class="line">    	<span class="keyword">double</span> costs[Months];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>作用域内枚举不能隐式地转换为整型。</p>
-<h3 id="10-5-总结"><a href="#10-5-总结" class="headerlink" title="10.5 总结"></a>10.5 总结</h3><p>面向对象编程强调的是程序如何表示数据。使用OOP方法解决编程问题的第一步是根据它与程序之间的接口来描述数据，从而指定如何使用数据。然后，设计一个类来实现该接口，一般来说，私有数据成员存储信息，公有成员函数（又称为方法）提供访问数据的唯一途径。</p>
-<p>类是用户定义的类型，对象是类的实例。</p>
-<p>如果希望成员函数对多个对象进行操作，可以将额外的对象作为参数传递给它。如果方法需要显式地引用调用它的对象，则可以使用this指针，由于this指针被设置为调用对象的地址，因此*this是该对象的别名。</p>
 ]]></content>
       <categories>
         <category>learning</category>
